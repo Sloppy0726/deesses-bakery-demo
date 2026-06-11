@@ -384,6 +384,17 @@
       return catOk && brOk;
     });
 
+    if (activeBranch === "kaitak") {
+      items = items.slice().sort(function (a, b) {
+        function artemisRank(p) {
+          if (p.signature) return 0;
+          if (p.branches.length === 1 && p.branches[0] === "kaitak") return 1;
+          return 2;
+        }
+        return artemisRank(a) - artemisRank(b);
+      });
+    }
+
     empty.hidden = items.length > 0;
 
     items.forEach(function (p) {
