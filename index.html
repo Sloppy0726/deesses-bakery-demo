@@ -3,28 +3,31 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Deesses Bakery — Warm Golden Breads & Pastries</title>
-  <meta name="description" content="A concept demo site for Deesses Bakery — warm, golden, handcrafted breads and pastries. Demo only; not an official site." />
+  <title>DÉESSES Bakery — French Cakes, Pastries & Bakery · Hong Kong</title>
+  <meta name="description" content="DÉESSES Bakery — a Hong Kong bakery brand with branches in Kai Tak (Artemis), Kennedy Town, Tin Shui Wai and Sheung Shui. French-style cakes, handmade croissants and natural sourdough. Static demo site." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css?v=hero-centered-peek-1" />
 </head>
 <body>
   <!-- Sticky glass navigation -->
   <header class="nav" id="nav">
     <nav class="nav__inner" aria-label="Primary">
       <a href="#top" class="nav__brand">
-        <span class="nav__mark" aria-hidden="true">◍</span>
-        <span class="nav__name">Deesses Bakery</span>
+        <span class="nav__mark" aria-hidden="true">❀</span>
+        <span class="nav__name">DÉESSES<small>Bakery</small></span>
       </a>
       <ul class="nav__links">
-        <li><a href="#story">Story</a></li>
-        <li><a href="#bakes">Bakes</a></li>
-        <li><a href="#artemis">Artemis</a></li>
-        <li><a href="#visit">Visit</a></li>
+        <li><a href="#branches">Branches · 分店</a></li>
+        <li><a href="#signature">Artemis · 啟德</a></li>
+        <li><a href="#menu">Menu · 餐單</a></li>
+        <li><a href="#order">Order · 訂購</a></li>
       </ul>
-      <a href="https://www.facebook.com/deessesbakery" class="nav__cta" target="_blank" rel="noopener">Facebook</a>
+      <a href="https://www.instagram.com/deesses_bakery/" class="nav__cta" target="_blank" rel="noopener">
+        <span class="ig-mark" aria-hidden="true"></span>
+        @deesses_bakery
+      </a>
     </nav>
   </header>
 
@@ -34,165 +37,186 @@
       <div class="hero__glow" aria-hidden="true"></div>
       <div class="hero__inner">
         <div class="hero__content">
-          <p class="eyebrow">Concept demo · Hong Kong</p>
-          <h1 class="hero__title">Bread, the colour<br />of late afternoon.</h1>
+          <p class="eyebrow">DÉESSES · Artemis by Deesses Bakery · 香港</p>
+          <h1 class="hero__title">Goddess-made<br />cakes &amp; pastries.</h1>
+          <p class="hero__zh">法式蛋糕 · 手工牛角酥 · 天然酸種包</p>
           <p class="hero__lede">
-            Slow ferments, blistered crusts, and pastries pulled from the oven at their most golden.
-            Deesses Bakery is a small idea about warmth — the kind you can smell before you see it.
+            A Hong Kong bakery brand of four neighbourhood counters — from the pink-and-purple
+            gift counter of <strong>Artemis at AIRSIDE, Kai Tak</strong> to the wetlands of
+            <strong>Tin Shui Wai</strong>. Slow-folded croissants, additive-free sourdough,
+            and French-style cakes baked fresh daily.
           </p>
           <div class="hero__actions">
-            <a href="#bakes" class="btn btn--primary">See the bakes</a>
-            <a href="#artemis" class="btn btn--ghost">Meet Artemis</a>
-            <a href="https://www.facebook.com/deessesbakery" class="btn btn--facebook" target="_blank" rel="noopener">
-              <span class="btn__fb-mark" aria-hidden="true">f</span>
-              Follow on Facebook
-            </a>
+            <a href="#branches" class="btn btn--primary">Choose your branch · 選擇分店</a>
+            <a href="#menu" class="btn btn--ghost">Browse the menu · 看餐單</a>
           </div>
+          <ul class="hero__stats" aria-label="Instagram at a glance">
+            <li><strong>436</strong><span>Posts · 帖文</span></li>
+            <li><strong>~6,250</strong><span>Followers · 追蹤者</span></li>
+            <li><strong>4</strong><span>Branches · 分店</span></li>
+          </ul>
         </div>
 
-        <!-- Right-side bakery display composition (pure CSS, no images) -->
-        <div class="hero__visual" aria-hidden="true">
-          <div class="display-card">
-            <div class="display-card__top">
-              <span class="display-card__tag">Fresh from the oven</span>
-              <span class="display-card__dot"></span>
+        <!-- Right-side swipeable product preview using temporary demo assets -->
+        <div class="hero__visual">
+          <div class="hero-preview" aria-label="DÉESSES Bakery product preview carousel">
+            <div class="hero-preview__viewport" data-hero-preview>
+              <article class="hero-preview__slide">
+                <img src="assets/unicorn.jpg" alt="Déesses Unicorn cake preview" />
+                <div class="hero-preview__bubble">
+                  <span>Signature cake</span>
+                  <strong>Déesses Unicorn · 獨角獸蛋糕</strong>
+                  <p>Celebration cake preview for the bakery range.</p>
+                </div>
+              </article>
+              <article class="hero-preview__slide">
+                <img src="assets/croissant.jpg" alt="Croissant preview" />
+                <div class="hero-preview__bubble">
+                  <span>Pastry</span>
+                  <strong>Croissants · 牛角酥</strong>
+                  <p>Daily folded pastries, including Artemis signature ideas.</p>
+                </div>
+              </article>
+              <article class="hero-preview__slide">
+                <img src="assets/mini.jpg" alt="Mini cakes preview" />
+                <div class="hero-preview__bubble">
+                  <span>Party box</span>
+                  <strong>Mini Cakes · 散水餅</strong>
+                  <p>Small bite-size cakes for office sharing and gifting.</p>
+                </div>
+              </article>
+              <article class="hero-preview__slide">
+                <img src="assets/rose.jpg" alt="Rose cake preview" />
+                <div class="hero-preview__bubble">
+                  <span>Seasonal</span>
+                  <strong>Rose Cake · 玫瑰蛋糕</strong>
+                  <p>Elegant seasonal cake preview for campaign moments.</p>
+                </div>
+              </article>
             </div>
-            <div class="display-card__stage">
-              <span class="steam steam--a"></span>
-              <span class="steam steam--b"></span>
-              <span class="steam steam--c"></span>
-              <div class="bake3d bake3d--croissant"></div>
-              <div class="bake3d bake3d--loaf"></div>
-              <div class="bake3d bake3d--bun"></div>
-            </div>
-            <div class="display-card__shelf"></div>
-            <p class="display-card__caption">Golden crusts · laminated layers · honey crumb</p>
+            <div class="hero-preview__dots" data-hero-dots aria-label="Product preview slides"></div>
+            <p class="hero-preview__fine">Temporary preview photos · replace with approved assets before delivery.</p>
           </div>
         </div>
       </div>
       <div class="hero__scrim" aria-hidden="true"></div>
     </section>
 
-    <!-- Story -->
-    <section class="story" id="story">
+    <!-- Branches -->
+    <section class="branches" id="branches">
       <div class="section__head">
-        <p class="eyebrow">The Story</p>
-        <h2>A bakery that chases the light.</h2>
-      </div>
-      <div class="story__grid">
-        <p class="story__lead">
-          This is a design concept — a love letter to golden crumb and honeyed crust.
-          The look borrows from quiet morning markets and the soft glow that lands on a loaf
-          just as the city wakes up.
-        </p>
-        <div class="story__cards">
-          <article class="card">
-            <h3>Long, patient ferments</h3>
-            <p>Dough left to find its own flavour overnight, until the crust caramelises into deep amber.</p>
-          </article>
-          <article class="card">
-            <h3>Pastry, laminated by hand</h3>
-            <p>Butter and flour folded into countless layers that shatter, lift, and shine.</p>
-          </article>
-          <article class="card">
-            <h3>Rooted in Hong Kong</h3>
-            <p>An imagined neighbourhood bakery with one foot in the wetlands and one in the harbour.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- Bakes -->
-    <section class="bakes" id="bakes">
-      <div class="section__head">
-        <p class="eyebrow">The Bakes</p>
-        <h2>Golden, every one.</h2>
-        <p class="section__sub">A sampler of the kind of things this concept bakery would pull from the oven.</p>
-      </div>
-      <div class="bakes__grid">
-        <article class="bake">
-          <div class="bake__swatch bake__swatch--crust" aria-hidden="true"></div>
-          <div class="bake__head">
-            <h3>Country Sourdough</h3>
-            <span class="bake__price">Price TBC</span>
-          </div>
-          <p>A dark, crackling crust over an open, custardy crumb.</p>
-        </article>
-        <article class="bake">
-          <div class="bake__swatch bake__swatch--butter" aria-hidden="true"></div>
-          <div class="bake__head">
-            <h3>Butter Croissant</h3>
-            <span class="bake__price">Price TBC</span>
-          </div>
-          <p>Honeycomb layers, burnished tips, and a quiet shower of flakes.</p>
-        </article>
-        <article class="bake">
-          <div class="bake__swatch bake__swatch--honey" aria-hidden="true"></div>
-          <div class="bake__head">
-            <h3>Honey Brioche</h3>
-            <span class="bake__price">Price TBC</span>
-          </div>
-          <p>Soft, golden, and barely sweet — the loaf that smells like home.</p>
-        </article>
-        <article class="bake">
-          <div class="bake__swatch bake__swatch--seed" aria-hidden="true"></div>
-          <div class="bake__head">
-            <h3>Seeded Wheat</h3>
-            <span class="bake__price">Price TBC</span>
-          </div>
-          <p>Toasted seeds and wholegrain warmth, baked to a deep, nutty amber.</p>
-        </article>
-      </div>
-      <p class="note">Items shown are illustrative of the concept. Prices are to be confirmed; no menu or availability is implied.</p>
-    </section>
-
-    <!-- Artemis -->
-    <section class="artemis" id="artemis">
-      <div class="artemis__inner">
-        <p class="eyebrow eyebrow--light">A sibling concept</p>
-        <h2>Artemis<span class="artemis__by"> by Deesses Bakery</span></h2>
-        <p class="artemis__lead">
-          The search results pair Deesses Bakery with <strong>Artemis by Deesses Bakery</strong>,
-          listed at <strong>AIRSIDE, Kai Tak</strong>. In this demo, Artemis is imagined as the
-          calmer, evening-lit counter — the same golden palette, a slower pour.
-        </p>
-        <ul class="artemis__facts">
-          <li><span>Listed as</span> Artemis by Deesses Bakery</li>
-          <li><span>Area</span> AIRSIDE, Kai Tak</li>
-          <li><span>Status</span> Concept demo — details not verified</li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- Visit -->
-    <section class="visit" id="visit">
-      <div class="section__head">
-        <p class="eyebrow">Find the Light</p>
-        <h2>Somewhere near the wetlands.</h2>
+        <p class="eyebrow">Choose Your Branch · 選擇分店</p>
+        <h2>Four counters, one brand.</h2>
         <p class="section__sub">
-          The source post mentions <strong>Hong Kong Wetland Park</strong>. We've kept that as the
-          mood of the place — reeds, soft water, low golden sun.
+          Tap <strong>Artemis at Kai Tak</strong> to jump into the purple signature counter first;
+          the other branch cards take you straight to their filtered menu.
         </p>
       </div>
-      <div class="visit__card">
-        <div class="visit__col">
-          <h3>Setting</h3>
-          <p>Hong Kong Wetland Park (referenced in the original post)</p>
+      <div class="branch-grid" id="branchGrid">
+        <!-- Branch cards injected by script.js -->
+      </div>
+    </section>
+
+    <!-- Signature -->
+    <section class="signature" id="signature">
+      <div class="signature__inner">
+        <p class="eyebrow eyebrow--light">Artemis · 啟德招牌</p>
+        <h2>Artemis<span class="signature__by"> by Deesses Bakery</span></h2>
+        <p class="signature__lead">
+          At <strong>AIRSIDE, Kai Tak</strong>, Artemis pairs high-quality bread baked fresh daily
+          with an elegant, gift-ready vibe — a stronger pink-and-purple, Instagram aesthetic and a
+          handful of signature bakes.
+        </p>
+        <ul class="signature__list">
+          <li><span>🌰</span> Pistachio mochi croissant · 開心果麻糬牛角酥 <em>signature</em></li>
+          <li><span>🌭</span> 50cm sausage pastry · 50cm 腸仔酥</li>
+          <li><span>🌈</span> Mini rainbow croissants · 迷你彩虹牛角酥</li>
+          <li><span>🧸</span> Bear cake · 小熊蛋糕</li>
+        </ul>
+        <a href="#menu" class="btn btn--primary">View Artemis products · 睇啟德產品</a>
+      </div>
+    </section>
+
+    <!-- Menu -->
+    <section class="menu" id="menu">
+      <div class="section__head">
+        <p class="eyebrow">The Menu · 餐單</p>
+        <h2>Cakes, pastries &amp; bakery.</h2>
+        <p class="section__sub">
+          Filter by category and by branch. Prices marked
+          <em>“from public posts · 售價或有變動”</em> come from older social posts and may have changed.
+        </p>
+      </div>
+
+      <div class="filters" role="group" aria-label="Menu filters">
+        <div class="filters__row" id="categoryFilters" aria-label="Filter by category">
+          <span class="filters__label">Category · 分類</span>
+          <!-- chips injected -->
         </div>
-        <div class="visit__col">
-          <h3>Hours</h3>
-          <p>Not published — this is a concept demo.</p>
-        </div>
-        <div class="visit__col">
-          <h3>Contact</h3>
-          <p>No phone or address is invented here. Follow the Facebook page for anything official.</p>
+        <div class="filters__row" id="branchFilters" aria-label="Filter by branch">
+          <span class="filters__label">Branch · 分店</span>
+          <!-- chips injected -->
         </div>
       </div>
-      <div class="visit__cta">
-        <a href="https://www.facebook.com/deessesbakery" class="btn btn--facebook btn--lg" target="_blank" rel="noopener">
-          <span class="btn__fb-mark" aria-hidden="true">f</span>
-          Follow Deesses Bakery on Facebook
+
+      <div class="menu__grid" id="menuGrid" aria-live="polite">
+        <!-- Product cards injected by script.js -->
+      </div>
+      <p class="menu__empty" id="menuEmpty" hidden>No items match this filter. · 沒有符合的產品。</p>
+
+      <p class="note">
+        Images are temporary public-preview references from Instagram and should be replaced with
+        approved assets before delivery. Seasonal prices (e.g. festive cakes) are past examples,
+        not current pricing.
+      </p>
+    </section>
+
+    <!-- Order -->
+    <section class="order" id="order">
+      <div class="section__head">
+        <p class="eyebrow">Pre-order · 訂購方法</p>
+        <h2>Reserve before you visit.</h2>
+        <p class="section__sub">
+          Cakes and festive bakes are made to order in limited daily batches —
+          message ahead to reserve. · 蛋糕及節日產品每日限量製作，請提前預訂。
+        </p>
+      </div>
+      <div class="order__cards">
+        <a class="order-card order-card--ig" href="https://www.instagram.com/deesses_bakery/" target="_blank" rel="noopener">
+          <span class="order-card__icon ig-mark ig-mark--lg" aria-hidden="true"></span>
+          <h3>Instagram DM</h3>
+          <p>@deesses_bakery</p>
+          <span class="order-card__hint">Send a direct message · 私訊落單</span>
         </a>
+        <a class="order-card order-card--wa" href="https://wa.me/85268128098" target="_blank" rel="noopener">
+          <span class="order-card__icon order-card__icon--wa" aria-hidden="true">✆</span>
+          <h3>WhatsApp</h3>
+          <p>6812&nbsp;8098</p>
+          <span class="order-card__hint">Message to pre-order · WhatsApp 訂購</span>
+        </a>
+      </div>
+      <p class="note">Pre-order channel per the brand's public Instagram bio. Availability and lead times vary by branch and season.</p>
+    </section>
+
+    <!-- Instagram social proof -->
+    <section class="social" id="social">
+      <div class="social__inner">
+        <div class="social__text">
+          <p class="eyebrow">Follow · 追蹤我們</p>
+          <h2>@deesses_bakery</h2>
+          <p class="social__lead">
+            <strong>DÉESSES</strong> — Artemis by Deesses Bakery. Bakery. New flavours, seasonal
+            cakes and branch updates land on Instagram first.
+          </p>
+          <p class="social__counts"><strong>436</strong> posts · <strong>~6,250</strong> followers</p>
+          <a href="https://www.instagram.com/deesses_bakery/" class="btn btn--primary" target="_blank" rel="noopener">
+            <span class="ig-mark" aria-hidden="true"></span>
+            Open Instagram · 前往 Instagram
+          </a>
+        </div>
+        <div class="social__grid" id="socialGrid" aria-hidden="true">
+          <!-- preview tiles injected -->
+        </div>
       </div>
     </section>
   </main>
@@ -200,21 +224,31 @@
   <footer class="footer">
     <div class="footer__inner">
       <div class="footer__top">
-        <p class="footer__brand">Deesses Bakery</p>
-        <a href="https://www.facebook.com/deessesbakery" class="footer__fb" target="_blank" rel="noopener">
-          <span class="btn__fb-mark" aria-hidden="true">f</span>
-          facebook.com/deessesbakery
+        <div>
+          <p class="footer__brand">DÉESSES Bakery</p>
+          <p class="footer__tag">Artemis by Deesses Bakery · 香港</p>
+        </div>
+        <a href="https://www.instagram.com/deesses_bakery/" class="footer__ig" target="_blank" rel="noopener">
+          <span class="ig-mark" aria-hidden="true"></span>
+          @deesses_bakery
         </a>
       </div>
+
+      <div class="footer__branches" id="footerBranches">
+        <!-- compact branch contacts injected -->
+      </div>
+
       <p class="footer__fine">
-        Unofficial design concept. Not affiliated with, endorsed by, or representing the real
-        business. No real prices, hours, phone numbers, or addresses are stated. Place and brand
-        references (Artemis by Deesses Bakery · AIRSIDE, Kai Tak · Hong Kong Wetland Park) are drawn
-        from public search and social results for illustration only.
+        <strong>Static demo site.</strong> This is an unofficial design demo built for presentation.
+        Branch names, addresses, phone numbers and the pre-order contact are taken from the brand's
+        public Instagram bio and public listings (OpenRice / AIRSIDE) for illustration. Seasonal
+        prices shown are drawn from older public posts and may have changed. Product images are
+        temporary public-preview references and should be replaced with approved assets before
+        client delivery. Please confirm all hours, pricing and availability with the business directly.
       </p>
     </div>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="script.js?v=hero-centered-peek-1"></script>
 </body>
 </html>

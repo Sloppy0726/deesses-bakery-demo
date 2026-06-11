@@ -1,44 +1,541 @@
 /* =========================================================
-   Deesses Bakery — concept demo
-   - Sticky glass nav: condenses after scroll
-   - Scroll-driven theme shifts (dawn → midday → golden → dusk)
-   - Reveal-on-scroll via IntersectionObserver
+   DÉESSES Bakery — multi-branch static demo
+   - Data-driven branches + product menu with category/branch filters
+   - Sticky glass nav, scroll-driven warm theme, reveal-on-scroll
+   NOTE: image URLs are temporary public-preview references and
+   should be replaced with approved assets before delivery.
    ========================================================= */
 
 (function () {
   "use strict";
 
-  var body = document.body;
-  var nav = document.getElementById("nav");
+  /* ---------- Temporary public-preview image references ---------- */
+  var IMG = {
+    mini:       "assets/mini.jpg",
+    sourdough:  "assets/sourdough.jpg",
+    croissant:  "assets/croissant.jpg",
+    strawberry: "assets/strawberry.jpg",
+    rose:       "assets/rose.jpg",
+    unicorn:    "assets/unicorn.jpg",
+    orange:     "assets/orange.jpg"
+  };
 
-  // Default theme
-  body.setAttribute("data-theme", "dawn");
-
-  /* ---- Sticky glass nav: add blur/shadow once scrolled ---- */
-  function onScrollNav() {
-    if (window.scrollY > 24) {
-      nav.classList.add("nav--scrolled");
-    } else {
-      nav.classList.remove("nav--scrolled");
+  /* ---------- Branches ---------- */
+  var BRANCHES = [
+    {
+      id: "kaitak",
+      heart: "💜",
+      name: "啟德 Kai Tak",
+      sub: "Artemis · AIRSIDE",
+      addr: "九龍啟德協調道2號 Airside B132C",
+      addrEn: "Shop B132C, B1/F, AIRSIDE, 2 Concorde Road, Kai Tak",
+      phone: "6812 8981",
+      note: "High-quality bread baked fresh daily, elegant vibe. Brand's signature & gift counter."
+    },
+    {
+      id: "kennedytown",
+      heart: "🧡",
+      name: "西環 Kennedy Town",
+      sub: "Bernice",
+      addr: "堅尼地城卑路乍街聯威新樓地下",
+      addrEn: "G/F, Luen Wai Building, Belcher's Street, Kennedy Town",
+      phone: null,
+      note: "Neighbourhood counter for daily cakes, pastries and bakery."
+    },
+    {
+      id: "tinshuiwai",
+      heart: "💖",
+      name: "天水圍 Tin Shui Wai",
+      sub: "Wetland Seasons Bay",
+      addr: "Wetland Seasons Bay 地下10號",
+      addrEn: "Shop 10, G/F, Wetland Seasons Bay, 1 Wetland Park Road",
+      phone: "6812 8908",
+      note: "Bayside counter by Hong Kong Wetland Park."
+    },
+    {
+      id: "sheungshui",
+      heart: "💓",
+      name: "上水 Sheung Shui",
+      sub: "Sheung Shui Plaza",
+      addr: "上水廣場5樓512號",
+      addrEn: "Shop 512, 5/F, Sheung Shui Plaza",
+      phone: "6812 8980",
+      note: "Mall counter for cakes, pastries and bakery."
     }
+  ];
+
+  var ALL_IDS = BRANCHES.map(function (b) { return b.id; });
+  var WHATSAPP_NUMBER = "85268128098";
+
+  function esc(value) {
+    return String(value == null ? "" : value)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;");
   }
 
-  /* ---- Scroll-driven theme ----
-     Map page progress to a warm "time of day" palette. */
-  var themes = ["dawn", "midday", "golden", "dusk"];
 
+  /* ---------- Categories ---------- */
+  var CATEGORIES = [
+    { id: "cake",   label: "Cake · 蛋糕",   emoji: "🎂" },
+    { id: "pastry", label: "Pastry · 酥點", emoji: "🧁" },
+    { id: "bakery", label: "Bakery · 麵包", emoji: "🥯" }
+  ];
+
+  /* ---------- Products ----------
+     branches: ids where item is offered (all four unless noted).
+     priceNote: "current" facts are described conservatively; festive/seasonal
+     prices are explicitly flagged as past public-post examples. */
+  var PRODUCTS = [
+    {
+      name: "Mini Cakes · 散水餅",
+      cat: "cake",
+      img: IMG.mini,
+      desc: "Rotating single-serve cakes — a green apple mini cake among the recent flavours.",
+      price: "From public posts · 售價或有變動",
+      size: "Assorted mini size · 散水/派對款",
+      serves: "Best for office sharing / party box",
+      lead: "Reserve 1–2 days ahead · 建議提前1–2日預訂",
+      options: ["Green apple mini cake", "Rotating seasonal flavours", "Gift / party box"],
+      branches: ALL_IDS
+    },
+    {
+      name: "Natural Sourdough · 天然酸種包",
+      cat: "bakery",
+      img: IMG.sourdough,
+      desc: "Slow-fermented sourdough with no additives, preservatives or artificial colour.",
+      price: "Ask in branch · 門市查詢",
+      size: "Loaf size varies daily · 每日款式不同",
+      serves: "Slice for breakfast / sharing",
+      lead: "Same-day stock varies · 即日供應視乎門市",
+      options: ["Natural sourdough", "No additives", "Daily baked"],
+      branches: ALL_IDS
+    },
+    {
+      name: "Croissants · 牛角酥",
+      cat: "pastry",
+      img: IMG.croissant,
+      desc: "Handmade, hand-folded and double-fermented. Flavours include chocolate custard cream, raspberry-strawberry and black sesame mochi.",
+      price: "Ask in branch · 門市查詢",
+      size: "Single pastry · 單件裝",
+      serves: "1 person",
+      lead: "Best to reserve before pickup · 建議先預留",
+      options: ["Chocolate custard", "Raspberry-strawberry", "Black sesame mochi"],
+      branches: ALL_IDS
+    },
+    {
+      name: "Strawberry Cake · 士多啤梨蛋糕",
+      cat: "cake",
+      img: IMG.strawberry,
+      desc: "Fresh strawberry cake. A public Instagram post listed a limited special price HK$318 (regular HK$368), with pickup before 2026-06-10 — shown as a past example only.",
+      price: "Past example: $318 / reg $368 · 已過期",
+      size: "Approx. 5–6 inch cake · 約5–6吋（示例）",
+      serves: "4–6 people · 約4–6人",
+      lead: "Reserve 2–3 days ahead · 建議提前2–3日預訂",
+      options: ["Birthday message card", "Pickup branch", "Candle request"],
+      seasonal: true,
+      branches: ALL_IDS
+    },
+    {
+      name: "Rose Cake · 玫瑰蛋糕",
+      cat: "cake",
+      img: IMG.rose,
+      desc: "Mother's Day creation: rose-raspberry cream, strawberry jam, sponge, raspberry chocolate mousse and handmade chocolate rose petals under a red glaze.",
+      price: "Seasonal · 節日限定",
+      size: "Approx. 5 inch seasonal cake · 約5吋節日蛋糕",
+      serves: "4–6 people · 約4–6人",
+      lead: "Seasonal pre-order · 節日前預訂",
+      options: ["Rose-raspberry cream", "Strawberry jam", "Chocolate message card"],
+      seasonal: true,
+      branches: ALL_IDS
+    },
+    {
+      name: "Déesses Unicorn · 獨角獸蛋糕",
+      cat: "cake",
+      img: IMG.unicorn,
+      desc: "3D chocolate unicorn over a white-peach cake with peach jam and mousse. A festive limited bake (20 only) — example only.",
+      price: "Seasonal · 節日限定",
+      size: "Limited celebration cake · 限量慶祝蛋糕",
+      serves: "4–6 people · 約4–6人",
+      lead: "Limited batch, ask Artemis · 啟德限定查詢",
+      options: ["White peach mousse", "3D chocolate unicorn", "Gift-ready box"],
+      seasonal: true,
+      branches: ["kaitak"]
+    },
+    {
+      name: "Orange Cake · 香橙蛋糕",
+      cat: "cake",
+      img: IMG.orange,
+      desc: "Lunar New Year cake: orange mousse, praline chocolate mousse, chocolate-orange sponge and semi-confit mandarin.",
+      price: "Seasonal · 節日限定",
+      size: "Approx. 5 inch seasonal cake · 約5吋節日蛋糕",
+      serves: "4–6 people · 約4–6人",
+      lead: "Seasonal pre-order · 節日前預訂",
+      options: ["Orange mousse", "Praline chocolate mousse", "Mandarin garnish"],
+      seasonal: true,
+      branches: ALL_IDS
+    },
+    {
+      name: "Pistachio Mochi Croissant · 開心果麻糬牛角酥",
+      cat: "pastry",
+      img: IMG.croissant,
+      desc: "Artemis signature — buttery croissant with pistachio and chewy mochi.",
+      price: "Ask in branch · 門市查詢",
+      size: "Single signature pastry · 單件招牌酥點",
+      serves: "1 person",
+      lead: "Reserve same day if available · 可即日查詢預留",
+      options: ["Pistachio filling", "Chewy mochi", "Artemis Kai Tak pickup"],
+      signature: true,
+      branches: ["kaitak"]
+    },
+    {
+      name: "Filled Bagels · 麻糬貝果",
+      cat: "bakery",
+      img: IMG.sourdough,
+      desc: "Mochi-filled bagels — matcha mochi red bean, earl grey mochi lychee, taro mochi.",
+      price: "From public posts · $15–$19 · 售價或有變動",
+      size: "Single bagel · 單個貝果",
+      serves: "1 person",
+      lead: "Same-day stock varies · 即日供應視乎門市",
+      options: ["Matcha mochi red bean", "Earl grey mochi lychee", "Taro mochi"],
+      branches: ALL_IDS
+    },
+    {
+      name: "Wheel Croissant · 圓酥",
+      cat: "pastry",
+      img: IMG.croissant,
+      desc: "Round laminated pastry — pistachio, Lotus sea-salt caramel, lemon yuzu.",
+      price: "From public posts · $26–$29 · 售價或有變動",
+      size: "Single wheel croissant · 單件圓酥",
+      serves: "1 person",
+      lead: "Best to reserve before pickup · 建議先預留",
+      options: ["Pistachio", "Lotus sea-salt caramel", "Lemon yuzu"],
+      branches: ALL_IDS
+    }
+  ];
+
+  /* =========================================================
+     Render helpers
+     ========================================================= */
+  var body = document.body;
+  var nav = document.getElementById("nav");
+  var activeBranch = "all";
+  var activeCategory = "all";
+
+  function el(tag, cls, html) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (html != null) n.innerHTML = html;
+    return n;
+  }
+
+  function branchName(id) {
+    for (var i = 0; i < BRANCHES.length; i++) if (BRANCHES[i].id === id) return BRANCHES[i];
+    return null;
+  }
+
+  /* ---------- Branch cards ---------- */
+  function renderBranches() {
+    var grid = document.getElementById("branchGrid");
+    if (!grid) return;
+    BRANCHES.forEach(function (b) {
+      var card = el("button", "branch-card");
+      card.type = "button";
+      card.setAttribute("data-branch", b.id);
+      card.setAttribute("aria-pressed", "false");
+      var phone = b.phone
+        ? '<a class="branch-card__phone" href="tel:+852' + b.phone.replace(/\s/g, "") + '" onclick="event.stopPropagation()">☏ ' + b.phone + "</a>"
+        : '<span class="branch-card__phone branch-card__phone--none">Pre-order via IG / WhatsApp</span>';
+      card.innerHTML =
+        '<span class="branch-card__heart" aria-hidden="true">' + b.heart + "</span>" +
+        '<h3 class="branch-card__name">' + b.name + "</h3>" +
+        '<p class="branch-card__sub">' + b.sub + "</p>" +
+        '<p class="branch-card__addr">' + b.addr + "</p>" +
+        '<p class="branch-card__addr branch-card__addr--en">' + b.addrEn + "</p>" +
+        '<p class="branch-card__note">' + b.note + "</p>" +
+        phone +
+        '<span class="branch-card__cta">' + (b.id === "kaitak" ? "Enter Artemis · 進入啟德專櫃 →" : "View menu · 看餐單 →") + '</span>';
+      card.addEventListener("click", function () {
+        var nextBranch = activeBranch === b.id ? "all" : b.id;
+        selectBranch(nextBranch);
+        var targetId = b.id === "kaitak" ? "signature" : "menu";
+        var target = document.getElementById(targetId);
+        if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+      grid.appendChild(card);
+    });
+  }
+
+  /* ---------- Filter chips ---------- */
+  function renderFilters() {
+    var catRow = document.getElementById("categoryFilters");
+    var brRow = document.getElementById("branchFilters");
+    if (!catRow || !brRow) return;
+
+    function chip(row, key, label, onClick, group) {
+      var c = el("button", "chip", label);
+      c.type = "button";
+      c.setAttribute("data-key", key);
+      c.setAttribute("data-group", group);
+      c.addEventListener("click", onClick);
+      row.appendChild(c);
+      return c;
+    }
+
+    chip(catRow, "all", "All · 全部", function () { selectCategory("all"); }, "cat");
+    CATEGORIES.forEach(function (c) {
+      chip(catRow, c.id, c.emoji + " " + c.label, function () { selectCategory(c.id); }, "cat");
+    });
+
+    chip(brRow, "all", "All branches · 所有分店", function () { selectBranch("all"); }, "br");
+    BRANCHES.forEach(function (b) {
+      chip(brRow, b.id, b.heart + " " + b.name, function () { selectBranch(b.id); }, "br");
+    });
+
+    syncChips();
+  }
+
+  function syncChips() {
+    document.querySelectorAll('.chip[data-group="cat"]').forEach(function (c) {
+      c.classList.toggle("chip--on", c.getAttribute("data-key") === activeCategory);
+    });
+    document.querySelectorAll('.chip[data-group="br"]').forEach(function (c) {
+      c.classList.toggle("chip--on", c.getAttribute("data-key") === activeBranch);
+    });
+    document.querySelectorAll(".branch-card").forEach(function (c) {
+      var on = c.getAttribute("data-branch") === activeBranch;
+      c.classList.toggle("branch-card--on", on);
+      c.setAttribute("aria-pressed", on ? "true" : "false");
+    });
+  }
+
+  function selectCategory(id) { activeCategory = id; syncChips(); renderMenu(); }
+  function selectBranch(id) { activeBranch = id; syncChips(); renderMenu(); }
+
+  function getActiveBranchForOrder(p) {
+    if (activeBranch !== "all" && p.branches.indexOf(activeBranch) !== -1) return branchName(activeBranch);
+    return branchName(p.branches[0]);
+  }
+
+  function productWhatsAppUrl(p, branch) {
+    var lines = [
+      "你好 DÉESSES Bakery，我想訂購/查詢：" + p.name,
+      "產品/Product: " + p.name,
+      "分店/Branch: " + (branch ? branch.name + " — " + branch.addrEn : "To be confirmed"),
+      "尺寸/Size: " + (p.size || "To be confirmed"),
+      "價錢/Price: " + p.price,
+      "取貨日期/Pickup date: ",
+      "數量/Quantity: 1",
+      "備註/Message card: "
+    ];
+    return "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(lines.join("\n"));
+  }
+
+  function detailOptions(p) {
+    return (p.options || ["Pickup branch", "Quantity", "Message card"])
+      .map(function (x) { return '<span class="product-modal__pill">' + esc(x) + '</span>'; })
+      .join("");
+  }
+
+  function detailBranches(p) {
+    return p.branches.map(function (id) {
+      var b = branchName(id);
+      return b ? '<span class="product-modal__branch">' + esc(b.heart + " " + b.name) + '</span>' : "";
+    }).join("");
+  }
+
+  function detailBranchChoices(p, selectedId) {
+    return p.branches.map(function (id) {
+      var b = branchName(id);
+      if (!b) return "";
+      var on = id === selectedId ? " product-modal__branch-choice--on" : "";
+      return '<button class="product-modal__branch-choice' + on + '" type="button" data-order-branch="' + esc(id) + '">' + esc(b.heart + " " + b.name) + '</button>';
+    }).join("");
+  }
+
+  function bindOrderBranchChoices(modal, product) {
+    var orderBtn = modal.querySelector(".product-modal__order");
+    var branchNote = modal.querySelector(".product-modal__branch-note strong");
+    modal.querySelectorAll("[data-order-branch]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var branch = branchName(btn.getAttribute("data-order-branch"));
+        if (!branch || !orderBtn) return;
+        orderBtn.href = productWhatsAppUrl(product, branch);
+        if (branchNote) branchNote.textContent = branch.name;
+        modal.querySelectorAll("[data-order-branch]").forEach(function (other) {
+          other.classList.toggle("product-modal__branch-choice--on", other === btn);
+        });
+      });
+    });
+  }
+
+  /* ---------- Menu ---------- */
+  function renderMenu() {
+    var grid = document.getElementById("menuGrid");
+    var empty = document.getElementById("menuEmpty");
+    if (!grid) return;
+    grid.innerHTML = "";
+
+    var items = PRODUCTS.filter(function (p) {
+      var catOk = activeCategory === "all" || p.cat === activeCategory;
+      var brOk = activeBranch === "all" || p.branches.indexOf(activeBranch) !== -1;
+      return catOk && brOk;
+    });
+
+    empty.hidden = items.length > 0;
+
+    items.forEach(function (p) {
+      var card = el("button", "product");
+      card.type = "button";
+      card.setAttribute("aria-label", "View details for " + p.name);
+      var badge = "";
+      if (p.signature) badge = '<span class="product__badge product__badge--sig">Signature · 招牌</span>';
+      else if (p.seasonal) badge = '<span class="product__badge product__badge--season">Seasonal · 節日</span>';
+
+      var hearts = p.branches.map(function (id) {
+        var b = branchName(id);
+        return b ? '<span title="' + b.name + '">' + b.heart + "</span>" : "";
+      }).join("");
+      var avail = p.branches.length === ALL_IDS.length
+        ? '<span class="product__avail-all">All branches · 全線供應</span>'
+        : '<span class="product__avail-some">' + hearts + " selected · 指定分店</span>";
+
+      var cat = null;
+      for (var i = 0; i < CATEGORIES.length; i++) if (CATEGORIES[i].id === p.cat) cat = CATEGORIES[i];
+
+      card.innerHTML =
+        '<div class="product__media">' +
+          badge +
+          '<span class="product__cat">' + (cat ? cat.emoji + " " + cat.label : "") + "</span>" +
+          '<img src="' + p.img + '" alt="' + p.name + '" decoding="async" />' +
+        "</div>" +
+        '<div class="product__body">' +
+          '<div class="product__head"><h3>' + p.name + "</h3></div>" +
+          "<p class=\"product__desc\">" + p.desc + "</p>" +
+          '<div class="product__foot">' +
+            '<span class="product__price">' + p.price + "</span>" +
+            '<span class="product__avail">' + avail + "</span>" +
+            '<span class="product__open">View details · 查看詳情 →</span>' +
+          "</div>" +
+        "</div>";
+      card.addEventListener("click", function () { openProductModal(p); });
+      grid.appendChild(card);
+    });
+  }
+
+  /* ---------- Product detail modal + WhatsApp prefill ---------- */
+  function ensureModal() {
+    var existing = document.getElementById("productModal");
+    if (existing) return existing;
+    var m = el("div", "product-modal");
+    m.id = "productModal";
+    m.setAttribute("aria-hidden", "true");
+    m.innerHTML = '<div class="product-modal__backdrop" data-close-modal></div>' +
+      '<section class="product-modal__panel" role="dialog" aria-modal="true" aria-labelledby="productModalTitle">' +
+        '<button class="product-modal__close" type="button" aria-label="Close product details" data-close-modal>×</button>' +
+        '<div class="product-modal__content" id="productModalContent"></div>' +
+      '</section>';
+    m.addEventListener("click", function (e) {
+      if (e.target && e.target.hasAttribute("data-close-modal")) closeProductModal();
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && m.classList.contains("product-modal--open")) closeProductModal();
+    });
+    document.body.appendChild(m);
+    return m;
+  }
+
+  function openProductModal(p) {
+    var modal = ensureModal();
+    var content = document.getElementById("productModalContent");
+    var branch = getActiveBranchForOrder(p);
+    var orderUrl = productWhatsAppUrl(p, branch);
+    content.innerHTML =
+      '<div class="product-modal__image"><img src="' + esc(p.img) + '" alt="' + esc(p.name) + '" /></div>' +
+      '<div class="product-modal__details">' +
+        '<p class="eyebrow">Product details · 產品詳情</p>' +
+        '<h2 id="productModalTitle">' + esc(p.name) + '</h2>' +
+        '<p class="product-modal__desc">' + esc(p.desc) + '</p>' +
+        '<div class="product-modal__branch-note">Ordering branch: <strong>' + esc(branch ? branch.name : "To be confirmed") + '</strong></div>' +
+        '<div class="product-modal__section product-modal__pickup"><span>Pickup branch · 取貨分店</span><div class="product-modal__branch-choices">' + detailBranchChoices(p, branch ? branch.id : p.branches[0]) + '</div></div>' +
+        '<a class="btn btn--primary product-modal__order" href="' + orderUrl + '" target="_blank" rel="noopener">Order now on WhatsApp · WhatsApp 自動填訊息</a>' +
+        '<div class="product-modal__specs">' +
+          '<div><span>Price · 價錢</span><strong>' + esc(p.price) + '</strong></div>' +
+          '<div><span>Size · 尺寸</span><strong>' + esc(p.size || "To be confirmed") + '</strong></div>' +
+          '<div><span>Serves · 份量</span><strong>' + esc(p.serves || "To be confirmed") + '</strong></div>' +
+          '<div><span>Lead time · 預訂</span><strong>' + esc(p.lead || "Ask in branch") + '</strong></div>' +
+        '</div>' +
+        '<div class="product-modal__section"><span>Options · 可選項目</span><div class="product-modal__pills">' + detailOptions(p) + '</div></div>' +
+        '<div class="product-modal__section"><span>Available at · 供應分店</span><div class="product-modal__branches">' + detailBranches(p) + '</div></div>' +
+        '<p class="product-modal__fine">The WhatsApp button opens a pre-filled message. Please confirm exact price, size, pickup date and availability with the shop.</p>' +
+      '</div>';
+    modal.classList.add("product-modal--open");
+    bindOrderBranchChoices(modal, p);
+    modal.setAttribute("aria-hidden", "false");
+    document.body.classList.add("modal-open");
+    var closeBtn = modal.querySelector(".product-modal__close");
+    if (closeBtn) closeBtn.focus();
+  }
+
+  function closeProductModal() {
+    var modal = document.getElementById("productModal");
+    if (!modal) return;
+    modal.classList.remove("product-modal--open");
+    modal.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("modal-open");
+  }
+
+  /* ---------- Footer branch contacts ---------- */
+  function renderFooterBranches() {
+    var wrap = document.getElementById("footerBranches");
+    if (!wrap) return;
+    BRANCHES.forEach(function (b) {
+      var c = el("div", "footer-branch");
+      c.innerHTML =
+        '<p class="footer-branch__name">' + b.heart + " " + b.name + "</p>" +
+        '<p class="footer-branch__addr">' + b.addrEn + "</p>" +
+        (b.phone ? '<p class="footer-branch__phone">☏ ' + b.phone + "</p>" : '<p class="footer-branch__phone">Pre-order: IG / WhatsApp 6812 8098</p>');
+      wrap.appendChild(c);
+    });
+  }
+
+  /* ---------- Instagram preview tiles ---------- */
+  function renderSocialGrid() {
+    var grid = document.getElementById("socialGrid");
+    if (!grid) return;
+    var imgs = [IMG.mini, IMG.croissant, IMG.rose, IMG.unicorn, IMG.orange, IMG.strawberry];
+    imgs.forEach(function (src) {
+      var a = el("a", "social-tile");
+      a.href = "https://www.instagram.com/deesses_bakery/";
+      a.target = "_blank";
+      a.rel = "noopener";
+      a.innerHTML = '<img loading="lazy" src="' + src + '" alt="DÉESSES Bakery Instagram preview" />';
+      grid.appendChild(a);
+    });
+  }
+
+  /* =========================================================
+     Scroll behaviour (nav + warm theme + reveal)
+     ========================================================= */
+  body.setAttribute("data-theme", "dawn");
+
+  function onScrollNav() {
+    if (window.scrollY > 24) nav.classList.add("nav--scrolled");
+    else nav.classList.remove("nav--scrolled");
+  }
+
+  var themes = ["dawn", "midday", "golden", "dusk"];
   function onScrollTheme() {
     var doc = document.documentElement;
     var max = (doc.scrollHeight - window.innerHeight) || 1;
     var progress = Math.min(1, Math.max(0, window.scrollY / max));
     var index = Math.min(themes.length - 1, Math.floor(progress * themes.length));
     var next = themes[index];
-    if (body.getAttribute("data-theme") !== next) {
-      body.setAttribute("data-theme", next);
-    }
+    if (body.getAttribute("data-theme") !== next) body.setAttribute("data-theme", next);
   }
 
-  /* ---- rAF-throttled scroll handler ---- */
   var ticking = false;
   function onScroll() {
     if (!ticking) {
@@ -51,30 +548,75 @@
     }
   }
   window.addEventListener("scroll", onScroll, { passive: true });
-  onScroll(); // set initial state
 
-  /* ---- Presentation-safe reveal styling ----
-     Keep all content visible. For this sales demo, screenshots and screen-share
-     reliability matter more than hiding content for scroll reveals. */
-  var revealTargets = document.querySelectorAll(
-    ".section__head, .story__lead, .card, .bake, .artemis__inner, .visit__card, .visit__cta"
-  );
-  revealTargets.forEach(function (el) {
-    el.classList.add("reveal");
-  });
-
-  /* ---- Smooth anchor focus for accessibility ---- */
-  document.querySelectorAll('a[href^="#"]').forEach(function (link) {
-    link.addEventListener("click", function (e) {
-      var id = link.getAttribute("href");
-      if (id.length < 2) return;
-      var target = document.querySelector(id);
-      if (target) {
-        e.preventDefault();
-        target.scrollIntoView({ behavior: "smooth", block: "start" });
-        target.setAttribute("tabindex", "-1");
-        target.focus({ preventScroll: true });
-      }
+  /* ---------- Smooth anchor focus ---------- */
+  function wireAnchors() {
+    document.querySelectorAll('a[href^="#"]').forEach(function (link) {
+      link.addEventListener("click", function (e) {
+        var id = link.getAttribute("href");
+        if (id.length < 2) return;
+        var target = document.querySelector(id);
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: "smooth", block: "start" });
+          target.setAttribute("tabindex", "-1");
+          target.focus({ preventScroll: true });
+        }
+      });
     });
-  });
+  }
+
+  /* ---------- Swipeable hero product preview ---------- */
+  function wireHeroPreview() {
+    var viewport = document.querySelector("[data-hero-preview]");
+    if (!viewport) return;
+    var slides = Array.from(viewport.querySelectorAll(".hero-preview__slide"));
+    var prev = document.querySelector("[data-hero-prev]");
+    var next = document.querySelector("[data-hero-next]");
+    var dotsWrap = document.querySelector("[data-hero-dots]");
+    var active = 0;
+
+    function slideWidth() {
+      var gap = parseFloat(window.getComputedStyle(viewport).columnGap || window.getComputedStyle(viewport).gap) || 0;
+      return slides[0] ? slides[0].getBoundingClientRect().width + gap : 0;
+    }
+    function setActive(index, shouldScroll) {
+      if (!slides.length) return;
+      active = (index + slides.length) % slides.length;
+      if (shouldScroll) viewport.scrollTo({ left: active * slideWidth(), behavior: "smooth" });
+      if (dotsWrap) {
+        Array.from(dotsWrap.children).forEach(function (dot, i) {
+          dot.classList.toggle("hero-preview__dot--on", i === active);
+        });
+      }
+    }
+
+    if (dotsWrap && !dotsWrap.children.length) {
+      slides.forEach(function (_, i) {
+        var dot = el("button", "hero-preview__dot" + (i === 0 ? " hero-preview__dot--on" : ""));
+        dot.type = "button";
+        dot.setAttribute("aria-label", "Show product preview " + (i + 1));
+        dot.addEventListener("click", function () { setActive(i, true); });
+        dotsWrap.appendChild(dot);
+      });
+    }
+    if (prev) prev.addEventListener("click", function () { setActive(active - 1, true); });
+    if (next) next.addEventListener("click", function () { setActive(active + 1, true); });
+    viewport.addEventListener("scroll", function () {
+      window.requestAnimationFrame(function () {
+        var width = slideWidth() || 1;
+        setActive(Math.round(viewport.scrollLeft / width), false);
+      });
+    }, { passive: true });
+  }
+
+  /* ---------- Init ---------- */
+  renderBranches();
+  renderFilters();
+  renderMenu();
+  renderFooterBranches();
+  renderSocialGrid();
+  wireHeroPreview();
+  wireAnchors();
+  onScroll();
 })();
