@@ -73,3 +73,13 @@ test('README reflects local assets and implemented features', () => {
   assert.doesNotMatch(readFileSync(new URL('../README.md', import.meta.url), 'utf8'), /public Instagram CDN URLs/, 'README should no longer claim CDN images');
   assert.doesNotMatch(readFileSync(new URL('../README.md', import.meta.url), 'utf8'), /reveal-on-scroll/i, 'README should not advertise missing reveal-on-scroll');
 });
+
+test('cake assembly animation and Dribbble-inspired design cues are implemented accessibly', () => {
+  assert.match(html, /id="craft"/, 'craft section missing');
+  assert.match(html, /cake-assembly/, 'cake assembly SVG missing');
+  assert.match(html, /data-cake-action="explode"/, 'explode control missing');
+  assert.match(html, /aria-live="polite"[^>]*id="cakeStatus"|id="cakeStatus"[^>]*aria-live="polite"/, 'cake status should announce state changes');
+  assert.match(css, /data-cake-mode="exploded"[\s\S]*cake-candle/, 'exploded-view motion styles missing');
+  assert.match(css, /craft__shot-meta/, 'Dribbble-style compact shot metadata missing');
+  assert.match(js, /wireCakeAssembly[\s\S]*__cakeAssemblyStatus/, 'cake assembly JS wiring/status missing');
+});

@@ -825,6 +825,50 @@
     });
   }
 
+  function wireCakeAssembly() {
+    var craft = document.getElementById("craft");
+    if (!craft) return;
+    var status = document.getElementById("cakeStatus");
+    var buttons = {
+      explode: craft.querySelector('[data-cake-action="explode"]'),
+      assemble: craft.querySelector('[data-cake-action="assemble"]'),
+      replay: craft.querySelector('[data-cake-action="replay"]')
+    };
+    var replayTimer = null;
+    function stopReplay() {
+      if (replayTimer) window.clearInterval(replayTimer);
+      replayTimer = null;
+      craft.removeAttribute("data-cake-replay");
+      craft.classList.remove("craft--replaying");
+    }
+    function setMode(mode, keepReplay) {
+      if (!keepReplay) stopReplay();
+      craft.setAttribute("data-cake-mode", mode);
+      if (buttons.explode) buttons.explode.disabled = mode === "exploded";
+      if (buttons.assemble) buttons.assemble.disabled = mode === "assembled";
+      if (status) status.textContent = mode === "exploded" ? "Cake exploded view · 已拆開睇層次" : "Cake assembled · 蛋糕已組裝";
+      window.__cakeAssemblyStatus = { mode: mode, pieces: craft.querySelectorAll(".cake-piece").length };
+    }
+    if (buttons.explode) buttons.explode.addEventListener("click", function () { setMode("exploded"); });
+    if (buttons.assemble) buttons.assemble.addEventListener("click", function () { setMode("assembled"); });
+    if (buttons.replay) buttons.replay.addEventListener("click", function () {
+      stopReplay();
+      craft.setAttribute("data-cake-replay", "true");
+      craft.classList.add("craft--replaying");
+      setMode("exploded", true);
+      replayTimer = window.setInterval(function () {
+        setMode(craft.getAttribute("data-cake-mode") === "exploded" ? "assembled" : "exploded", true);
+      }, 2200);
+    });
+    setMode("assembled");
+    window.setTimeout(function () {
+      if (!prefersReducedMotion()) {
+        setMode("exploded");
+        window.setTimeout(function () { setMode("assembled"); }, 1700);
+      }
+    }, 500);
+  }
+
   function wireSignatureProducts() {
     document.querySelectorAll("[data-signature-product]").forEach(function (btn) {
       btn.addEventListener("click", function () {
@@ -841,6 +885,7 @@
   renderSocialGrid();
   wireHeroSearch();
   wireMobileNav();
+  wireCakeAssembly();
   wireSignatureProducts();
   wireAnchors();
   onScroll();

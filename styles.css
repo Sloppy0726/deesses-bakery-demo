@@ -461,6 +461,49 @@ body[data-nav-open="true"] .nav__toggle span[aria-hidden="true"]::after { opacit
 .signature__product span { font-size: 1.4rem; }
 .signature__product em { margin-left: auto; font-style: normal; font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--blush); font-weight: 700; }
 
+/* ---- Cake craft / Dribbble-inspired motion panel ---- */
+.craft {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 12% 18%, rgba(255,255,255,0.92) 0 9%, transparent 10%),
+    radial-gradient(circle at 84% 18%, rgba(255,214,102,0.36) 0 10%, transparent 11%),
+    radial-gradient(circle at 76% 82%, rgba(186,229,255,0.42) 0 12%, transparent 13%),
+    linear-gradient(135deg, #fff2f8, #f5edff 48%, #fff9e8);
+}
+.craft::before { content: ""; position: absolute; inset: 24px; border: 1px dashed rgba(201, 50, 120, 0.2); border-radius: 38px; pointer-events: none; }
+.craft__inner { position: relative; max-width: var(--maxw); margin: 0 auto; display: grid; grid-template-columns: minmax(0, 0.85fr) minmax(340px, 1.15fr); gap: clamp(28px, 6vw, 72px); align-items: center; }
+.craft__copy h2 { font-size: clamp(2.2rem, 6vw, 4.2rem); max-width: 560px; }
+.craft__copy .section__sub { text-align: left; max-width: 610px; }
+.craft__controls { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+.craft__controls .btn[disabled] { opacity: 0.56; cursor: not-allowed; transform: none; }
+.craft__status { margin-top: 14px; color: var(--muted); font-size: 0.9rem; font-weight: 700; }
+.craft__panel {
+  position: relative; min-height: clamp(420px, 52vw, 620px); display: grid; place-items: center;
+  padding: clamp(18px, 4vw, 34px); border-radius: 36px; background: rgba(255,255,255,0.5);
+  border: 1px solid rgba(255,255,255,0.82); box-shadow: 0 30px 80px rgba(96,57,92,0.17), inset 0 1px 0 rgba(255,255,255,0.76);
+  -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px); overflow: hidden;
+}
+.craft__shot-meta { position: absolute; left: 18px; right: 18px; top: 18px; z-index: 2; display: flex; flex-wrap: wrap; gap: 8px; }
+.craft__shot-meta span { display: inline-flex; align-items: center; min-height: 34px; padding: 7px 11px; border-radius: 999px; background: rgba(255,255,255,0.76); border: 1px solid rgba(255,255,255,0.9); color: #7b4a66; font-size: 0.78rem; font-weight: 800; box-shadow: 0 10px 24px rgba(124,73,101,0.09); }
+.cake-assembly { width: min(100%, 620px); max-height: 620px; overflow: visible; user-select: none; }
+.cake-piece { transform-box: fill-box; transform-origin: center; transition: transform 0.9s var(--ease), filter 0.9s var(--ease); filter: drop-shadow(0 16px 22px rgba(88,40,62,0.12)); }
+.cake-shadow { opacity: 0.22; filter: blur(8px); transition: transform 0.9s var(--ease), opacity 0.9s var(--ease); }
+.cake-guide line { opacity: 0; stroke: rgba(146,80,117,0.34); stroke-width: 2; stroke-dasharray: 8 8; stroke-linecap: round; transition: opacity 0.45s var(--ease); }
+.cake-labels text { opacity: 0; fill: #8b4663; font: 800 18px "Inter", "Noto Sans TC", sans-serif; letter-spacing: 0.02em; paint-order: stroke; stroke: rgba(255,255,255,0.92); stroke-width: 7px; stroke-linejoin: round; transition: opacity 0.45s var(--ease), transform 0.45s var(--ease); }
+.craft[data-cake-mode="exploded"] .cake-candle { transform: translate(94px, -86px) rotate(10deg) scale(1.03); }
+.craft[data-cake-mode="exploded"] .cake-berries { transform: translate(-118px, -76px) rotate(-12deg) scale(1.06); }
+.craft[data-cake-mode="exploded"] .cake-frosting { transform: translate(98px, -48px) rotate(4deg) scale(1.02); }
+.craft[data-cake-mode="exploded"] .cake-sponge--top { transform: translate(-34px, -12px) rotate(-1deg); }
+.craft[data-cake-mode="exploded"] .cake-cream { transform: translate(-116px, 28px) rotate(-5deg) scale(1.02); }
+.craft[data-cake-mode="exploded"] .cake-sponge--bottom { transform: translate(92px, 58px) rotate(3deg); }
+.craft[data-cake-mode="exploded"] .cake-plate { transform: translate(-96px, 72px) rotate(-2deg) scale(0.98); }
+.craft[data-cake-mode="exploded"] .cake-shadow { opacity: 0.14; transform: scaleX(1.24); }
+.craft[data-cake-mode="exploded"] .cake-guide line, .craft[data-cake-mode="exploded"] .cake-labels text { opacity: 1; }
+.craft[data-cake-mode="exploded"] .cake-labels text { transform: translateY(5px); }
+.craft[data-cake-mode="replaying"] .cake-piece { animation: cakePulse 2.8s var(--ease) infinite; }
+@keyframes cakePulse { 0%, 100% { filter: drop-shadow(0 16px 22px rgba(88,40,62,0.12)); } 50% { filter: drop-shadow(0 22px 34px rgba(201,50,120,0.2)); } }
+
 /* ---- Order ---- */
 .order__cards { max-width: 760px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
 .order-card {
@@ -516,6 +559,7 @@ body[data-nav-open="true"] .nav__toggle span[aria-hidden="true"]::after { opacit
   .hero-gallery__tile { min-height: 28vh; }
   .hero-gallery__tile--three { grid-column: span 2; }
   .social__inner { grid-template-columns: 1fr; }
+  .craft__inner { grid-template-columns: 1fr; }
 }
 @media (max-width: 760px) {
   .nav__inner { position: relative; }
@@ -530,6 +574,10 @@ body[data-nav-open="true"] .nav__toggle span[aria-hidden="true"]::after { opacit
   .nav__links a:hover { background: rgba(246,214,230,0.28); }
   .nav__cta { margin-left: 0; }
   .hero { min-height: 86vh; min-height: 86svh; padding-top: 76px; }
+  .craft::before { inset: 10px; border-radius: 24px; }
+  .craft__panel { min-height: 420px; border-radius: 26px; }
+  .craft__shot-meta { position: static; margin-bottom: 8px; }
+  .cake-assembly { width: min(112%, 520px); }
   .hero-search { grid-template-columns: 1fr; border-radius: 24px; }
   .hero-search button { width: 100%; }
   .hero-gallery { grid-template-columns: 1fr 1fr; gap: 8px; padding: 8px; }
@@ -546,4 +594,5 @@ body[data-nav-open="true"] .nav__toggle span[aria-hidden="true"]::after { opacit
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+  .craft[data-cake-mode="replaying"] .cake-piece { animation: none; }
 }
