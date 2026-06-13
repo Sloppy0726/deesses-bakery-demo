@@ -47,6 +47,11 @@ test('product photo areas open details directly and remain accessible', () => {
   assert.match(css, /product__media:focus-visible/, 'media/photo button should have a visible keyboard focus style');
 });
 
+test('selected product modal branch buttons keep light text while focused or pressed', () => {
+  assert.match(css, /product-modal__branch-choice--on:hover[\s\S]*product-modal__branch-choice--on:focus[\s\S]*color:\s*#fff\s*!important[\s\S]*-webkit-text-fill-color:\s*#fff/, 'selected branch choices should keep white text on hover/focus/active');
+  assert.match(css, /product-modal__branch-choice:focus-visible/, 'branch choices should have explicit focus styling instead of relying on browser defaults');
+});
+
 test('product modal traps and restores focus', () => {
   assert.match(js, /lastModalTrigger|previousFocus|previousModalFocus|modalTrigger/, 'opening modal should store the trigger/previous focus');
   assert.match(js, /trapModalFocus[\s\S]*focusable[\s\S]*shiftKey/, 'modal should trap Tab and Shift+Tab within the dialog');
