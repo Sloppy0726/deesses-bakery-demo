@@ -53,10 +53,13 @@ test('mobile top bar stays inside narrow viewports', () => {
   assert.match(css, /@media \(max-width:\s*760px\)[\s\S]*\.nav__cta\s*\{\s*display:\s*none;\s*\}/, 'desktop Instagram CTA should be hidden from the cramped mobile top bar');
 });
 
-test('Instagram remains reachable from the opened mobile navigation', () => {
-  assert.match(html, /class="nav__mobile-instagram"[\s\S]*https:\/\/www\.instagram\.com\/deesses_bakery\/[\s\S]*@deesses_bakery/, 'mobile nav should include the Instagram link moved out of the cramped top bar');
-  assert.match(css, /\.nav__mobile-instagram\s*\{\s*display:\s*none;\s*\}/, 'mobile Instagram link should stay hidden on desktop');
-  assert.match(css, /@media \(max-width:\s*760px\)[\s\S]*\.nav__mobile-instagram\s*\{\s*display:\s*block;\s*\}/, 'mobile Instagram link should appear inside the opened mobile menu');
+test('Pineapple-style floating social menu keeps Instagram reachable on mobile', () => {
+  assert.match(html, /class="social-float"[\s\S]*data-social-trigger[\s\S]*class="social-menu"[\s\S]*https:\/\/www\.instagram\.com\/deesses_bakery\/[\s\S]*https:\/\/wa\.me\/85268128098/, 'floating social menu should expose Instagram and WhatsApp like Pineapple reference');
+  assert.match(css, /\.social-float\s*\{\s*position:\s*fixed;[\s\S]*bottom:\s*max\(10px,\s*env\(safe-area-inset-bottom\)\)/, 'social menu should float from the lower-right corner');
+  assert.match(css, /\.social-float:hover \.social-menu[\s\S]*\.social-float:focus-within \.social-menu[\s\S]*\.social-float\.social-float--open \.social-menu[\s\S]*opacity:\s*1[\s\S]*pointer-events:\s*auto/, 'social menu should expand on hover, focus, and tap-open state');
+  assert.match(css, /@media \(max-width:\s*760px\)[\s\S]*\.social-trigger\s*\{[\s\S]*width:\s*48px[\s\S]*height:\s*48px/, 'mobile floating social trigger should collapse to a compact round button');
+  assert.match(js, /function wireSocialFloat\(\)[\s\S]*data-social-trigger[\s\S]*aria-expanded[\s\S]*social-float--open/, 'floating social trigger should be tap-toggleable and update aria-expanded');
+  assert.match(js, /wireSocialFloat\(\)/, 'init should wire the floating social menu');
 });
 
 test('entire product cards open details and remain keyboard accessible', () => {

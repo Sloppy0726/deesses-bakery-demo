@@ -76,6 +76,12 @@
     en: {
       languageLabel: "Language",
       openNav: "Open navigation",
+      quickSocialLinks: "Quick social links",
+      socialLabel: "Social",
+      socialInstagramHint: "Latest cakes / DM pre-order",
+      socialWhatsappHint: "Message to pre-order",
+      socialGalleryTitle: "Social gallery",
+      socialGalleryHint: "Preview posts and updates",
       skipMenu: "Skip to menu",
       searchMenu: "Search menu",
       searchButton: "Search",
@@ -140,6 +146,12 @@
     zh: {
       languageLabel: "語言",
       openNav: "開啟選單",
+      quickSocialLinks: "快速社交連結",
+      socialLabel: "社交",
+      socialInstagramHint: "最新蛋糕／私訊預訂",
+      socialWhatsappHint: "WhatsApp 查詢預訂",
+      socialGalleryTitle: "社交相集",
+      socialGalleryHint: "查看帖文與最新消息",
       skipMenu: "跳到餐單",
       searchMenu: "搜尋餐單",
       searchButton: "搜尋",
@@ -1042,6 +1054,30 @@
     syncLanguageButtons();
   }
 
+  function wireSocialFloat() {
+    var float = document.querySelector(".social-float");
+    var trigger = document.querySelector("[data-social-trigger]");
+    if (!float || !trigger) return;
+    function setOpen(open) {
+      float.classList.toggle("social-float--open", open);
+      trigger.setAttribute("aria-expanded", open ? "true" : "false");
+    }
+    trigger.addEventListener("click", function (event) {
+      event.stopPropagation();
+      setOpen(!float.classList.contains("social-float--open"));
+    });
+    document.addEventListener("click", function (event) {
+      if (!float.contains(event.target)) setOpen(false);
+    });
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") setOpen(false);
+    });
+    float.querySelectorAll(".social-menu a").forEach(function (link) {
+      link.addEventListener("click", function () { setOpen(false); });
+    });
+    window.__deessesSocialFloat = { links: float.querySelectorAll(".social-menu a").length };
+  }
+
   function wireCakeAssembly() {
     var craft = document.getElementById("craft");
     if (!craft) return;
@@ -1147,6 +1183,7 @@
   wireHeroSearch();
   wireMobileNav();
   wireLanguageSwitch();
+  wireSocialFloat();
   wireCakeAssembly();
   wireSignatureProducts();
   wireScrollReveal();

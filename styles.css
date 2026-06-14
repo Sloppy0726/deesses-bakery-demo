@@ -183,7 +183,32 @@ section { padding: clamp(64px, 11vw, 132px) clamp(20px, 6vw, 64px); }
 .nav__links { display: flex; gap: 26px; list-style: none; margin: 0 auto 0 18px; padding: 0; font-size: 0.92rem; font-weight: 500; }
 .nav__links a { color: var(--muted); transition: color 0.25s var(--ease); }
 .nav__links a:hover { color: var(--accent-2); }
-.nav__mobile-instagram { display: none; }
+.social-float { position: fixed; right: clamp(10px, 2vw, 22px); bottom: max(10px, env(safe-area-inset-bottom)); z-index: 95; }
+.social-trigger {
+  border: 0; cursor: pointer; min-width: 108px; height: 48px; display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+  border-radius: 999px; color: #fff; background: linear-gradient(135deg, var(--rose), var(--plum));
+  box-shadow: 0 18px 42px rgba(138,79,158,0.26); font: inherit; font-weight: 850; letter-spacing: -0.01em;
+  transition: transform 0.18s var(--ease), box-shadow 0.18s var(--ease), opacity 0.18s var(--ease);
+}
+.social-trigger .ig-mark { background: currentColor; }
+.social-menu {
+  position: absolute; right: 0; bottom: calc(100% + 10px); width: min(314px, calc(100vw - 32px)); padding: 10px;
+  border-radius: 26px; background: rgba(255,250,244,0.92); border: 1px solid rgba(138,79,158,0.15);
+  box-shadow: 0 26px 80px rgba(83,49,75,0.22); -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px);
+  opacity: 0; transform: translateY(12px) scale(0.96); pointer-events: none; transform-origin: bottom right;
+  transition: opacity 0.22s var(--ease), transform 0.22s var(--ease);
+}
+.social-float:hover .social-menu, .social-float:focus-within .social-menu, .social-float.social-float--open .social-menu { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
+.social-float:hover .social-trigger, .social-float:focus-within .social-trigger, .social-float.social-float--open .social-trigger { transform: translateY(-1px); box-shadow: 0 20px 52px rgba(138,79,158,0.32); }
+.social-menu a { display: grid; grid-template-columns: 38px 1fr; gap: 10px; align-items: center; padding: 10px; border-radius: 18px; color: var(--text); }
+.social-menu a:hover, .social-menu a:focus { background: rgba(246,214,230,0.24); outline: none; }
+.social-menu .ig-mark, .social-icon {
+  width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; background: linear-gradient(135deg, var(--rose), var(--plum)); color: #fff;
+  box-shadow: 0 10px 22px rgba(138,79,158,0.16);
+}
+.social-menu span { display: grid; gap: 2px; }
+.social-menu strong { font-size: 0.95rem; }
+.social-menu small { color: var(--muted); font-weight: 700; line-height: 1.25; }
 .language-switch {
   display: inline-flex; align-items: center; gap: 4px; padding: 4px; border: 1px solid var(--hairline);
   border-radius: 999px; background: rgba(255,255,255,0.68); box-shadow: 0 12px 30px rgba(83,49,75,0.08);
@@ -634,13 +659,10 @@ body[data-nav-open="true"] .nav__toggle span[aria-hidden="true"]::after { opacit
   body[data-nav-open="true"] .nav__links, .nav__links--open { display: flex; }
   .nav__links a { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 14px; }
   .nav__links a:hover { background: rgba(246,214,230,0.28); }
-  .nav__mobile-instagram { display: block; }
-  .nav__mobile-instagram a {
-    justify-content: center; margin-top: 6px;
-    background: linear-gradient(120deg, var(--rose), var(--plum)); color: #fff;
-    font-weight: 700; box-shadow: 0 14px 30px rgba(138,79,158,0.18);
-  }
-  .nav__mobile-instagram .ig-mark { background: currentColor; }
+  .social-float { right: 10px; bottom: max(8px, env(safe-area-inset-bottom)); }
+  .social-trigger { min-width: 48px; width: 48px; height: 48px; padding: 0; opacity: 0.94; }
+  .social-trigger > span:last-child { display: none; }
+  .social-menu { width: min(292px, calc(100vw - 28px)); }
   .hero { min-height: 86vh; min-height: 86svh; padding-top: 76px; }
   .craft::before { inset: 10px; border-radius: 24px; }
   .craft__panel { min-height: 420px; border-radius: 26px; }
