@@ -92,6 +92,13 @@ section { padding: clamp(64px, 11vw, 132px) clamp(20px, 6vw, 64px); }
 }
 .ig-mark--lg { width: 30px; height: 30px; border-radius: 9px; }
 .ig-mark--lg::after { width: 3.5px; height: 3.5px; top: 4px; right: 4px; }
+.ig-mark--brand {
+  width: 28px; height: 28px; border-radius: 9px; color: #fff !important; border: 0;
+  background: radial-gradient(circle at 30% 105%, #feda75 0 28%, #fa7e1e 43%, #d62976 62%, #962fbf 82%, #4f5bd5 100%);
+  box-shadow: 0 10px 22px -14px rgba(138, 79, 158, 0.9);
+}
+.ig-mark--brand::before { inset: 6px; border-width: 2px; }
+.ig-mark--brand::after { width: 4px; height: 4px; top: 5px; right: 5px; }
 
 /* ---- Shared bits ---- */
 .eyebrow {

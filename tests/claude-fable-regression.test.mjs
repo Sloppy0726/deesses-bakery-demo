@@ -25,6 +25,12 @@ test('branch and product cards avoid invalid nested interactive controls', () =>
   assert.doesNotMatch(js, /product__media product__media-button/, 'product media should not be a nested button inside the clickable product card');
 });
 
+test('top-left brand mark uses the Instagram icon', () => {
+  assert.match(html, /class="nav__mark ig-mark ig-mark--brand"/, 'top-left nav mark should use the Instagram icon styling');
+  assert.doesNotMatch(html, /class="nav__mark"[^>]*>❀</, 'top-left nav mark should not use the old flower glyph');
+  assert.match(css, /\.ig-mark--brand[\s\S]*radial-gradient[\s\S]*#d62976[\s\S]*#4f5bd5/, 'brand Instagram icon should use Instagram-style gradient styling');
+});
+
 test('social preview links are not hidden from assistive tech', () => {
   assert.doesNotMatch(html, /id="socialGrid"[^>]*aria-hidden="true"/, 'socialGrid must not hide focusable preview links');
 });
