@@ -46,6 +46,13 @@ test('mobile navigation has a replacement when desktop links collapse', () => {
   assert.match(js, /data-nav-toggle|nav__toggle/, 'JS should wire the mobile nav toggle');
 });
 
+test('mobile top bar stays inside narrow viewports', () => {
+  assert.match(css, /@media \(max-width:\s*760px\)[\s\S]*\.nav\s*\{[\s\S]*padding-inline:\s*max\(10px,\s*env\(safe-area-inset-left\)\)/, 'mobile nav should reduce horizontal padding for narrow screens');
+  assert.match(css, /@media \(max-width:\s*760px\)[\s\S]*\.nav__inner\s*\{[\s\S]*max-width:\s*100%[\s\S]*gap:\s*8px[\s\S]*min-width:\s*0/, 'mobile nav inner should not exceed the viewport');
+  assert.match(css, /@media \(max-width:\s*760px\)[\s\S]*\.nav__brand\s*\{[\s\S]*flex:\s*1 1 auto[\s\S]*min-width:\s*0/, 'mobile brand should be allowed to shrink instead of forcing overflow');
+  assert.match(css, /@media \(max-width:\s*760px\)[\s\S]*\.nav__cta\s*\{\s*display:\s*none;\s*\}/, 'desktop Instagram CTA should be hidden from the cramped mobile top bar');
+});
+
 test('entire product cards open details and remain keyboard accessible', () => {
   assert.match(js, /card\.setAttribute\("role", "button"\)/, 'product card should expose one full-card click target');
   assert.match(js, /card\.setAttribute\("tabindex", "0"\)/, 'product card should be keyboard focusable');
