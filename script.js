@@ -1141,8 +1141,8 @@
       ".craft__panel",
       ".filters__row",
       ".product",
-      ".order__card",
-      ".social__copy > *",
+      ".order-card",
+      ".social__text > *",
       ".social-tile",
       ".footer-branch",
       ".footer__inner > *"
@@ -1173,6 +1173,46 @@
     window.__deessesScrollReveal = { enabled: true, targetCount: targets.length };
   }
 
+  function initGsapTasteMotion() {
+    var gsap = window.gsap;
+    var hero = document.querySelector(".hero");
+    var center = document.querySelector(".hero-center");
+    var tiles = Array.prototype.slice.call(document.querySelectorAll(".hero-gallery__tile"));
+    if (prefersReducedMotion() || !gsap || !hero || !center) {
+      window.__deessesGsapMotion = { enabled: false, reason: prefersReducedMotion() ? "reduced-motion" : "gsap-unavailable" };
+      return;
+    }
+
+    body.classList.add("has-gsap-motion");
+    var intro = gsap.timeline({ defaults: { ease: "power3.out" } });
+    intro
+      .fromTo(tiles, { autoAlpha: 0, y: 30, scale: 1.035 }, { autoAlpha: 1, y: 0, scale: 1, duration: 1.1, stagger: 0.08 }, 0)
+      .fromTo(center, { autoAlpha: 0, y: 22, scale: 0.985, filter: "blur(10px)" }, { autoAlpha: 1, y: 0, scale: 1, filter: "blur(0px)", duration: 0.9 }, 0.18)
+      .fromTo(".hero-category-nav a", { autoAlpha: 0, y: 10 }, { autoAlpha: 1, y: 0, duration: 0.48, stagger: 0.045 }, 0.62)
+      .fromTo(".social-trigger", { autoAlpha: 0, y: 14, scale: 0.94 }, { autoAlpha: 1, y: 0, scale: 1, duration: 0.55 }, 0.76);
+
+    var tileOffsets = [18, -12, 8, -10, 16];
+    var parallaxTicking = false;
+    function updateHeroParallax() {
+      var rect = hero.getBoundingClientRect();
+      var progress = Math.min(1, Math.max(0, -rect.top / Math.max(1, rect.height)));
+      tiles.forEach(function (tile, index) {
+        gsap.to(tile, { y: tileOffsets[index % tileOffsets.length] * progress, duration: 0.35, overwrite: "auto", ease: "power2.out" });
+      });
+      parallaxTicking = false;
+    }
+    function requestHeroParallax() {
+      if (!parallaxTicking) {
+        window.requestAnimationFrame(updateHeroParallax);
+        parallaxTicking = true;
+      }
+    }
+    window.addEventListener("scroll", requestHeroParallax, { passive: true });
+    updateHeroParallax();
+
+    window.__deessesGsapMotion = { enabled: true, animatedTiles: tiles.length, hasIntroTimeline: true };
+  }
+
   /* ---------- Init ---------- */
   localizeStatic();
   renderBranches();
@@ -1187,6 +1227,7 @@
   wireCakeAssembly();
   wireSignatureProducts();
   wireScrollReveal();
+  initGsapTasteMotion();
   wireAnchors();
   onScroll();
 })();

@@ -152,3 +152,23 @@ test('cake assembly animation and Dribbble-inspired design cues are implemented 
   assert.match(css, /craft__shot-meta/, 'Dribbble-style compact shot metadata missing');
   assert.match(js, /wireCakeAssembly[\s\S]*__cakeAssemblyStatus/, 'cake assembly JS wiring/status missing');
 });
+
+test('GSAP taste motion layer is loaded progressively and respects reduced motion', () => {
+  assert.match(html, /gsap@3\.12\.5\/dist\/gsap\.min\.js" defer/, 'GSAP should be loaded as a deferred progressive enhancement');
+  assert.match(html, /script\.js\?v=gsap-taste-1" defer/, 'site script should be cache-busted for the GSAP/taste update');
+  assert.match(js, /function initGsapTasteMotion\(\)/, 'GSAP motion initializer missing');
+  assert.match(js, /prefersReducedMotion\(\) \|\| !gsap/, 'GSAP should disable itself for reduced-motion users or when the CDN fails');
+  assert.match(js, /var tiles = Array\.prototype\.slice\.call\(document\.querySelectorAll\("\.hero-gallery__tile"\)\)[\s\S]*var center = document\.querySelector\("\.hero-center"\)|var center = document\.querySelector\("\.hero-center"\)[\s\S]*var tiles = Array\.prototype\.slice\.call\(document\.querySelectorAll\("\.hero-gallery__tile"\)\)/, 'GSAP intro should collect the hero gallery and panel elements');
+  assert.match(js, /gsap\.timeline[\s\S]*\.fromTo\(tiles[\s\S]*\.fromTo\(center[\s\S]*\.fromTo\("\.hero-category-nav a"/, 'GSAP intro should choreograph the hero gallery, panel and quick links');
+  assert.match(js, /__deessesGsapMotion\s*=\s*\{ enabled:\s*true/, 'GSAP status should be exposed for browser verification');
+  assert.match(js, /window\.addEventListener\("scroll", requestHeroParallax, \{ passive: true \}\)/, 'hero parallax should be passive and requestAnimationFrame-backed');
+});
+
+test('design taste refinements keep the page polished without adding clutter', () => {
+  assert.match(css, /::selection\s*\{[\s\S]*rgba\(201, 50, 120, 0\.18\)/, 'selection color should be brand-tinted');
+  assert.match(css, /\.section__sub\s*\{[\s\S]*max-width:\s*62ch/, 'body copy should have a restrained readable line length');
+  assert.match(css, /\.hero::after\s*\{[\s\S]*radial-gradient\(closest-side at 50% 100%/, 'hero should have a subtle grounded glow rather than extra decorative clutter');
+  assert.match(css, /\.hero-center::before\s*\{[\s\S]*border:\s*1px solid rgba\(255,255,255,0\.26\)/, 'hero panel should use a restrained inner hairline');
+  assert.match(css, /\.branch-card[\s\S]*linear-gradient\(180deg, rgba\(255,255,255,0\.96\), var\(--surface\)\)/, 'branch cards should use subtle depth instead of flat slabs');
+  assert.match(css, /\.product__media img[\s\S]*transition:\s*transform 0\.75s var\(--ease\), filter 0\.75s var\(--ease\)/, 'product imagery should feel smoother and intentional');
+});
