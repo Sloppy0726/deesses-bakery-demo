@@ -173,13 +173,15 @@ section { padding: clamp(64px, 11vw, 132px) clamp(20px, 6vw, 64px); }
   box-shadow: 0 1px 0 var(--hairline);
 }
 .nav__inner { max-width: var(--maxw); margin: 0 auto; display: flex; align-items: center; gap: 24px; }
-.nav__brand { display: flex; align-items: center; gap: 10px; font-family: "Fraunces", serif; font-weight: 600; font-size: 1.18rem; letter-spacing: 0.04em; }
+.nav__brand { display: flex; align-items: center; gap: 12px; font-family: "Fraunces", serif; font-weight: 600; font-size: 1.18rem; letter-spacing: 0.04em; }
 .nav__name small { display: block; font-size: 0.62rem; letter-spacing: 0.32em; color: var(--muted); font-family: "Inter", sans-serif; font-weight: 600; }
 .nav__mark { color: var(--accent-2); font-size: 1.25rem; }
 .nav__logo {
-  width: 36px; height: 36px; border-radius: 50%; object-fit: cover; display: block; flex: none;
-  background: #fff; border: 1px solid rgba(138, 79, 158, 0.18);
-  box-shadow: 0 10px 22px -14px rgba(138, 79, 158, 0.9);
+  width: 48px; height: 48px; border-radius: 50%; object-fit: cover; display: block; flex: none;
+  padding: 3px;
+  background: linear-gradient(#fffaf4, #fffaf4) padding-box, linear-gradient(135deg, var(--rose), var(--plum), var(--honey)) border-box;
+  border: 2px solid transparent;
+  box-shadow: 0 12px 30px -13px rgba(138, 79, 158, 0.95), 0 0 0 5px rgba(246, 214, 230, 0.34);
 }
 .nav__links { display: flex; gap: 26px; list-style: none; margin: 0 auto 0 18px; padding: 0; font-size: 0.92rem; font-weight: 500; }
 .nav__links a { color: var(--muted); transition: color 0.25s var(--ease); }
@@ -672,7 +674,7 @@ body[data-nav-open="true"] .nav__toggle span[aria-hidden="true"]::after { opacit
   .nav__brand { min-width: 0; flex: 1 1 auto; gap: 8px; font-size: clamp(0.88rem, 4vw, 1.05rem); letter-spacing: 0.025em; order: 1; }
   .nav__name { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
   .nav__name small { font-size: 0.54rem; letter-spacing: 0.22em; }
-  .nav__logo { width: 34px; height: 34px; }
+  .nav__logo { width: 40px; height: 40px; padding: 2px; box-shadow: 0 10px 24px -14px rgba(138,79,158,0.95), 0 0 0 4px rgba(246,214,230,0.30); }
   .language-switch { padding: 3px; gap: 2px; order: 2; }
   .language-switch button { min-width: 34px; height: 32px; font-size: 0.76rem; }
   .nav__cta { display: none; }
