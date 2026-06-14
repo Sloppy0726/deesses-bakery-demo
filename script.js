@@ -884,6 +884,49 @@
     });
   }
 
+  function wireScrollReveal() {
+    var targets = document.querySelectorAll([
+      ".section__head",
+      ".branch-card",
+      ".signature__copy > *",
+      ".signature__visual",
+      ".signature-list li",
+      ".craft__copy > *",
+      ".craft__panel",
+      ".filters__row",
+      ".product",
+      ".order__card",
+      ".social__copy > *",
+      ".social-tile",
+      ".footer-branch",
+      ".footer__inner > *"
+    ].join(", "));
+
+    if (prefersReducedMotion() || !("IntersectionObserver" in window)) {
+      targets.forEach(function (node) { node.classList.add("reveal-on-scroll", "is-visible"); });
+      window.__deessesScrollReveal = { enabled: false, targetCount: targets.length };
+      return;
+    }
+
+    targets.forEach(function (node, index) {
+      node.classList.add("reveal-on-scroll");
+      node.style.setProperty("--reveal-delay", Math.min(index % 5, 4) * 65 + "ms");
+    });
+
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+        } else if (entry.boundingClientRect.top > window.innerHeight * 0.9) {
+          entry.target.classList.remove("is-visible");
+        }
+      });
+    }, { threshold: 0.16, rootMargin: "0px 0px -8% 0px" });
+
+    targets.forEach(function (node) { observer.observe(node); });
+    window.__deessesScrollReveal = { enabled: true, targetCount: targets.length };
+  }
+
   /* ---------- Init ---------- */
   renderBranches();
   renderFilters();
@@ -894,6 +937,7 @@
   wireMobileNav();
   wireCakeAssembly();
   wireSignatureProducts();
+  wireScrollReveal();
   wireAnchors();
   onScroll();
 })();

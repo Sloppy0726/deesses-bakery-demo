@@ -108,6 +108,28 @@ section { padding: clamp(64px, 11vw, 132px) clamp(20px, 6vw, 64px); }
 .section__head h2 { font-size: clamp(2rem, 5vw, 3.4rem); }
 .section__sub { margin-top: 18px; color: var(--muted); font-size: 1.06rem; }
 .section__sub strong, .section__sub em { color: var(--text); }
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(34px) scale(0.985);
+  filter: blur(8px);
+  transition:
+    opacity 0.85s ease var(--reveal-delay, 0ms),
+    transform 0.85s cubic-bezier(0.2, 0.8, 0.2, 1) var(--reveal-delay, 0ms),
+    filter 0.85s ease var(--reveal-delay, 0ms);
+  will-change: opacity, transform, filter;
+}
+.reveal-on-scroll.is-visible { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+.product.reveal-on-scroll,
+.branch-card.reveal-on-scroll,
+.social-tile.reveal-on-scroll,
+.footer-branch.reveal-on-scroll { transform: translateY(42px) scale(0.96); }
+.product.reveal-on-scroll.is-visible,
+.branch-card.reveal-on-scroll.is-visible,
+.social-tile.reveal-on-scroll.is-visible,
+.footer-branch.reveal-on-scroll.is-visible { transform: translateY(0) scale(1); }
+.product.reveal-on-scroll.is-visible:hover,
+.branch-card.reveal-on-scroll.is-visible:hover { transform: translateY(-6px) scale(1); }
+.social-tile.reveal-on-scroll.is-visible:hover { transform: translateY(-4px) scale(1); }
 
 .btn {
   display: inline-flex; align-items: center; justify-content: center;
@@ -612,6 +634,7 @@ body[data-nav-open="true"] .nav__toggle span[aria-hidden="true"]::after { opacit
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+  *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; }
+  .reveal-on-scroll { opacity: 1; transform: none !important; filter: none; }
   .craft[data-cake-mode="replaying"] .cake-piece { animation: none; }
 }

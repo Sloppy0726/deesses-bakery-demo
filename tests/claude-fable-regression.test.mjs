@@ -100,6 +100,17 @@ test('hero intro panel stays translucent so the opening gallery remains visible'
   assert.match(css, /\.hero-category-nav a\s*\{[\s\S]*background:\s*rgba\(255,255,255,0\.28\)/, 'hero quick links should be translucent, not solid chips');
 });
 
+test('Pineapple-style scroll reveal animations are wired with reduced-motion support', () => {
+  assert.match(js, /function wireScrollReveal\(\)/, 'scroll reveal wiring function missing');
+  assert.match(js, /IntersectionObserver[\s\S]*threshold:\s*0\.16[\s\S]*rootMargin:\s*"0px 0px -8% 0px"/, 'scroll reveal should use IntersectionObserver with Pineapple-style threshold/root margin');
+  assert.match(js, /\.branch-card[\s\S]*\.product[\s\S]*\.social-tile/, 'scroll reveal should target branch cards, product cards and social tiles');
+  assert.match(js, /--reveal-delay[\s\S]*Math\.min\(index % 5, 4\) \* 65/, 'scroll reveal should stagger targets');
+  assert.match(js, /wireScrollReveal\(\)/, 'init should call scroll reveal wiring');
+  assert.match(css, /\.reveal-on-scroll\s*\{[\s\S]*opacity:\s*0[\s\S]*translateY\(34px\) scale\(0\.985\)[\s\S]*filter:\s*blur\(8px\)/, 'scroll reveal hidden state should fade, rise and unblur like Pineapple reference');
+  assert.match(css, /\.reveal-on-scroll\.is-visible\s*\{[\s\S]*opacity:\s*1[\s\S]*translateY\(0\) scale\(1\)[\s\S]*filter:\s*blur\(0\)/, 'visible reveal state missing');
+  assert.match(css, /prefers-reduced-motion:\s*reduce[\s\S]*\.reveal-on-scroll\s*\{[\s\S]*opacity:\s*1[\s\S]*transform:\s*none\s*!important[\s\S]*filter:\s*none/, 'reveal must be disabled for reduced motion');
+});
+
 test('cake assembly animation and Dribbble-inspired design cues are implemented accessibly', () => {
   assert.match(html, /id="craft"/, 'craft section missing');
   assert.match(html, /cake-assembly/, 'cake assembly SVG missing');
