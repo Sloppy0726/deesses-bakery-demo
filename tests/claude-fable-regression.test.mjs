@@ -94,6 +94,12 @@ test('README reflects local assets and implemented features', () => {
   assert.doesNotMatch(readFileSync(new URL('../README.md', import.meta.url), 'utf8'), /reveal-on-scroll/i, 'README should not advertise missing reveal-on-scroll');
 });
 
+test('hero intro panel stays translucent so the opening gallery remains visible', () => {
+  assert.match(css, /\.hero-center\s*\{[\s\S]*width:\s*min\(720px,\s*100%\)[\s\S]*background:\s*linear-gradient\(180deg,\s*rgba\(255,250,244,0\.38\),\s*rgba\(255,250,244,0\.16\)\)/, 'hero text panel should be narrower and more transparent than the previous big opaque box');
+  assert.match(css, /\.hero-center\s*\{[\s\S]*backdrop-filter:\s*blur\(8px\)\s*saturate\(120%\)/, 'hero glass should use a lighter blur so background imagery reads through');
+  assert.match(css, /\.hero-category-nav a\s*\{[\s\S]*background:\s*rgba\(255,255,255,0\.28\)/, 'hero quick links should be translucent, not solid chips');
+});
+
 test('cake assembly animation and Dribbble-inspired design cues are implemented accessibly', () => {
   assert.match(html, /id="craft"/, 'craft section missing');
   assert.match(html, /cake-assembly/, 'cake assembly SVG missing');
