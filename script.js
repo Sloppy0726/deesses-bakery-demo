@@ -40,7 +40,7 @@
       addr: "堅尼地城卑路乍街聯威新樓地下",
       addrEn: "G/F, Luen Wai Building, Belcher's Street, Kennedy Town",
       phone: null,
-      note: "Neighbourhood counter for daily cakes, pastries and bakery."
+      note: "Neighbourhood counter for daily cakes, pastries and breads."
     },
     {
       id: "tinshuiwai",
@@ -60,7 +60,7 @@
       addr: "上水廣場5樓512號",
       addrEn: "Shop 512, 5/F, Sheung Shui Plaza",
       phone: "6812 8980",
-      note: "Mall counter for cakes, pastries and bakery."
+      note: "Mall counter for cakes, pastries and breads."
     }
   ];
 
@@ -89,7 +89,7 @@
       cakeCraft: "Cake craft",
       cakes: "Cakes",
       pastries: "Pastries",
-      bakery: "Bakery",
+      bakery: "Breads",
       preOrder: "Pre-order",
       branches: "Branches",
       craft: "Craft",
@@ -113,7 +113,7 @@
       cakeAssembled: "Cake assembled",
       cakeExploded: "Cake exploded view",
       menuEyebrow: "The Menu",
-      menuTitle: "Cakes, pastries & bakery.",
+      menuTitle: "Cakes, pastries & breads.",
       menuSub: "Filter by category and by branch. Prices marked <em>“from public posts”</em> come from older social posts and may have changed.",
       category: "Category",
       branch: "Branch",
@@ -302,7 +302,7 @@
   var CATEGORIES = [
     { id: "cake",   labelEn: "Cake",   labelZh: "蛋糕", emoji: "🎂" },
     { id: "pastry", labelEn: "Pastry", labelZh: "酥點", emoji: "🧁" },
-    { id: "bakery", labelEn: "Bakery", labelZh: "麵包", emoji: "🥯" }
+    { id: "bakery", labelEn: "Breads", labelZh: "麵包", emoji: "🥖" }
   ];
 
   /* ---------- Products ----------
@@ -485,7 +485,7 @@
      ========================================================= */
   var body = document.body;
   var nav = document.getElementById("nav");
-  var CATEGORY_ROUTES = { cake: "cakes.html", pastry: "pastries.html", bakery: "bakery.html" };
+  var CATEGORY_ROUTES = { cake: "cakes.html", pastry: "pastries.html", bakery: "breads.html" };
   var activeBranch = "all";
   var activeCategory = "all";
   var activeSearch = "";

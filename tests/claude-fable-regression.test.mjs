@@ -6,7 +6,8 @@ const homeCopy = readFileSync(new URL('../index.html', import.meta.url), 'utf8')
 const menuHtml = readFileSync(new URL('../menu.html', import.meta.url), 'utf8');
 const cakesHtml = readFileSync(new URL('../cakes.html', import.meta.url), 'utf8');
 const pastriesHtml = readFileSync(new URL('../pastries.html', import.meta.url), 'utf8');
-const bakeryHtml = readFileSync(new URL('../bakery.html', import.meta.url), 'utf8');
+const breadsHtml = readFileSync(new URL('../breads.html', import.meta.url), 'utf8');
+const bakeryRedirectHtml = readFileSync(new URL('../bakery.html', import.meta.url), 'utf8');
 const js = readFileSync(new URL('../script.js', import.meta.url), 'utf8');
 const css = readFileSync(new URL('../styles.css', import.meta.url), 'utf8');
 const siteCss = readFileSync(new URL('../site.css', import.meta.url), 'utf8');
@@ -33,7 +34,7 @@ test('branch and product cards avoid invalid nested interactive controls', () =>
 
 test('top-left brand mark uses the real DÉESSES Instagram profile logo', () => {
   assert.match(html, /<img class="nav__mark nav__logo site-brand__logo" src="assets\/deesses-instagram-logo-safe\.jpg" alt="DÉESSES Bakery logo" width="68" height="68"/, 'top-left nav mark should use the safe DÉESSES logo asset with enough whitespace');
-  assert.doesNotMatch(html + menuHtml + cakesHtml + pastriesHtml + bakeryHtml, /deesses-instagram-logo-crop16\.jpg/, 'header logos should not use the cropped asset that cuts into the logo text');
+  assert.doesNotMatch(html + menuHtml + cakesHtml + pastriesHtml + breadsHtml, /deesses-instagram-logo-crop16\.jpg/, 'header logos should not use the cropped asset that cuts into the logo text');
   assert.doesNotMatch(html, /class="nav__mark ig-mark ig-mark--brand"/, 'top-left nav mark should not use the generic Instagram glyph');
   assert.doesNotMatch(html, /class="nav__mark"[^>]*>❀</, 'top-left nav mark should not use the old flower glyph');
   assert.match(siteCss, /\.site-brand__logo[\s\S]*width:\s*64px[\s\S]*height:\s*64px[\s\S]*object-fit:\s*contain[\s\S]*box-shadow/, 'Brand logo image should be styled as a larger noticeable profile icon without cropping the text');
@@ -154,7 +155,7 @@ test('cake craft placeholder appears only on the front page', () => {
   assert.match(html, /id="craft"[\s\S]*Layer-by-layer cake craft[\s\S]*deconstructed-cake-placeholder\.jpg/, 'front page should keep the layer-by-layer cake craft section');
   assert.match(html, /data-cake-action="explode"/, 'front-page craft section should keep accessible controls');
   assert.match(html, /aria-live="polite"[^>]*id="cakeStatus"|id="cakeStatus"[^>]*aria-live="polite"/, 'cake status should announce state changes');
-  assert.doesNotMatch(menuHtml + cakesHtml + pastriesHtml + bakeryHtml, /id="craft"|Layer-by-layer cake craft|deconstructed-cake-placeholder\.jpg/, 'layer-by-layer cake craft should not appear on menu or category pages');
+  assert.doesNotMatch(menuHtml + cakesHtml + pastriesHtml + breadsHtml, /id="craft"|Layer-by-layer cake craft|deconstructed-cake-placeholder\.jpg/, 'layer-by-layer cake craft should not appear on menu or category pages');
   assert.match(siteCss, /\.site-cake-placeholder[\s\S]*\.site-cake-placeholder img/, 'Cake placeholder styles should remain for the front-page craft section');
   assert.match(js, /wireCakeAssembly[\s\S]*__cakeAssemblyStatus/, 'cake assembly JS wiring/status missing');
 });
@@ -187,33 +188,34 @@ test('Homepage separates category spotlights and cake-only custom ordering', () 
   assert.doesNotMatch(homeCopy, /id="order"|data-custom-order|Custom Cake Order|Design your perfect cake|custom cake/i, 'Homepage should not render or promote the custom cake order flow');
   assert.doesNotMatch(homeCopy, /full menu|Browse full menu/i, 'Homepage should not imply there is a full menu');
   assert.match(homeCopy, /href="cakes\.html#order"[^>]*data-i18n="order"/, 'Homepage Order nav should send shoppers to the cakes custom-order flow');
-  assert.match(homeCopy, /href="cakes\.html"[^>]*>Cakes[\s\S]*href="pastries\.html"[^>]*>Pastries[\s\S]*href="bakery\.html"[^>]*>Bakery/, 'Homepage top nav category links should open dedicated category pages');
-  assert.match(homeCopy, /class="site-product-spotlight"[\s\S]*Choose a spotlight collection[\s\S]*site-product-spotlight__section--cake[\s\S]*site-product-spotlight__photos[\s\S]*site-product-spotlight__copy[\s\S]*View cakes[\s\S]*site-product-spotlight__section--pastry site-product-spotlight__section--reverse[\s\S]*site-product-spotlight__copy[\s\S]*View pastries[\s\S]*site-product-spotlight__photos[\s\S]*site-product-spotlight__section--bakery[\s\S]*site-product-spotlight__photos[\s\S]*site-product-spotlight__copy[\s\S]*View bakery/, 'Homepage product spotlight should present three horizontal alternating category sections with direct category buttons');
+  assert.match(homeCopy, /href="cakes\.html"[^>]*>Cakes[\s\S]*href="pastries\.html"[^>]*>Pastries[\s\S]*href="breads\.html"[^>]*>Breads/, 'Homepage top nav category links should open dedicated category pages');
+  assert.match(homeCopy, /class="site-product-spotlight"[\s\S]*Choose a spotlight collection[\s\S]*site-product-spotlight__section--cake[\s\S]*site-product-spotlight__photos[\s\S]*site-product-spotlight__copy[\s\S]*View cakes[\s\S]*site-product-spotlight__section--pastry site-product-spotlight__section--reverse[\s\S]*site-product-spotlight__copy[\s\S]*View pastries[\s\S]*site-product-spotlight__photos[\s\S]*site-product-spotlight__section--breads[\s\S]*site-product-spotlight__photos[\s\S]*site-product-spotlight__copy[\s\S]*View breads/, 'Homepage product spotlight should present three horizontal alternating category sections with direct category buttons');
   assert.doesNotMatch(homeCopy, /A cake worth stopping for|View cake spotlight|Browse full menu/, 'Old confusing single-product spotlight copy should be removed');
   assert.match(siteCss, /\.site-product-spotlight__stack[\s\S]*\.site-product-spotlight__section[\s\S]*grid-template-columns:\s*minmax\(0, 1\.12fr\) minmax\(320px, 0\.88fr\)[\s\S]*\.site-product-spotlight__section--reverse[\s\S]*grid-template-columns:\s*minmax\(320px, 0\.88fr\) minmax\(0, 1\.12fr\)/, 'Product spotlight should use horizontal alternating image/text sections on desktop');
 
   assert.match(menuHtml, /<body class="site menu-page">/, 'separate product menu page should have the menu page body class');
   assert.match(menuHtml, /class="menu site-menu" id="menu"[\s\S]*id="categoryFilters"[\s\S]*id="branchFilters"[\s\S]*id="menuGrid"/, 'separate product menu page should keep filters and product grid');
-  assert.doesNotMatch(menuHtml + pastriesHtml + bakeryHtml, /id="order"|href="#order"|data-custom-order|Custom Cake Order|Design your perfect cake|Send Custom Order/, 'Custom cake ordering should only appear on the cakes category page and other pages should not link to missing #order anchors');
-  assert.match(menuHtml + pastriesHtml + bakeryHtml, /href="cakes\.html#order"/, 'Non-cake pages should send Order links to the cakes custom-order flow');
+  assert.doesNotMatch(menuHtml + pastriesHtml + breadsHtml, /id="order"|href="#order"|data-custom-order|Custom Cake Order|Design your perfect cake|Send Custom Order/, 'Custom cake ordering should only appear on the cakes category page and other pages should not link to missing #order anchors');
+  assert.match(menuHtml + pastriesHtml + breadsHtml, /href="cakes\.html#order"/, 'Non-cake pages should send Order links to the cakes custom-order flow');
+  assert.match(bakeryRedirectHtml, /url=breads\.html|location\.replace\("breads\.html/, 'Old bakery URL should redirect to renamed Breads category page');
   assert.match(cakesHtml, /id="order"[\s\S]*data-custom-order[\s\S]*Custom Cake Order[\s\S]*Send Custom Order/, 'Cakes page should keep the custom cake order flow');
 
   [
     ['cake', 'Cake Collection', cakesHtml],
     ['pastry', 'Pastry Collection', pastriesHtml],
-    ['bakery', 'Bakery Collection', bakeryHtml]
+    ['bakery', 'Bread Collection', breadsHtml]
   ].forEach(([cat, heading, page]) => {
     assert.match(page, new RegExp(`data-category-page="${cat}"`), `${heading} page should declare its fixed category`);
     assert.doesNotMatch(page, /class="skip-link"|Skip to products|Skip to menu/, `${heading} page should not show a confusing skip-link pill`);
     assert.doesNotMatch(page, /id="categoryFilters"|Filter by category|>Category<|>分類</, `${heading} page should remove the category filter row entirely`);
     assert.doesNotMatch(page, />[^<]*\bonly\.[^<]*</i, `${heading} page should not use awkward "only" section headings`);
-    assert.match(page, /<h2>Shop (cakes|pastries|bakery)<\/h2>/, `${heading} page should promote the shop label to the main section heading`);
+    assert.match(page, /<h2>Shop (cakes|pastries|breads)<\/h2>/, `${heading} page should promote the shop label to the main section heading`);
     assert.match(page, new RegExp(`${heading}[\\s\\S]*id="branchFilters"`), `${heading} page should keep branch filtering`);
   });
   assert.match(siteCss, /\.category-page #menu \.site-section-head h2[\s\S]*font-family:\s*"Allura"[\s\S]*::after/, 'category shop headings should use a polished handwritten typography treatment');
   assert.match(siteCss, /\.site-menu-hero[\s\S]*\.menu-page \.site-menu/, 'menu page should have a dedicated compact menu hero');
   assert.match(js, /function menuUrl\(params\)/, 'JS should build filtered menu URLs for cross-page navigation');
-  assert.match(js, /CATEGORY_ROUTES\s*=\s*\{ cake:\s*"cakes\.html", pastry:\s*"pastries\.html", bakery:\s*"bakery\.html" \}/, 'JS should map product categories to dedicated static pages');
+  assert.match(js, /CATEGORY_ROUTES\s*=\s*\{ cake:\s*"cakes\.html", pastry:\s*"pastries\.html", bakery:\s*"breads\.html" \}/, 'JS should map product categories to dedicated static pages');
   assert.match(js, /function fixedCategoryPage\(\)[\s\S]*data-category-page|body\.getAttribute\("data-category-page"\)/, 'category pages should lock the active category from body data');
   assert.match(js, /if \(!brRow\) return/, 'filter rendering should still work on category pages without a category row');
   assert.match(js, /function applyInitialMenuParams\(\)[\s\S]*fixedCategoryPage\(\)[\s\S]*params\.get\("branch"\)[\s\S]*params\.get\("q"\)/, 'menu/category pages should read route/category plus branch/search params on load');

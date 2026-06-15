@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DÉESSES Bakery - Cakes</title>
-  <meta name="description" content="DÉESSES Bakery cakes page with celebration cakes, mini cakes, seasonal cake designs and WhatsApp pre-order flow." />
+  <title>DÉESSES Bakery - Breads</title>
+  <meta name="description" content="DÉESSES Bakery breads page with sourdough, baguettes, daily bread items and WhatsApp pre-order flow." />
   <meta name="theme-color" content="#fff7f2" />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23fff7f2'/%3E%3Ctext x='50%25' y='56%25' dominant-baseline='middle' text-anchor='middle' font-size='34'%3E%E2%99%A1%3C/text%3E%3C/svg%3E" />
   <link rel="apple-touch-icon" href="assets/deesses-instagram-logo.jpg" />
@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="styles.css?v=brand-logo-1" />
   <link rel="stylesheet" href="site.css?v=concept-12" />
 </head>
-<body class="site menu-page category-page category-page--cake" data-category-page="cake">
+<body class="site menu-page category-page category-page--breads" data-category-page="bakery">
   <header class="nav site-nav" id="nav">
     <nav class="nav__inner site-nav__inner" aria-label="Primary">
       <a href="index.html" class="nav__brand site-brand">
@@ -33,13 +33,13 @@
         <li><a href="cakes.html" data-hero-filter="cake">Cakes</a></li>
         <li><a href="pastries.html" data-hero-filter="pastry">Pastries</a></li>
         <li><a href="breads.html" data-hero-filter="bakery">Breads</a></li>
-        <li><a href="#order" data-i18n="order">Order</a></li>
+        <li><a href="cakes.html#order" data-i18n="order">Order</a></li>
       </ul>
       <div class="language-switch site-language" aria-label="Language" data-i18n-aria="languageLabel">
         <button type="button" data-language="en" aria-pressed="false"><span>EN</span></button>
         <button type="button" data-language="zh" aria-pressed="false"><span>繁</span></button>
       </div>
-      <a href="#order" class="nav__cta site-order-pill">Order Now <span aria-hidden="true">♡</span></a>
+      <a href="cakes.html#order" class="nav__cta site-order-pill">Order Now <span aria-hidden="true">♡</span></a>
     </nav>
   </header>
 
@@ -67,9 +67,9 @@
   <main id="top">
     <section class="site-menu-hero" id="hero">
       <div>
-        <p class="site-script">Cake Collection</p>
-        <h1>Cakes for sweet moments.</h1>
-        <p>Browse celebration cakes, mini cakes and seasonal cake designs as their own collection before sending a WhatsApp enquiry.</p>
+        <p class="site-script">Bread Collection</p>
+        <h1>Fresh breads for every day.</h1>
+        <p>Browse sourdough, baguettes and daily breads as their own bread collection before sending a WhatsApp enquiry.</p>
       </div>
       <form class="hero-search site-search site-menu-search" role="search" aria-label="Search DÉESSES menu" data-i18n-aria="searchMenu" data-hero-search>
         <label class="sr-only" for="heroSearchInput" data-i18n="searchMenu">Search menu</label>
@@ -80,8 +80,8 @@
 
     <section class="menu site-menu" id="menu">
       <div class="section__head site-section-head">
-        <h2>Shop cakes</h2>
-        <p class="section__sub">A dedicated cake collection with branch availability, search and product detail ordering.</p>
+        <h2>Shop breads</h2>
+        <p class="section__sub">A dedicated fresh bread collection with branch availability, search and product detail ordering.</p>
       </div>
       <div class="filters site-filters" role="group" aria-label="Menu filters">
         <div class="filters__row site-filters__row" id="branchFilters" aria-label="Filter by branch">
@@ -92,45 +92,6 @@
       <p class="menu__empty site-empty" id="menuEmpty" hidden>No items match this filter.</p>
     </section>
 
-    <section class="order site-order" id="order">
-      <aside class="site-inspiration-card">
-        <img src="assets/rose.jpg" alt="Pink celebration cake inspiration" width="420" height="520" loading="lazy" />
-        <div>
-          <h3>Need inspiration?</h3>
-          <p>Browse the gallery first, then send your cake idea through WhatsApp or Instagram DM.</p>
-          <a class="site-button site-button--ghost" href="index.html#social">View Cake Gallery</a>
-        </div>
-      </aside>
-      <form class="site-custom-form" data-custom-order>
-        <p class="site-script">Custom Cake Order</p>
-        <h2>Design your perfect cake.</h2>
-        <div class="site-form-grid">
-          <label>Cake type<select name="cakeType"><option>Celebration Cake</option><option>Fruit Cake</option><option>Seasonal Gift</option><option>Custom Order</option></select></label>
-          <label>Size<select name="size"><option>6 inch (serves 6-8)</option><option>4 inch</option><option>5 inch</option><option>8 inch</option></select></label>
-          <label>Flavour<select name="flavour"><option>Vanilla and Strawberry</option><option>White Peach</option><option>Rose Raspberry</option><option>Chocolate</option></select></label>
-          <label>Pickup date<input name="pickupDate" type="date" /></label>
-        </div>
-        <fieldset class="site-radio-row">
-          <legend>Pickup or delivery</legend>
-          <label><input type="radio" name="method" value="Pickup" checked /> Pickup</label>
-          <label><input type="radio" name="method" value="Delivery" /> Delivery</label>
-        </fieldset>
-        <label>Message on cake<input name="message" type="text" placeholder="Happy Birthday" /></label>
-        <label>Additional notes<textarea name="notes" rows="3" placeholder="Allergies, colours, character theme"></textarea></label>
-        <button class="site-button site-button--primary site-submit" type="submit">Send Custom Order</button>
-      </form>
-      <aside class="site-order-info">
-        <h3>Ordering Information</h3>
-        <ul>
-          <li><strong>Order lead time</strong><span>Please order at least 48 hours in advance.</span></li>
-          <li><strong>Pickup and confirmation</strong><span>The shop confirms availability, branch and final price.</span></li>
-          <li><strong>Delivery</strong><span>Delivery may be available by request for selected areas.</span></li>
-          <li><strong>Questions?</strong><span>Message the team before ordering.</span></li>
-        </ul>
-        <a class="site-button site-button--primary" href="https://wa.me/85268128098" target="_blank" rel="noopener">Order via WhatsApp</a>
-        <a class="site-button site-button--ghost" href="https://www.instagram.com/deesses_bakery/" target="_blank" rel="noopener">Send IG DM</a>
-      </aside>
-    </section>
 
     <section class="site-how" id="how-it-works">
       <h2>How ordering works</h2>
@@ -170,33 +131,5 @@
   </footer>
 
   <script src="script.js?v=brand-logo-1"></script>
-  <script>
-    (function () {
-      var form = document.querySelector('[data-custom-order]');
-      if (!form) return;
-      var date = form.querySelector('input[name="pickupDate"]');
-      if (date) {
-        var now = new Date();
-        var local = new Date(now.getTime() - now.getTimezoneOffset() * 60000);
-        date.min = local.toISOString().slice(0, 10);
-      }
-      form.addEventListener('submit', function (event) {
-        event.preventDefault();
-        var data = new FormData(form);
-        var lines = [
-          '你好 DÉESSES Bakery，我想查詢自訂蛋糕：',
-          'Cake type: ' + (data.get('cakeType') || ''),
-          'Size: ' + (data.get('size') || ''),
-          'Flavour: ' + (data.get('flavour') || ''),
-          'Pickup date: ' + (data.get('pickupDate') || 'To be confirmed'),
-          'Method: ' + (data.get('method') || 'Pickup'),
-          'Message: ' + (data.get('message') || 'None'),
-          'Notes: ' + (data.get('notes') || 'None'),
-          '請確認供應、最終價錢及取貨安排，謝謝。'
-        ];
-        window.open('https://wa.me/85268128098?text=' + encodeURIComponent(lines.join('\n')), '_blank', 'noopener');
-      });
-    })();
-  </script>
 </body>
 </html>

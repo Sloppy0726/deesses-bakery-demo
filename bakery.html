@@ -1,135 +1,14 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DÉESSES Bakery - Bakery</title>
-  <meta name="description" content="DÉESSES Bakery breads page with sourdough, baguettes, daily bakery items and WhatsApp pre-order flow." />
-  <meta name="theme-color" content="#fff7f2" />
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23fff7f2'/%3E%3Ctext x='50%25' y='56%25' dominant-baseline='middle' text-anchor='middle' font-size='34'%3E%E2%99%A1%3C/text%3E%3C/svg%3E" />
-  <link rel="apple-touch-icon" href="assets/deesses-instagram-logo.jpg" />
-  <link rel="preload" as="image" href="assets/front-page-bakery-scene.jpg" />
-  <link rel="preload" as="image" href="assets/mini.jpg" />
-  <link rel="preload" as="image" href="assets/strawberry.jpg" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=brand-logo-1" />
-  <link rel="stylesheet" href="site.css?v=concept-12" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Redirecting to Breads | DÉESSES Bakery</title>
+  <meta http-equiv="refresh" content="0; url=breads.html" />
+  <link rel="canonical" href="https://sloppy0726.github.io/deesses-bakery-demo/breads.html" />
+  <script>location.replace("breads.html" + location.search + location.hash);</script>
 </head>
-<body class="site menu-page category-page category-page--bakery" data-category-page="bakery">
-  <header class="nav site-nav" id="nav">
-    <nav class="nav__inner site-nav__inner" aria-label="Primary">
-      <a href="index.html" class="nav__brand site-brand">
-        <img class="nav__mark nav__logo site-brand__logo" src="assets/deesses-instagram-logo-safe.jpg" alt="DÉESSES Bakery logo" width="68" height="68" />
-        <span class="nav__name site-brand__name">DÉESSES<small>Bakery</small></span>
-      </a>
-      <button class="nav__toggle site-nav__toggle" type="button" aria-expanded="false" aria-controls="primaryNavLinks" data-nav-toggle>
-        <span class="sr-only">Open navigation</span>
-        <span aria-hidden="true"></span>
-      </button>
-      <ul class="nav__links site-nav__links" id="primaryNavLinks">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="cakes.html" data-hero-filter="cake">Cakes</a></li>
-        <li><a href="pastries.html" data-hero-filter="pastry">Pastries</a></li>
-        <li><a href="bakery.html" data-hero-filter="bakery">Bakery</a></li>
-        <li><a href="cakes.html#order" data-i18n="order">Order</a></li>
-      </ul>
-      <div class="language-switch site-language" aria-label="Language" data-i18n-aria="languageLabel">
-        <button type="button" data-language="en" aria-pressed="false"><span>EN</span></button>
-        <button type="button" data-language="zh" aria-pressed="false"><span>繁</span></button>
-      </div>
-      <a href="cakes.html#order" class="nav__cta site-order-pill">Order Now <span aria-hidden="true">♡</span></a>
-    </nav>
-  </header>
-
-  <aside class="social-float site-social-float" aria-label="Quick social links" data-i18n-aria="quickSocialLinks">
-    <button class="social-trigger site-social-trigger" type="button" aria-haspopup="true" aria-expanded="false" data-social-trigger>
-      <span class="site-social-trigger__icon" aria-hidden="true">♡</span>
-      <span class="social-trigger__label" data-i18n="socialLabel">Social</span>
-    </button>
-    <div class="social-menu" role="menu">
-      <a role="menuitem" href="https://www.instagram.com/deesses_bakery/" target="_blank" rel="noopener">
-        <span class="social-icon" aria-hidden="true">◎</span>
-        <span><strong>Instagram</strong><small data-i18n="socialInstagramHint">Latest cakes / DM pre-order</small></span>
-      </a>
-      <a role="menuitem" href="https://wa.me/85268128098" target="_blank" rel="noopener">
-        <span class="social-icon" aria-hidden="true">✆</span>
-        <span><strong>WhatsApp</strong><small data-i18n="socialWhatsappHint">Message to pre-order</small></span>
-      </a>
-      <a role="menuitem" href="index.html#social">
-        <span class="social-icon" aria-hidden="true">✧</span>
-        <span><strong data-i18n="socialGalleryTitle">Social gallery</strong><small data-i18n="socialGalleryHint">Preview posts and updates</small></span>
-      </a>
-    </div>
-  </aside>
-
-  <main id="top">
-    <section class="site-menu-hero" id="hero">
-      <div>
-        <p class="site-script">Bakery Collection</p>
-        <h1>Bakery breads for every day.</h1>
-        <p>Browse sourdough, baguettes and daily breads as their own bakery collection before sending a WhatsApp enquiry.</p>
-      </div>
-      <form class="hero-search site-search site-menu-search" role="search" aria-label="Search DÉESSES menu" data-i18n-aria="searchMenu" data-hero-search>
-        <label class="sr-only" for="heroSearchInput" data-i18n="searchMenu">Search menu</label>
-        <input id="heroSearchInput" type="search" placeholder="Search menu" data-i18n-placeholder="searchMenu" autocomplete="off" />
-        <button type="submit" data-i18n="searchButton">Search</button>
-      </form>
-    </section>
-
-    <section class="menu site-menu" id="menu">
-      <div class="section__head site-section-head">
-        <h2>Shop bakery</h2>
-        <p class="section__sub">A dedicated bakery bread collection with branch availability, search and product detail ordering.</p>
-      </div>
-      <div class="filters site-filters" role="group" aria-label="Menu filters">
-        <div class="filters__row site-filters__row" id="branchFilters" aria-label="Filter by branch">
-          <span class="filters__label">Branch</span>
-        </div>
-      </div>
-      <div class="product-grid site-product-grid" id="menuGrid" aria-live="polite"></div>
-      <p class="menu__empty site-empty" id="menuEmpty" hidden>No items match this filter.</p>
-    </section>
-
-
-    <section class="site-how" id="how-it-works">
-      <h2>How ordering works</h2>
-      <ol>
-        <li><strong>Choose</strong><span>Select products from cakes, pastries or bakery breads.</span></li>
-        <li><strong>Plan</strong><span>Pick your branch, size, date and message details.</span></li>
-        <li><strong>Confirm</strong><span>Send the WhatsApp enquiry for shop confirmation.</span></li>
-        <li><strong>Enjoy</strong><span>Pick up fresh bakes at your selected counter.</span></li>
-      </ol>
-    </section>
-
-    <section class="social site-social" id="social">
-      <div class="social__text site-social__head">
-        <h2>Follow our creations</h2>
-        <p><a href="https://www.instagram.com/deesses_bakery/" target="_blank" rel="noopener">@deesses_bakery</a></p>
-      </div>
-      <div class="social__grid site-social-grid" id="socialGrid"></div>
-    </section>
-  </main>
-
-  <footer class="footer site-footer" id="contact">
-    <div class="footer__inner site-footer__inner">
-      <div>
-        <a href="index.html" class="site-brand site-footer-brand">
-          <img class="site-brand__logo" src="assets/deesses-instagram-logo.jpg" alt="DÉESSES Bakery logo" width="48" height="48" />
-          <span class="site-brand__name">DÉESSES<small>Bakery</small></span>
-        </a>
-        <p>An online cake and pastry ordering concept.</p>
-      </div>
-      <div class="footer__branches site-footer-branches" id="footerBranches"></div>
-      <form class="site-subscribe" action="https://wa.me/85268128098" target="_blank">
-        <label>Stay in the loop<input type="email" placeholder="Email address" /></label>
-        <button class="site-button site-button--primary" type="submit">Subscribe</button>
-      </form>
-    </div>
-    <p class="site-footer-note">Static design demo. Product images are temporary preview assets. Confirm all prices, availability and pickup details with the business directly.</p>
-  </footer>
-
-  <script src="script.js?v=brand-logo-1"></script>
+<body>
+  <p>This category is now called <a href="breads.html">Breads</a>.</p>
 </body>
 </html>
