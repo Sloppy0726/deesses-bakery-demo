@@ -82,7 +82,7 @@
   padding: 2px;
   border: 2px solid rgba(216, 115, 130, 0.42);
   background: #fffdf8;
-  object-fit: cover;
+  object-fit: contain;
   box-shadow:
     0 12px 32px rgba(169, 112, 106, 0.18),
     0 0 0 5px rgba(253, 232, 232, 0.74);

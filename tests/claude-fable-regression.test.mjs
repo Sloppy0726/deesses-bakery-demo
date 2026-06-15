@@ -32,10 +32,11 @@ test('branch and product cards avoid invalid nested interactive controls', () =>
 });
 
 test('top-left brand mark uses the real DÉESSES Instagram profile logo', () => {
-  assert.match(html, /<img class="nav__mark nav__logo site-brand__logo" src="assets\/deesses-instagram-logo-crop16\.jpg" alt="DÉESSES Bakery logo" width="68" height="68"/, 'top-left nav mark should use the enlarged cropped DÉESSES logo asset');
+  assert.match(html, /<img class="nav__mark nav__logo site-brand__logo" src="assets\/deesses-instagram-logo-safe\.jpg" alt="DÉESSES Bakery logo" width="68" height="68"/, 'top-left nav mark should use the safe DÉESSES logo asset with enough whitespace');
+  assert.doesNotMatch(html + menuHtml + cakesHtml + pastriesHtml + bakeryHtml, /deesses-instagram-logo-crop16\.jpg/, 'header logos should not use the cropped asset that cuts into the logo text');
   assert.doesNotMatch(html, /class="nav__mark ig-mark ig-mark--brand"/, 'top-left nav mark should not use the generic Instagram glyph');
   assert.doesNotMatch(html, /class="nav__mark"[^>]*>❀</, 'top-left nav mark should not use the old flower glyph');
-  assert.match(siteCss, /\.site-brand__logo[\s\S]*width:\s*64px[\s\S]*height:\s*64px[\s\S]*object-fit:\s*cover[\s\S]*box-shadow/, 'Brand logo image should be styled as a larger noticeable profile icon');
+  assert.match(siteCss, /\.site-brand__logo[\s\S]*width:\s*64px[\s\S]*height:\s*64px[\s\S]*object-fit:\s*contain[\s\S]*box-shadow/, 'Brand logo image should be styled as a larger noticeable profile icon without cropping the text');
 });
 
 test('social preview links are not hidden from assistive tech', () => {
