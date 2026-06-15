@@ -1208,7 +1208,11 @@
   function wireScrollReveal() {
     var targets = document.querySelectorAll([
       ".section__head",
+      ".site-section-head > *",
       ".branch-card",
+      ".site-product-spotlight__section",
+      ".site-product-spotlight__photo",
+      ".site-product-spotlight__copy > *",
       ".signature__copy > *",
       ".signature__visual",
       ".signature-list li",
@@ -1217,9 +1221,12 @@
       ".filters__row",
       ".product",
       ".order-card",
+      ".site-how li",
       ".social__text > *",
+      ".site-social__head > *",
       ".social-tile",
       ".footer-branch",
+      ".site-footer__inner > *",
       ".footer__inner > *"
     ].join(", "));
 

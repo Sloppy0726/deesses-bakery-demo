@@ -143,12 +143,13 @@ test('Root homepage is active with language switch available', () => {
 test('Pineapple-style scroll reveal animations are wired with reduced-motion support', () => {
   assert.match(js, /function wireScrollReveal\(\)/, 'scroll reveal wiring function missing');
   assert.match(js, /IntersectionObserver[\s\S]*threshold:\s*0\.16[\s\S]*rootMargin:\s*"0px 0px -8% 0px"/, 'scroll reveal should use IntersectionObserver with Pineapple-style threshold/root margin');
-  assert.match(js, /\.branch-card[\s\S]*\.product[\s\S]*\.social-tile/, 'scroll reveal should target branch cards, product cards and social tiles');
+  assert.match(js, /\.branch-card[\s\S]*\.site-product-spotlight__section[\s\S]*\.product[\s\S]*\.site-how li[\s\S]*\.social-tile/, 'scroll reveal should target spotlight sections, branch cards, product cards, how-it-works cards and social tiles');
   assert.match(js, /--reveal-delay[\s\S]*Math\.min\(index % 5, 4\) \* 65/, 'scroll reveal should stagger targets');
   assert.match(js, /wireScrollReveal\(\)/, 'init should call scroll reveal wiring');
-  assert.match(css, /\.reveal-on-scroll\s*\{[\s\S]*opacity:\s*0[\s\S]*translateY\(34px\) scale\(0\.985\)[\s\S]*filter:\s*blur\(8px\)/, 'scroll reveal hidden state should fade, rise and unblur like Pineapple reference');
-  assert.match(css, /\.reveal-on-scroll\.is-visible\s*\{[\s\S]*opacity:\s*1[\s\S]*translateY\(0\) scale\(1\)[\s\S]*filter:\s*blur\(0\)/, 'visible reveal state missing');
-  assert.match(css, /prefers-reduced-motion:\s*reduce[\s\S]*\.reveal-on-scroll\s*\{[\s\S]*opacity:\s*1[\s\S]*transform:\s*none\s*!important[\s\S]*filter:\s*none/, 'reveal must be disabled for reduced motion');
+  assert.match(siteCss, /\.site \.reveal-on-scroll\s*\{[\s\S]*opacity:\s*0[\s\S]*translateY\(34px\) scale\(0\.985\)[\s\S]*filter:\s*blur\(8px\)/, 'current site reveal hidden state should fade, rise and unblur');
+  assert.match(siteCss, /\.site \.reveal-on-scroll\.is-visible\s*\{[\s\S]*opacity:\s*1[\s\S]*translateY\(0\) scale\(1\)[\s\S]*filter:\s*blur\(0\)/, 'current site visible reveal state missing');
+  assert.doesNotMatch(siteCss, /\.site \.reveal-on-scroll,[\s\S]*opacity:\s*1;[\s\S]*transform:\s*none;[\s\S]*filter:\s*none;[\s\S]*\.site-nav/, 'current site CSS must not flatten scroll reveal animations before the nav styles');
+  assert.match(siteCss, /prefers-reduced-motion:\s*reduce[\s\S]*\.site \.reveal-on-scroll\s*\{[\s\S]*opacity:\s*1[\s\S]*transform:\s*none\s*!important[\s\S]*filter:\s*none/, 'current site reveal must be disabled for reduced motion');
 });
 
 test('cake craft placeholder appears only on the front page', () => {

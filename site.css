@@ -53,16 +53,41 @@
 
 .site section { padding: clamp(46px, 7vw, 92px) clamp(18px, 5vw, 56px); }
 
-.site .reveal-on-scroll,
-.site .reveal-on-scroll.is-visible,
+.site .reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(34px) scale(0.985);
+  filter: blur(8px);
+  transition:
+    opacity 0.85s ease var(--reveal-delay, 0ms),
+    transform 0.85s cubic-bezier(0.2, 0.8, 0.2, 1) var(--reveal-delay, 0ms),
+    filter 0.85s ease var(--reveal-delay, 0ms);
+  will-change: opacity, transform, filter;
+}
+.site .reveal-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+}
+.site .site-product-spotlight__section.reveal-on-scroll,
 .site .product.reveal-on-scroll,
 .site .branch-card.reveal-on-scroll,
+.site .site-how li.reveal-on-scroll,
 .site .social-tile.reveal-on-scroll,
 .site .footer-branch.reveal-on-scroll {
-  opacity: 1;
-  transform: none;
-  filter: none;
+  transform: translateY(42px) scale(0.96);
 }
+.site .site-product-spotlight__section.reveal-on-scroll.is-visible,
+.site .product.reveal-on-scroll.is-visible,
+.site .branch-card.reveal-on-scroll.is-visible,
+.site .site-how li.reveal-on-scroll.is-visible,
+.site .social-tile.reveal-on-scroll.is-visible,
+.site .footer-branch.reveal-on-scroll.is-visible {
+  transform: translateY(0) scale(1);
+}
+.site .site-product-spotlight__section.reveal-on-scroll.is-visible:hover,
+.site .product.reveal-on-scroll.is-visible:hover,
+.site .branch-card.reveal-on-scroll.is-visible:hover { transform: translateY(-6px) scale(1); }
+.site .social-tile.reveal-on-scroll.is-visible:hover { transform: translateY(-4px) scale(1); }
 
 .site-nav {
   padding: 7px clamp(16px, 4vw, 42px);
@@ -831,4 +856,10 @@
   .site *,
   .site *::before,
   .site *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+  .site .reveal-on-scroll {
+    opacity: 1;
+    transform: none !important;
+    filter: none;
+    transition: none;
+  }
 }
