@@ -161,6 +161,16 @@ test('cake craft placeholder appears only on the front page', () => {
   assert.match(js, /wireCakeAssembly[\s\S]*__cakeAssemblyStatus/, 'cake assembly JS wiring/status missing');
 });
 
+test('language toggle localizes current visible site sections', () => {
+  assert.match(js, /home:\s*"Home"[\s\S]*home:\s*"首頁"/, 'nav home label should have English and Chinese copy');
+  assert.match(js, /homeHeroTitle:\s*"Order Your<br \/>Sweet Moments"[\s\S]*homeHeroTitle:\s*"訂購你的<br \/>甜蜜時刻"/, 'homepage hero should have Chinese copy');
+  assert.match(js, /productSpotlightTitle:[\s\S]*選擇想看的產品系列/, 'product spotlight should have Chinese copy');
+  assert.match(js, /breadPageTitle:[\s\S]*每日新鮮麵包/, 'breads page hero should have Chinese copy');
+  assert.match(js, /function localizeCurrentSite\(\)[\s\S]*localizeNavigation\(\)[\s\S]*localizeHomePage\(\)[\s\S]*localizeMenuPage\(\)/, 'language toggle should localize duplicated current-site sections beyond data-i18n nodes');
+  assert.match(js, /document\.querySelectorAll\('\.site-nav__links a\[data-hero-filter="cake"\]'\)[\s\S]*cakesPlural/, 'language toggle should localize static category nav labels');
+  assert.match(js, /localizeStatic\(\)[\s\S]*syncLanguageButtons\(\)[\s\S]*renderBranches\(\)[\s\S]*renderFilters\(\)[\s\S]*renderMenu\(\)/, 'setLanguage should refresh static and generated content');
+});
+
 test('root loads the current scripts and motion layer progressively', () => {
   assert.match(html, /script\.js\?v=brand-logo-1/, 'site script should be loaded on the root');
   assert.match(html, /site\.css\?v=concept-12/, 'root should load the current site stylesheet cache key');

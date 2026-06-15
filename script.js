@@ -141,7 +141,73 @@
       preOrderNow: "Pre-order now",
       enterArtemis: "Enter Artemis →",
       viewMenu: "View menu →",
-      preorderVia: "Pre-order via IG / WhatsApp"
+      preorderVia: "Pre-order via IG / WhatsApp",
+      home: "Home",
+      orderNow: "Order Now",
+      onlineOrdering: "Online Ordering",
+      homeHeroTitle: "Order Your<br />Sweet Moments",
+      homeHeroCopy: "Handcrafted cakes, pastries and fresh breads presented as clear category spotlights before shoppers choose the right collection.",
+      viewProductSpotlights: "View Product Spotlights <span aria-hidden=\"true\">♡</span>",
+      howItWorks: "How It Works",
+      artemisSignature: "Artemis Signature",
+      artemisTitle: "Gift-ready bakes from Kai Tak.",
+      artemisCopy: "Artemis at AIRSIDE leads with pink-purple gift energy, fresh breads, mochi croissants and celebration cakes.",
+      viewArtemisPicks: "View Artemis picks",
+      productSpotlight: "Product Spotlight",
+      productSpotlightTitle: "Choose a spotlight collection.",
+      productSpotlightCopy: "Three clear product spotlights: celebration cakes, gift-ready pastries and everyday fresh breads. Pick the collection you want to view.",
+      productSpotlightAria: "Product spotlight categories",
+      cakeSpotlight: "Cake spotlight",
+      pastrySpotlight: "Pastry spotlight",
+      breadSpotlight: "Bread spotlight",
+      cakesPlural: "Cakes",
+      pastriesPlural: "Pastries",
+      breadsPlural: "Breads",
+      cakesSpotlightCopy: "Celebration cakes, mini cakes and seasonal cake picks for birthdays and gifting.",
+      pastriesSpotlightCopy: "Mochi croissants, petite pastries and polished gift-ready sweet bites.",
+      breadsSpotlightCopy: "Fresh sourdough, baguettes and everyday breads for shoppers who want something simple.",
+      viewCakes: "View cakes",
+      viewPastries: "View pastries",
+      viewBreads: "View breads",
+      craftHeadline: "Layer-by-layer cake craft",
+      craftPlaceholderCopy: "This placeholder uses the supplied pistachio mochi cake layer guide while the custom animation is refined.",
+      cakeFigcaption: "Placeholder layer guide · Pistachio mochi cake",
+      howChooseTitle: "Choose",
+      howChooseCopy: "Select products from cakes, pastries or fresh breads.",
+      howBrowseTitle: "Browse",
+      howBrowseCopy: "Open the cakes, pastries or breads page from the matching spotlight.",
+      howPlanTitle: "Plan",
+      howPlanCopy: "Pick your branch, size, date and message details.",
+      howConfirmTitle: "Confirm",
+      howConfirmCopy: "Send the WhatsApp enquiry for shop confirmation.",
+      howEnjoyTitle: "Enjoy",
+      howEnjoyCopy: "Pick up fresh bakes at your selected counter.",
+      followCreations: "Follow our creations",
+      footerConcept: "An online cake and pastry ordering concept.",
+      stayLoop: "Stay in the loop",
+      emailAddress: "Email address",
+      subscribe: "Subscribe",
+      footerNote: "Static design demo. Product images are temporary preview assets. Confirm all prices, availability and pickup details with the business directly.",
+      cakeCollection: "Cake Collection",
+      cakePageTitle: "Celebration cakes made to order.",
+      cakePageCopy: "Browse celebration cakes, minis and seasonal cake picks before sending a custom order enquiry.",
+      shopCakes: "Shop cakes",
+      shopCakesCopy: "A focused cake collection with branch availability, search and custom cake ordering below.",
+      pastryCollection: "Pastry Collection",
+      pastryPageTitle: "Gift-ready pastries and mochi croissants.",
+      pastryPageCopy: "Browse croissants, petite pastries and sweet bites as their own pastry collection before sending a WhatsApp enquiry.",
+      shopPastries: "Shop pastries",
+      shopPastriesCopy: "A focused pastry collection with branch availability, search and product detail ordering.",
+      breadCollection: "Bread Collection",
+      breadPageTitle: "Fresh breads for every day.",
+      breadPageCopy: "Browse sourdough, baguettes and daily breads as their own bread collection before sending a WhatsApp enquiry.",
+      shopBreads: "Shop breads",
+      shopBreadsCopy: "A dedicated fresh bread collection with branch availability, search and product detail ordering.",
+      menuCollection: "Menu Collection",
+      menuPageTitle: "Browse cakes, pastries and breads.",
+      menuPageCopy: "Search the product menu, filter by branch and send an enquiry when you are ready.",
+      shopMenu: "Shop menu",
+      shopMenuCopy: "Browse all available products with branch availability, search and product detail ordering."
     },
     zh: {
       languageLabel: "語言",
@@ -211,7 +277,73 @@
       preOrderNow: "立即預訂",
       enterArtemis: "進入啟德專櫃 →",
       viewMenu: "看餐單 →",
-      preorderVia: "經 IG / WhatsApp 預訂"
+      preorderVia: "經 IG / WhatsApp 預訂",
+      home: "首頁",
+      orderNow: "立即訂購",
+      onlineOrdering: "網上訂購",
+      homeHeroTitle: "訂購你的<br />甜蜜時刻",
+      homeHeroCopy: "手工蛋糕、酥點及新鮮麵包，以清晰產品分類展示，讓客人先選擇合適系列。",
+      viewProductSpotlights: "查看產品分類 <span aria-hidden=\"true\">♡</span>",
+      howItWorks: "訂購流程",
+      artemisSignature: "Artemis 招牌系列",
+      artemisTitle: "啟德送禮感烘焙。",
+      artemisCopy: "AIRSIDE Artemis 以粉紫送禮風格，展示新鮮麵包、麻糬牛角酥及慶祝蛋糕。",
+      viewArtemisPicks: "查看 Artemis 推介",
+      productSpotlight: "產品分類",
+      productSpotlightTitle: "選擇想看的產品系列。",
+      productSpotlightCopy: "三個清晰分類：慶祝蛋糕、送禮酥點及日常新鮮麵包。選擇你想瀏覽的系列。",
+      productSpotlightAria: "產品分類系列",
+      cakeSpotlight: "蛋糕分類",
+      pastrySpotlight: "酥點分類",
+      breadSpotlight: "麵包分類",
+      cakesPlural: "蛋糕",
+      pastriesPlural: "酥點",
+      breadsPlural: "麵包",
+      cakesSpotlightCopy: "慶祝蛋糕、迷你蛋糕及節日蛋糕，適合生日與送禮。",
+      pastriesSpotlightCopy: "麻糬牛角酥、精緻酥點及適合送禮的甜點。",
+      breadsSpotlightCopy: "酸種包、法包及日常新鮮麵包，簡單易選。",
+      viewCakes: "查看蛋糕",
+      viewPastries: "查看酥點",
+      viewBreads: "查看麵包",
+      craftHeadline: "蛋糕層次製作",
+      craftPlaceholderCopy: "此示意圖使用開心果麻糬蛋糕層次參考，待正式動畫再細化。",
+      cakeFigcaption: "蛋糕層次示意 · 開心果麻糬蛋糕",
+      howChooseTitle: "選擇",
+      howChooseCopy: "從蛋糕、酥點或新鮮麵包中選擇產品。",
+      howBrowseTitle: "瀏覽",
+      howBrowseCopy: "從對應分類進入蛋糕、酥點或麵包頁面。",
+      howPlanTitle: "安排",
+      howPlanCopy: "選擇分店、尺寸、日期及填寫訊息。",
+      howConfirmTitle: "確認",
+      howConfirmCopy: "發送 WhatsApp 查詢，等候店舖確認。",
+      howEnjoyTitle: "享用",
+      howEnjoyCopy: "到所選分店取新鮮烘焙產品。",
+      followCreations: "追蹤我們的作品",
+      footerConcept: "蛋糕與酥點網上訂購概念網站。",
+      stayLoop: "接收最新消息",
+      emailAddress: "電郵地址",
+      subscribe: "訂閱",
+      footerNote: "靜態設計示意網站。產品圖片為臨時預覽素材；價錢、供應及取貨詳情請直接向店舖確認。",
+      cakeCollection: "蛋糕系列",
+      cakePageTitle: "預訂慶祝蛋糕。",
+      cakePageCopy: "瀏覽慶祝蛋糕、迷你蛋糕及節日推介，再發送自訂蛋糕查詢。",
+      shopCakes: "選購蛋糕",
+      shopCakesCopy: "專注蛋糕系列，包含分店供應、搜尋及下方自訂蛋糕訂購。",
+      pastryCollection: "酥點系列",
+      pastryPageTitle: "送禮酥點與麻糬牛角酥。",
+      pastryPageCopy: "瀏覽牛角酥、精緻酥點及甜點系列，再發送 WhatsApp 查詢。",
+      shopPastries: "選購酥點",
+      shopPastriesCopy: "專注酥點系列，包含分店供應、搜尋及產品詳情訂購。",
+      breadCollection: "麵包系列",
+      breadPageTitle: "每日新鮮麵包。",
+      breadPageCopy: "瀏覽酸種包、法包及日常麵包系列，再發送 WhatsApp 查詢。",
+      shopBreads: "選購麵包",
+      shopBreadsCopy: "專屬新鮮麵包系列，包含分店供應、搜尋及產品詳情訂購。",
+      menuCollection: "餐單系列",
+      menuPageTitle: "瀏覽蛋糕、酥點及麵包。",
+      menuPageCopy: "搜尋產品餐單、按分店篩選，準備好後發送查詢。",
+      shopMenu: "選購餐單",
+      shopMenuCopy: "瀏覽所有產品，包含分店供應、搜尋及產品詳情訂購。"
     }
   };
 
@@ -257,6 +389,122 @@
     return (COPY[currentLanguage] && COPY[currentLanguage][key]) || COPY.en[key] || key;
   }
 
+  function setText(selector, key, root) {
+    var node = (root || document).querySelector(selector);
+    if (node) node.textContent = tx(key);
+  }
+
+  function setHtml(selector, key, root) {
+    var node = (root || document).querySelector(selector);
+    if (node) node.innerHTML = tx(key);
+  }
+
+  function setAttr(selector, attr, key, root) {
+    var node = (root || document).querySelector(selector);
+    if (node) node.setAttribute(attr, tx(key));
+  }
+
+  function localizeNavigation() {
+    document.querySelectorAll('.site-nav__links a[href="#top"], .site-nav__links a[href="index.html"]').forEach(function (node) { node.textContent = tx("home"); });
+    document.querySelectorAll('.site-nav__links a[data-hero-filter="cake"]').forEach(function (node) { node.textContent = tx("cakesPlural"); });
+    document.querySelectorAll('.site-nav__links a[data-hero-filter="pastry"]').forEach(function (node) { node.textContent = tx("pastriesPlural"); });
+    document.querySelectorAll('.site-nav__links a[data-hero-filter="bakery"]').forEach(function (node) { node.textContent = tx("breadsPlural"); });
+    document.querySelectorAll('.site-order-pill').forEach(function (node) { node.innerHTML = tx("orderNow") + ' <span aria-hidden="true">♡</span>'; });
+  }
+
+  function localizeHomePage() {
+    if (!document.querySelector('.site-hero')) return;
+    setText('.site-hero .site-script', 'onlineOrdering');
+    setHtml('.site-hero__title', 'homeHeroTitle');
+    setText('.site-hero__copy', 'homeHeroCopy');
+    setHtml('.site-hero__actions .site-button--primary', 'viewProductSpotlights');
+    setText('.site-hero__actions .site-button--ghost', 'howItWorks');
+    setText('.site-signature .site-script', 'artemisSignature');
+    setText('.site-signature h2', 'artemisTitle');
+    setText('.site-signature__copy p:nth-of-type(2)', 'artemisCopy');
+    setText('.site-signature__copy a', 'viewArtemisPicks');
+    setText('.site-product-spotlight__head .site-script', 'productSpotlight');
+    setText('#productSpotlightTitle', 'productSpotlightTitle');
+    setText('.site-product-spotlight__head .section__sub', 'productSpotlightCopy');
+    setAttr('.site-product-spotlight__stack', 'aria-label', 'productSpotlightAria');
+    var spotlightKeys = [
+      ['.site-product-spotlight__section--cake', 'cakeSpotlight', 'cakesPlural', 'cakesSpotlightCopy', 'viewCakes'],
+      ['.site-product-spotlight__section--pastry', 'pastrySpotlight', 'pastriesPlural', 'pastriesSpotlightCopy', 'viewPastries'],
+      ['.site-product-spotlight__section--breads', 'breadSpotlight', 'breadsPlural', 'breadsSpotlightCopy', 'viewBreads']
+    ];
+    spotlightKeys.forEach(function (item) {
+      var section = document.querySelector(item[0]);
+      if (!section) return;
+      setText('.site-product-spotlight__tag', item[1], section);
+      setText('h3', item[2], section);
+      setText('p', item[3], section);
+      setText('a', item[4], section);
+    });
+    setText('.site-craft h2', 'craftHeadline');
+    setText('.site-craft__copy > p:first-of-type', 'craftPlaceholderCopy');
+    setText('.site-cake-placeholder figcaption', 'cakeFigcaption');
+  }
+
+  function localizeMenuPage() {
+    var hero = document.querySelector('.site-menu-hero');
+    if (!hero) return;
+    var body = document.body;
+    var prefix = body.classList.contains('category-page--cakes') ? 'cake'
+      : body.classList.contains('category-page--pastries') ? 'pastry'
+      : body.classList.contains('category-page--breads') ? 'bread'
+      : 'menu';
+    var pageKeys = {
+      cake: ['cakeCollection', 'cakePageTitle', 'cakePageCopy', 'shopCakes', 'shopCakesCopy'],
+      pastry: ['pastryCollection', 'pastryPageTitle', 'pastryPageCopy', 'shopPastries', 'shopPastriesCopy'],
+      bread: ['breadCollection', 'breadPageTitle', 'breadPageCopy', 'shopBreads', 'shopBreadsCopy'],
+      menu: ['menuCollection', 'menuPageTitle', 'menuPageCopy', 'shopMenu', 'shopMenuCopy']
+    }[prefix];
+    setText('.site-menu-hero .site-script', pageKeys[0]);
+    setText('.site-menu-hero h1', pageKeys[1]);
+    setText('.site-menu-hero > div > p:not(.site-script)', pageKeys[2]);
+    setText('.site-menu .site-section-head h2', pageKeys[3]);
+    setText('.site-menu .site-section-head .section__sub', pageKeys[4]);
+    setText('#branchFilters .filters__label', 'branch');
+    setText('#menuEmpty', 'noItems');
+  }
+
+  function localizeHowFooterSocial() {
+    setText('.site-how h2', 'howItWorks');
+    var howItems = document.querySelectorAll('.site-how li');
+    var secondTitle = document.querySelector('.site-menu-hero') ? 'howPlanTitle' : 'howBrowseTitle';
+    var secondCopy = document.querySelector('.site-menu-hero') ? 'howPlanCopy' : 'howBrowseCopy';
+    var howKeys = [
+      ['howChooseTitle', 'howChooseCopy'],
+      [secondTitle, secondCopy],
+      ['howConfirmTitle', 'howConfirmCopy'],
+      ['howEnjoyTitle', 'howEnjoyCopy']
+    ];
+    howItems.forEach(function (item, index) {
+      if (!howKeys[index]) return;
+      setText('strong', howKeys[index][0], item);
+      setText('span', howKeys[index][1], item);
+    });
+    setText('.site-social__head h2', 'followCreations');
+    setText('.site-footer__inner > div:first-child > p', 'footerConcept');
+    var subscribeLabel = document.querySelector('.site-subscribe label');
+    if (subscribeLabel) {
+      var input = subscribeLabel.querySelector('input');
+      subscribeLabel.childNodes.forEach(function (node) {
+        if (node.nodeType === Node.TEXT_NODE) node.nodeValue = tx('stayLoop');
+      });
+      if (input) input.setAttribute('placeholder', tx('emailAddress'));
+    }
+    setText('.site-subscribe button', 'subscribe');
+    setText('.site-footer-note', 'footerNote');
+  }
+
+  function localizeCurrentSite() {
+    localizeNavigation();
+    localizeHomePage();
+    localizeMenuPage();
+    localizeHowFooterSocial();
+  }
+
   function localizeStatic() {
     document.documentElement.lang = currentLanguage === "zh" ? "zh-Hant-HK" : "en";
     document.querySelectorAll("[data-i18n]").forEach(function (node) {
@@ -271,6 +519,7 @@
     });
     var toggleLabel = document.querySelector("[data-nav-toggle] .sr-only");
     if (toggleLabel) toggleLabel.textContent = tx("openNav");
+    localizeCurrentSite();
     window.__deessesLanguage = currentLanguage;
   }
 
