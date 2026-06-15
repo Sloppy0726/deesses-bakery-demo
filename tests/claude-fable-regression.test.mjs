@@ -204,6 +204,8 @@ test('Homepage separates the product catalogue from the front page like a bakery
     assert.doesNotMatch(page, /class="skip-link"|Skip to products|Skip to menu/, `${heading} page should not show a confusing skip-link pill`);
     assert.doesNotMatch(page, /id="categoryFilters"|Filter by category|>Category<|>分類</, `${heading} page should remove the category filter row entirely`);
     assert.doesNotMatch(page, />[^<]*\bonly\.[^<]*</i, `${heading} page should not use awkward "only" section headings`);
+    assert.doesNotMatch(page, /<p class="site-script">Shop (cakes|pastries|bakery)<\/p>\s*<h2>(Cakes|Pastries|Bakery)\.<\/h2>/, `${heading} page should not show duplicate shop/category headings`);
+    assert.match(page, /<h2>Shop (cakes|pastries|bakery)<\/h2>/, `${heading} page should promote the shop label to the main section heading`);
     assert.match(page, new RegExp(`${heading}[\\s\\S]*id="branchFilters"`), `${heading} page should keep branch filtering`);
     assert.match(page, /id="order"[\s\S]*data-custom-order[\s\S]*Custom Cake Order/, `${heading} page should keep the order flow`);
   });
