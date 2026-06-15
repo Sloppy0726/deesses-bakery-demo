@@ -29,10 +29,10 @@ test('branch and product cards avoid invalid nested interactive controls', () =>
 });
 
 test('top-left brand mark uses the real DÉESSES Instagram profile logo', () => {
-  assert.match(html, /<img class="nav__mark nav__logo" src="assets\/deesses-instagram-logo\.jpg" alt="DÉESSES Bakery logo" width="48" height="48"/, 'top-left nav mark should use the enlarged downloaded DÉESSES Instagram profile logo asset');
+  assert.match(html, /<img class="nav__mark nav__logo v2-brand__logo" src="assets\/deesses-instagram-logo\.jpg" alt="DÉESSES Bakery logo" width="54" height="54"/, 'top-left nav mark should use the enlarged downloaded DÉESSES Instagram profile logo asset');
   assert.doesNotMatch(html, /class="nav__mark ig-mark ig-mark--brand"/, 'top-left nav mark should not use the generic Instagram glyph');
   assert.doesNotMatch(html, /class="nav__mark"[^>]*>❀</, 'top-left nav mark should not use the old flower glyph');
-  assert.match(css, /\.nav__logo[\s\S]*border-radius:\s*50%[\s\S]*object-fit:\s*cover/, 'brand logo image should be styled as a circular profile icon');
+  assert.match(v2Css, /\.v2-brand__logo[\s\S]*box-shadow[\s\S]*object-fit:\s*cover/, 'V2 brand logo image should be styled as a noticeable profile icon');
 });
 
 test('social preview links are not hidden from assistive tech', () => {
@@ -56,13 +56,11 @@ test('mobile top bar stays inside narrow viewports', () => {
   assert.match(css, /@media \(max-width:\s*760px\)[\s\S]*\.nav__cta\s*\{\s*display:\s*none;\s*\}/, 'desktop Instagram CTA should be hidden from the cramped mobile top bar');
 });
 
-test('Pineapple-style floating social menu keeps Instagram reachable on mobile', () => {
-  assert.match(html, /class="social-float"[\s\S]*data-social-trigger[\s\S]*class="social-menu"[\s\S]*https:\/\/www\.instagram\.com\/deesses_bakery\/[\s\S]*https:\/\/wa\.me\/85268128098/, 'floating social menu should expose Instagram and WhatsApp like Pineapple reference');
-  assert.match(html, /class="social-trigger__ig"[\s\S]*viewBox="0 0 24 24"[\s\S]*class="social-trigger__label"/, 'floating social trigger should use an Instagram-style glyph rather than the business logo');
-  assert.match(html, /class="social-menu__ig"[\s\S]*viewBox="0 0 24 24"/, 'Instagram menu row should use a matching Instagram glyph');
+test('V2 floating social menu keeps Instagram reachable on mobile', () => {
+  assert.match(html, /class="social-float v2-social-float"[\s\S]*data-social-trigger[\s\S]*class="social-menu"[\s\S]*https:\/\/www\.instagram\.com\/deesses_bakery\/[\s\S]*https:\/\/wa\.me\/85268128098/, 'floating social menu should expose Instagram and WhatsApp');
+  assert.match(html, /class="v2-social-trigger__icon"[\s\S]*class="social-trigger__label"/, 'floating social trigger should expose an icon and label');
   assert.doesNotMatch(html, /class="social-trigger__avatar"[\s\S]*deesses-instagram-logo\.jpg/, 'floating social trigger should not put the business/profile logo on the button');
-  assert.match(css, /\.social-trigger\s*\{[\s\S]*min-width:\s*104px[\s\S]*linear-gradient\(135deg,\s*#5b2a86[\s\S]*#f77737/, 'floating social trigger should follow the Pineapple-style pill button with an IG-inspired gradient');
-  assert.match(css, /\.social-trigger__ig\s*\{[\s\S]*width:\s*21px[\s\S]*drop-shadow/, 'floating social trigger should make the Instagram glyph visible and polished');
+  assert.match(v2Css, /\.v2-social-trigger\s*\{[\s\S]*linear-gradient\(135deg, #df8490, #c75d70\)/, 'V2 floating social trigger should use the V2 brand gradient');
   assert.match(css, /\.social-float\s*\{\s*position:\s*fixed;[\s\S]*bottom:\s*max\(10px,\s*env\(safe-area-inset-bottom\)\)/, 'social menu should float from the lower-right corner');
   assert.match(css, /\.social-float:hover \.social-menu[\s\S]*\.social-float:focus-within \.social-menu[\s\S]*\.social-float\.social-float--open \.social-menu[\s\S]*opacity:\s*1[\s\S]*pointer-events:\s*auto/, 'social menu should expand on hover, focus, and tap-open state');
   assert.match(css, /@media \(max-width:\s*760px\)[\s\S]*\.social-trigger\s*\{[\s\S]*width:\s*48px[\s\S]*height:\s*48px/, 'mobile floating social trigger should collapse to a compact round button');
@@ -126,13 +124,15 @@ test('hero intro panel stays bright while the opening gallery remains visible', 
   assert.match(css, /\.hero-category-nav a\s*\{[\s\S]*background:\s*rgba\(255,255,255,0\.42\)/, 'hero quick links should stay translucent but easier to read');
 });
 
-test('Pineapple-style EN/Traditional Chinese language switch is available', () => {
-  assert.match(html, /class="language-switch"[\s\S]*data-language="en"[\s\S]*data-language="zh"/, 'nav language switch should expose EN and Traditional Chinese buttons');
-  assert.match(js, /LANGUAGE_STORAGE_KEY\s*=\s*"deesses-bakery-language"/, 'language preference should persist like Pineapple reference');
+test('V2 root homepage is active with language switch available', () => {
+  assert.match(html, /<body class="v2-site">/, 'root index should now be the V2 website');
+  assert.match(html, /class="language-switch v2-language"[\s\S]*data-language="en"[\s\S]*data-language="zh"/, 'nav language switch should expose EN and Traditional Chinese buttons');
+  assert.doesNotMatch(html, />V1<|href="index\.html">V1/, 'root V2 navigation should not expose a V1 link');
+  assert.match(js, /LANGUAGE_STORAGE_KEY\s*=\s*"deesses-bakery-language"/, 'language preference should persist');
   assert.match(js, /function getInitialLanguage\(\)[\s\S]*new URLSearchParams\(window\.location\.search\)\.get\("lang"\)[\s\S]*localStorage\.getItem\(LANGUAGE_STORAGE_KEY\)/, 'language should initialize from ?lang= or saved preference');
   assert.match(js, /document\.documentElement\.lang\s*=\s*currentLanguage === "zh" \? "zh-Hant-HK" : "en"/, 'document lang should update for accessibility');
   assert.match(js, /function setLanguage\(lang\)[\s\S]*localizeStatic\(\)[\s\S]*renderBranches\(\)[\s\S]*renderFilters\(\)[\s\S]*renderMenu\(\)/, 'language switch should localize static and dynamic content');
-  assert.match(css, /\.language-switch\s*\{[\s\S]*border-radius:\s*999px[\s\S]*backdrop-filter:\s*blur\(12px\)/, 'language switch should use the same pill styling pattern as Pineapple');
+  assert.match(css, /\.language-switch\s*\{[\s\S]*border-radius:\s*999px[\s\S]*backdrop-filter:\s*blur\(12px\)/, 'language switch should use pill styling');
 });
 
 test('Pineapple-style scroll reveal animations are wired with reduced-motion support', () => {
@@ -146,25 +146,21 @@ test('Pineapple-style scroll reveal animations are wired with reduced-motion sup
   assert.match(css, /prefers-reduced-motion:\s*reduce[\s\S]*\.reveal-on-scroll\s*\{[\s\S]*opacity:\s*1[\s\S]*transform:\s*none\s*!important[\s\S]*filter:\s*none/, 'reveal must be disabled for reduced motion');
 });
 
-test('cake assembly animation and Dribbble-inspired design cues are implemented accessibly', () => {
+test('cake craft placeholder controls are implemented accessibly', () => {
   assert.match(html, /id="craft"/, 'craft section missing');
-  assert.match(html, /cake-assembly/, 'cake assembly SVG missing');
+  assert.match(html, /v2-cake-placeholder[\s\S]*deconstructed-cake-placeholder\.jpg/, 'cake placeholder image missing');
   assert.match(html, /data-cake-action="explode"/, 'explode control missing');
   assert.match(html, /aria-live="polite"[^>]*id="cakeStatus"|id="cakeStatus"[^>]*aria-live="polite"/, 'cake status should announce state changes');
-  assert.match(css, /data-cake-mode="exploded"[\s\S]*cake-candle/, 'exploded-view motion styles missing');
-  assert.match(css, /craft__shot-meta/, 'Dribbble-style compact shot metadata missing');
+  assert.match(v2Css, /\.v2-cake-placeholder[\s\S]*\.v2-cake-placeholder img/, 'V2 cake placeholder styles missing');
   assert.match(js, /wireCakeAssembly[\s\S]*__cakeAssemblyStatus/, 'cake assembly JS wiring/status missing');
 });
 
-test('GSAP taste motion layer is loaded progressively and respects reduced motion', () => {
-  assert.match(html, /gsap@3\.12\.5\/dist\/gsap\.min\.js" defer/, 'GSAP should be loaded as a deferred progressive enhancement');
-  assert.match(html, /script\.js\?v=hero-readability-1" defer/, 'site script should be cache-busted for the GSAP/taste update');
-  assert.match(js, /function initGsapTasteMotion\(\)/, 'GSAP motion initializer missing');
-  assert.match(js, /prefersReducedMotion\(\) \|\| !gsap/, 'GSAP should disable itself for reduced-motion users or when the CDN fails');
-  assert.match(js, /var tiles = Array\.prototype\.slice\.call\(document\.querySelectorAll\("\.hero-gallery__tile"\)\)[\s\S]*var center = document\.querySelector\("\.hero-center"\)|var center = document\.querySelector\("\.hero-center"\)[\s\S]*var tiles = Array\.prototype\.slice\.call\(document\.querySelectorAll\("\.hero-gallery__tile"\)\)/, 'GSAP intro should collect the hero gallery and panel elements');
-  assert.match(js, /gsap\.timeline[\s\S]*\.fromTo\(tiles[\s\S]*\.fromTo\(center[\s\S]*\.fromTo\("\.hero-category-nav a"/, 'GSAP intro should choreograph the hero gallery, panel and quick links');
-  assert.match(js, /__deessesGsapMotion\s*=\s*\{ enabled:\s*true/, 'GSAP status should be exposed for browser verification');
-  assert.match(js, /window\.addEventListener\("scroll", requestHeroParallax, \{ passive: true \}\)/, 'hero parallax should be passive and requestAnimationFrame-backed');
+test('V2 root loads the current scripts and motion layer progressively', () => {
+  assert.match(html, /script\.js\?v=brand-logo-1/, 'site script should be loaded on the V2 root');
+  assert.match(html, /v2\.css\?v=concept-6/, 'root should load the current V2 stylesheet cache key');
+  assert.match(js, /function initGsapTasteMotion\(\)/, 'motion initializer should remain available as progressive enhancement');
+  assert.match(js, /prefersReducedMotion\(\) \|\| !gsap/, 'motion should disable itself for reduced-motion users or when GSAP is unavailable');
+  assert.match(js, /__deessesGsapMotion\s*=\s*\{ enabled:\s*true/, 'motion status should be exposed for browser verification when active');
 });
 
 test('design taste refinements keep the page polished without adding clutter', () => {

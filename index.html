@@ -3,33 +3,37 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DÉESSES Bakery — French Cakes, Pastries & Bakery · Hong Kong</title>
-  <meta name="description" content="DÉESSES Bakery — a Hong Kong bakery brand with branches in Kai Tak (Artemis), Kennedy Town, Tin Shui Wai and Sheung Shui. French-style cakes, handmade croissants and natural sourdough. Static demo site." />
-  <meta name="theme-color" content="#fbf3e4" />
+  <title>DÉESSES Bakery — Online Ordering</title>
+  <meta name="description" content="DÉESSES Bakery online ordering concept with cakes, pastries, bakery breads, branch highlights and WhatsApp pre-order flow." />
+  <meta name="theme-color" content="#fff7f2" />
   <link rel="canonical" href="https://sloppy0726.github.io/deesses-bakery-demo/" />
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="DÉESSES Bakery — French Cakes, Pastries & Bakery · Hong Kong" />
-  <meta property="og:description" content="Choose a DÉESSES Bakery branch, browse cakes, pastries and sourdough, then pre-order by WhatsApp." />
-  <meta property="og:image" content="https://sloppy0726.github.io/deesses-bakery-demo/assets/unicorn.jpg" />
+  <meta property="og:title" content="DÉESSES Bakery — Online Ordering" />
+  <meta property="og:description" content="Browse DÉESSES cakes, pastries and bakery branches, then pre-order by WhatsApp." />
+  <meta property="og:image" content="https://sloppy0726.github.io/deesses-bakery-demo/assets/front-page-bakery-scene.jpg" />
   <meta property="og:url" content="https://sloppy0726.github.io/deesses-bakery-demo/" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="DÉESSES Bakery — Hong Kong bakery demo" />
-  <meta name="twitter:description" content="Browse branch-specific cakes, pastries and bakery items, then send a prefilled WhatsApp enquiry." />
-  <meta name="twitter:image" content="https://sloppy0726.github.io/deesses-bakery-demo/assets/unicorn.jpg" />
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23fbf3e4'/%3E%3Ctext x='50%25' y='56%25' dominant-baseline='middle' text-anchor='middle' font-size='38'%3E%E2%9D%80%3C/text%3E%3C/svg%3E" />
-  <link rel="apple-touch-icon" href="assets/unicorn.jpg" />
-  <link rel="preload" as="image" href="assets/unicorn.jpg" />
+  <meta name="twitter:title" content="DÉESSES Bakery — Online Ordering" />
+  <meta name="twitter:description" content="Browse DÉESSES cakes, pastries and bakery branches, then pre-order by WhatsApp." />
+  <meta name="twitter:image" content="https://sloppy0726.github.io/deesses-bakery-demo/assets/front-page-bakery-scene.jpg" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23fff7f2'/%3E%3Ctext x='50%25' y='56%25' dominant-baseline='middle' text-anchor='middle' font-size='34'%3E%E2%99%A1%3C/text%3E%3C/svg%3E" />
+  <link rel="apple-touch-icon" href="assets/deesses-instagram-logo.jpg" />
+  <link rel="preload" as="image" href="assets/front-page-bakery-scene.jpg" />
+  <link rel="preload" as="image" href="assets/deconstructed-cake-placeholder.jpg" />
+  <link rel="preload" as="image" href="assets/mini.jpg" />
+  <link rel="preload" as="image" href="assets/strawberry.jpg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css?v=brand-logo-1" />
+  <link rel="stylesheet" href="v2.css?v=concept-6" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Bakery",
     "name": "DÉESSES Bakery",
     "url": "https://sloppy0726.github.io/deesses-bakery-demo/",
-    "image": "https://sloppy0726.github.io/deesses-bakery-demo/assets/unicorn.jpg",
+    "image": "https://sloppy0726.github.io/deesses-bakery-demo/assets/front-page-bakery-scene.jpg",
     "telephone": "+85268128098",
     "sameAs": ["https://www.instagram.com/deesses_bakery/"],
     "servesCuisine": ["French pastry", "Bakery", "Cake"],
@@ -42,55 +46,43 @@
   }
   </script>
 </head>
-<body>
-  <a class="skip-link" href="#menu" data-i18n="skipMenu">Skip to menu</a>
-  <!-- Sticky glass navigation -->
-  <header class="nav" id="nav">
-    <nav class="nav__inner" aria-label="Primary">
-      <a href="#top" class="nav__brand">
-        <img class="nav__mark nav__logo" src="assets/deesses-instagram-logo.jpg" alt="DÉESSES Bakery logo" width="48" height="48" />
-        <span class="nav__name">DÉESSES<small>Bakery</small></span>
+<body class="v2-site">
+  <a class="skip-link" href="#branches">Skip to content</a>
+
+  <header class="nav v2-nav" id="nav">
+    <nav class="nav__inner v2-nav__inner" aria-label="Primary">
+      <a href="#top" class="nav__brand v2-brand">
+        <img class="nav__mark nav__logo v2-brand__logo" src="assets/deesses-instagram-logo.jpg" alt="DÉESSES Bakery logo" width="54" height="54" />
+        <span class="nav__name v2-brand__name">DÉESSES<small>Bakery</small></span>
       </a>
-      <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="primaryNavLinks" data-nav-toggle>
+      <button class="nav__toggle v2-nav__toggle" type="button" aria-expanded="false" aria-controls="primaryNavLinks" data-nav-toggle>
         <span class="sr-only">Open navigation</span>
         <span aria-hidden="true"></span>
       </button>
-      <ul class="nav__links" id="primaryNavLinks">
-        <li><a href="#branches" data-i18n="branches">Branches</a></li>
-        <li><a href="#signature">Artemis</a></li>
-        <li><a href="#craft" data-i18n="craft">Craft</a></li>
-        <li><a href="#menu" data-i18n="menu">Menu</a></li>
+      <ul class="nav__links v2-nav__links" id="primaryNavLinks">
+        <li><a href="#top">Home</a></li>
+        <li><a href="v2-menu.html?cat=cake#menu" data-hero-filter="cake">Cakes</a></li>
+        <li><a href="v2-menu.html?cat=pastry#menu" data-hero-filter="pastry">Pastries</a></li>
+        <li><a href="v2-menu.html?cat=bakery#menu" data-hero-filter="bakery">Bakery</a></li>
         <li><a href="#order" data-i18n="order">Order</a></li>
+        <li><a href="#branches" data-i18n="branches">Branches</a></li>
       </ul>
-      <div class="language-switch" aria-label="Language" data-i18n-aria="languageLabel">
+      <div class="language-switch v2-language" aria-label="Language" data-i18n-aria="languageLabel">
         <button type="button" data-language="en" aria-pressed="false"><span>EN</span></button>
         <button type="button" data-language="zh" aria-pressed="false"><span>繁</span></button>
       </div>
-      <a href="https://www.instagram.com/deesses_bakery/" class="nav__cta" target="_blank" rel="noopener">
-        <span class="ig-mark" aria-hidden="true"></span>
-        @deesses_bakery
-      </a>
+      <a href="#order" class="nav__cta v2-order-pill">Order Now <span aria-hidden="true">♡</span></a>
     </nav>
   </header>
 
-  <aside class="social-float" aria-label="Quick social links" data-i18n-aria="quickSocialLinks">
-    <button class="social-trigger" type="button" aria-haspopup="true" aria-expanded="false" data-social-trigger>
-      <svg class="social-trigger__ig" aria-hidden="true" viewBox="0 0 24 24" focusable="false">
-        <rect x="3.2" y="3.2" width="17.6" height="17.6" rx="5.2"></rect>
-        <circle cx="12" cy="12" r="4.15"></circle>
-        <circle class="social-trigger__ig-dot" cx="17.35" cy="6.85" r="1.15"></circle>
-      </svg>
+  <aside class="social-float v2-social-float" aria-label="Quick social links" data-i18n-aria="quickSocialLinks">
+    <button class="social-trigger v2-social-trigger" type="button" aria-haspopup="true" aria-expanded="false" data-social-trigger>
+      <span class="v2-social-trigger__icon" aria-hidden="true">♡</span>
       <span class="social-trigger__label" data-i18n="socialLabel">Social</span>
     </button>
     <div class="social-menu" role="menu">
       <a role="menuitem" href="https://www.instagram.com/deesses_bakery/" target="_blank" rel="noopener">
-        <span class="social-menu__ig" aria-hidden="true">
-          <svg viewBox="0 0 24 24" focusable="false">
-            <rect x="3.2" y="3.2" width="17.6" height="17.6" rx="5.2"></rect>
-            <circle cx="12" cy="12" r="4.15"></circle>
-            <circle cx="17.35" cy="6.85" r="1.15"></circle>
-          </svg>
-        </span>
+        <span class="social-icon" aria-hidden="true">◎</span>
         <span><strong>Instagram</strong><small data-i18n="socialInstagramHint">Latest cakes / DM pre-order</small></span>
       </a>
       <a role="menuitem" href="https://wa.me/85268128098" target="_blank" rel="noopener">
@@ -98,260 +90,216 @@
         <span><strong>WhatsApp</strong><small data-i18n="socialWhatsappHint">Message to pre-order</small></span>
       </a>
       <a role="menuitem" href="#social">
-        <span class="social-icon" aria-hidden="true">♡</span>
+        <span class="social-icon" aria-hidden="true">✧</span>
         <span><strong data-i18n="socialGalleryTitle">Social gallery</strong><small data-i18n="socialGalleryHint">Preview posts and updates</small></span>
       </a>
     </div>
   </aside>
 
   <main id="top">
-    <!-- Hero -->
-    <section class="hero hero--gallery" id="hero">
-      <div class="hero-gallery" aria-hidden="true">
-        <article class="hero-gallery__tile hero-gallery__tile--one">
-          <img src="assets/unicorn.jpg" alt="" width="320" height="320" decoding="async" fetchpriority="high" />
-          <span><strong>Celebration Cakes</strong><small>生日 · 派對 · 節日</small></span>
-        </article>
-        <article class="hero-gallery__tile hero-gallery__tile--two">
-          <img src="assets/croissant.jpg" alt="" width="320" height="320" decoding="async" loading="lazy" />
-          <span><strong>French Pastries</strong><small>牛角酥 · 圓酥</small></span>
-        </article>
-        <article class="hero-gallery__tile hero-gallery__tile--three">
-          <img src="assets/mini.jpg" alt="" width="320" height="320" decoding="async" loading="lazy" />
-          <span><strong>Mini Cakes</strong><small>散水餅 · 分享盒</small></span>
-        </article>
-        <article class="hero-gallery__tile hero-gallery__tile--four">
-          <img src="assets/sourdough.jpg" alt="" width="320" height="320" decoding="async" loading="lazy" />
-          <span><strong>Bakery</strong><small>酸種包 · 貝果</small></span>
-        </article>
-        <article class="hero-gallery__tile hero-gallery__tile--five">
-          <img src="assets/rose.jpg" alt="" width="320" height="320" decoding="async" loading="lazy" />
-          <span><strong>Seasonal Gifts</strong><small>玫瑰 · 香橙 · 限定</small></span>
-        </article>
-      </div>
-
-      <div class="hero-center">
-        <p class="eyebrow" data-i18n="heroEyebrow">DÉESSES · Artemis by Deesses Bakery · Hong Kong</p>
-        <h1 class="hero__title" data-i18n="heroTitle">Goddess-made<br />cakes &amp; pastries.</h1>
-        <p class="hero__zh" lang="zh-Hant" data-i18n="heroSub">French cakes · handmade croissants · natural sourdough</p>
-        <form class="hero-search" role="search" aria-label="Search DÉESSES menu" data-i18n-aria="searchMenu" data-hero-search>
+    <section class="hero v2-hero" id="hero">
+      <div class="v2-hero__content hero-center">
+        <p class="v2-script">Online Ordering</p>
+        <h1 class="v2-hero__title">Order Your<br />Sweet Moments</h1>
+        <div class="v2-flourish" aria-hidden="true"><span></span><strong>✦</strong><span></span></div>
+        <p class="v2-hero__copy">Handcrafted cakes, pastries and bakery breads. Pick your branch, choose favourites, then pre-order by WhatsApp.</p>
+        <form class="hero-search v2-search" role="search" aria-label="Search DÉESSES menu" data-i18n-aria="searchMenu" data-hero-search>
           <label class="sr-only" for="heroSearchInput" data-i18n="searchMenu">Search menu</label>
           <input id="heroSearchInput" type="search" placeholder="Search menu" data-i18n-placeholder="searchMenu" autocomplete="off" />
           <button type="submit" data-i18n="searchButton">Search</button>
         </form>
-        <div class="hero-category-nav" aria-label="Quick menu categories">
-          <a href="#branches" data-i18n="chooseBranch">Choose branch</a>
-          <a href="#craft" data-i18n="cakeCraft">Cake craft</a>
-          <a href="#menu" data-hero-filter="cake" data-i18n="cakes">Cakes</a>
-          <a href="#menu" data-hero-filter="pastry" data-i18n="pastries">Pastries</a>
-          <a href="#menu" data-hero-filter="bakery" data-i18n="bakery">Bakery</a>
-          <a href="#order" data-i18n="preOrder">Pre-order</a>
+        <div class="v2-hero__actions">
+          <a class="btn btn--primary v2-button v2-button--primary" href="v2-menu.html#menu">Browse Menu <span aria-hidden="true">♡</span></a>
+          <a class="btn btn--ghost v2-button v2-button--ghost" href="#how-it-works">How It Works</a>
         </div>
       </div>
-
-      <p class="hero__fine" data-i18n="heroFine">Unofficial preview using temporary images · replace with approved assets before delivery.</p>
-    </section>
-
-    <!-- Branches -->
-    <section class="branches" id="branches">
-      <div class="section__head">
-        <p class="eyebrow" data-i18n="branchEyebrow">Choose Your Branch</p>
-        <h2 data-i18n="branchTitle">Four counters, one brand.</h2>
-        <p class="section__sub" data-i18n="branchSub">
-          Tap <strong>Artemis at Kai Tak</strong> to jump into the purple signature counter first;
-          the other branch cards take you straight to their filtered menu.
-        </p>
-      </div>
-      <div class="branch-grid" id="branchGrid">
-        <!-- Branch cards injected by script.js -->
+      <div class="hero-gallery v2-hero__visual" aria-hidden="true">
+        <figure class="v2-hero-photo v2-hero-photo--cake hero-gallery__tile"><img src="assets/strawberry.jpg" alt="" width="520" height="520" fetchpriority="high" /></figure>
+        <figure class="v2-hero-photo v2-hero-photo--berry hero-gallery__tile"><img src="assets/mini.jpg" alt="" width="440" height="440" /></figure>
+        <figure class="v2-hero-photo v2-hero-photo--gift hero-gallery__tile"><img src="assets/orange.jpg" alt="" width="360" height="360" /></figure>
+        <figure class="v2-hero-photo v2-hero-photo--tart hero-gallery__tile"><img src="assets/croissant.jpg" alt="" width="260" height="260" /></figure>
       </div>
     </section>
 
-    <!-- Signature -->
-    <section class="signature" id="signature">
-      <div class="signature__inner">
-        <p class="eyebrow eyebrow--light" data-i18n="signatureEyebrow">Artemis · Kai Tak signature</p>
-        <h2>Artemis<span class="signature__by"> by Deesses Bakery</span></h2>
-        <p class="signature__lead" data-i18n="signatureLead">
-          At <strong>AIRSIDE, Kai Tak</strong>, Artemis pairs high-quality bread baked fresh daily
-          with an elegant, gift-ready vibe — a stronger pink-and-purple, Instagram aesthetic and a
-          handful of signature bakes.
-        </p>
-        <ul class="signature__list">
-          <li><button type="button" class="signature__product" data-signature-product="pistachio-mochi-croissant"><span>🌰</span> Pistachio mochi croissant · 開心果麻糬牛角酥 <em>signature</em></button></li>
-          <li><button type="button" class="signature__product" data-signature-product="50cm-sausage-pastry"><span>🌭</span> 50cm sausage pastry · 50cm 腸仔酥</button></li>
-          <li><button type="button" class="signature__product" data-signature-product="mini-rainbow-croissants"><span>🌈</span> Mini rainbow croissants · 迷你彩虹牛角酥</button></li>
-          <li><button type="button" class="signature__product" data-signature-product="bear-cake"><span>🧸</span> Bear cake · 小熊蛋糕</button></li>
+    <section class="v2-category-dock hero-category-nav" aria-label="Quick order categories">
+      <a href="v2-menu.html?cat=cake#menu" data-hero-filter="cake"><span>♧</span><strong>Cakes</strong></a>
+      <a href="v2-menu.html?cat=pastry#menu" data-hero-filter="pastry"><span>♢</span><strong>Pastries</strong></a>
+      <a href="v2-menu.html?cat=bakery#menu" data-hero-filter="bakery"><span>◌</span><strong>Bakery Breads</strong></a>
+      <a href="v2-menu.html#menu"><span>□</span><strong>Seasonal Gifts</strong></a>
+      <a href="#order"><span>◇</span><strong>Custom Orders</strong></a>
+    </section>
+
+    <section class="branches v2-branches" id="branches">
+      <div class="section__head v2-section-head">
+        <h2>Choose a pickup branch</h2>
+        <p class="section__sub">Four Hong Kong counters share one menu system. Tap a branch to filter the products and prefill your order enquiry.</p>
+      </div>
+      <div class="branch-grid v2-branch-grid" id="branchGrid" aria-live="polite"></div>
+    </section>
+
+    <section class="signature v2-signature" id="signature">
+      <div class="signature__copy v2-signature__copy">
+        <p class="v2-script">Artemis Signature</p>
+        <h2>Gift-ready bakes from Kai Tak.</h2>
+        <p>Artemis at AIRSIDE leads with pink-purple gift energy, fresh breads, mochi croissants and celebration cakes.</p>
+        <a class="btn btn--primary v2-button v2-button--primary" href="v2-menu.html?branch=kaitak&cat=pastry#menu" data-hero-filter="pastry">View Artemis picks</a>
+      </div>
+      <div class="signature__visual v2-signature__visual">
+        <img src="assets/croissant.jpg" alt="Croissants from DÉESSES Bakery" width="520" height="420" loading="lazy" />
+        <ul class="signature-list v2-signature-list">
+          <li><button type="button" data-signature-product="pistachio-mochi-croissant">Pistachio mochi croissant</button></li>
+          <li><button type="button" data-signature-product="rainbow-croissants">Mini rainbow croissants</button></li>
+          <li><button type="button" data-signature-product="bear-cake">Bear cake</button></li>
         </ul>
-        <a href="#menu" class="btn btn--primary" data-i18n="viewArtemis">View Artemis products</a>
       </div>
     </section>
 
+    <section class="v2-menu-gateway" id="menu-preview" aria-labelledby="menuGatewayTitle">
+      <div class="v2-section-head">
+        <p class="v2-script">Menu Preview</p>
+        <h2 id="menuGatewayTitle">Products have their own page.</h2>
+        <p class="section__sub">To keep the front page clean, cakes, pastries and bakery breads now live in a dedicated catalogue with filters and WhatsApp ordering.</p>
+      </div>
+      <div class="v2-menu-gateway__cards" aria-label="Product categories">
+        <a href="v2-menu.html?cat=cake#menu"><img src="assets/strawberry.jpg" alt="" width="420" height="320" loading="lazy" /><span>訂購蛋糕</span><strong>Cakes</strong></a>
+        <a href="v2-menu.html?cat=pastry#menu"><img src="assets/croissant.jpg" alt="" width="420" height="320" loading="lazy" /><span>特快訂購</span><strong>Pastries</strong></a>
+        <a href="v2-menu.html?cat=bakery#menu"><img src="assets/sourdough.jpg" alt="" width="420" height="320" loading="lazy" /><span>麵包及包裝產品</span><strong>Bakery</strong></a>
+        <a href="v2-menu.html#menu"><img src="assets/mini.jpg" alt="" width="420" height="320" loading="lazy" /><span>所有產品</span><strong>Full menu</strong></a>
+      </div>
+      <a class="v2-button v2-button--primary v2-menu-gateway__cta" href="v2-menu.html#menu">Open product menu</a>
+    </section>
 
-    <!-- Cake craft animation -->
-    <section class="craft" id="craft">
-      <div class="craft__inner">
-        <div class="craft__copy">
-          <p class="eyebrow" data-i18n="cakeCraft">Cake craft</p>
-          <h2 data-i18n="craftTitle">Tap to pull the celebration cake apart.</h2>
-          <p class="section__sub" data-i18n="craftSub">
-            A playful exploded-view moment shows how celebration cakes come together — candle, berries, cream, sponge and plate —
-            before everything snaps back into a gift-ready finish.
-          </p>
-          <div class="craft__controls" aria-label="Cake assembly controls">
-            <button type="button" class="btn btn--primary" data-cake-action="explode" data-i18n="explode">Explode</button>
-            <button type="button" class="btn btn--ghost" data-cake-action="assemble" data-i18n="assemble">Assemble</button>
-            <button type="button" class="btn btn--ghost" data-cake-action="replay" data-i18n="replay">Replay</button>
-          </div>
-          <p class="craft__status" id="cakeStatus" aria-live="polite" data-i18n="cakeAssembled">Cake assembled</p>
+    <section class="order v2-order" id="order">
+      <aside class="v2-inspiration-card">
+        <img src="assets/rose.jpg" alt="Pink celebration cake inspiration" width="420" height="520" loading="lazy" />
+        <div>
+          <h3>Need inspiration?</h3>
+          <p>Browse the gallery first, then send your cake idea through WhatsApp or Instagram DM.</p>
+          <a class="v2-button v2-button--ghost" href="#social">View Cake Gallery</a>
         </div>
+      </aside>
+      <form class="v2-custom-form" data-v2-custom-order>
+        <p class="v2-script">Custom Cake Order</p>
+        <h2>Design your perfect cake.</h2>
+        <div class="v2-form-grid">
+          <label>Cake type<select name="cakeType"><option>Celebration Cake</option><option>Fruit Cake</option><option>Seasonal Gift</option><option>Custom Order</option></select></label>
+          <label>Size<select name="size"><option>6 inch (serves 6-8)</option><option>4 inch</option><option>5 inch</option><option>8 inch</option></select></label>
+          <label>Flavour<select name="flavour"><option>Vanilla and Strawberry</option><option>White Peach</option><option>Rose Raspberry</option><option>Chocolate</option></select></label>
+          <label>Pickup date<input name="pickupDate" type="date" /></label>
+        </div>
+        <fieldset class="v2-radio-row">
+          <legend>Pickup or delivery</legend>
+          <label><input type="radio" name="method" value="Pickup" checked /> Pickup</label>
+          <label><input type="radio" name="method" value="Delivery" /> Delivery</label>
+        </fieldset>
+        <label>Message on cake<input name="message" type="text" placeholder="Happy Birthday" /></label>
+        <label>Additional notes<textarea name="notes" rows="3" placeholder="Allergies, colours, character theme"></textarea></label>
+        <button class="v2-button v2-button--primary v2-submit" type="submit">Send Custom Order</button>
+      </form>
+      <aside class="v2-order-info">
+        <h3>Ordering Information</h3>
+        <ul>
+          <li><strong>Order lead time</strong><span>Please order at least 48 hours in advance.</span></li>
+          <li><strong>Pickup and confirmation</strong><span>The shop confirms availability, branch and final price.</span></li>
+          <li><strong>Delivery</strong><span>Delivery may be available by request for selected areas.</span></li>
+          <li><strong>Questions?</strong><span>Message the team before ordering.</span></li>
+        </ul>
+        <a class="v2-button v2-button--primary" href="https://wa.me/85268128098" target="_blank" rel="noopener">Order via WhatsApp</a>
+        <a class="v2-button v2-button--ghost" href="https://www.instagram.com/deesses_bakery/" target="_blank" rel="noopener">Send IG DM</a>
+      </aside>
+    </section>
 
-        <div class="craft__panel">
-          <div class="craft__shot-meta" aria-label="Design inspiration metadata">
-            <span>🍰 Layered cake</span>
-            <span>♡ 436 posts</span>
-            <span>👁 6.2k followers</span>
-          </div>
-          <svg class="cake-assembly" viewBox="0 0 520 520" role="img" aria-labelledby="cakeAssemblyTitle cakeAssemblyDesc">
-            <title id="cakeAssemblyTitle">Animated exploded-view celebration cake</title>
-            <desc id="cakeAssemblyDesc">A cake separates into candle, berries, cream, sponge and plate layers, then reassembles.</desc>
-            <defs>
-              <linearGradient id="cakePlateGrad" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#f7d7e7"/></linearGradient>
-              <linearGradient id="cakeCreamGrad" x1="0" x2="1"><stop offset="0" stop-color="#fffdf6"/><stop offset="1" stop-color="#ffc3dc"/></linearGradient>
-              <linearGradient id="cakeSpongeGrad" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#ffd989"/><stop offset="1" stop-color="#d98642"/></linearGradient>
-            </defs>
-            <ellipse class="cake-shadow" cx="260" cy="402" rx="150" ry="32" fill="#53314b"/>
-            <g class="cake-piece cake-plate" data-piece="plate"><ellipse cx="260" cy="382" rx="162" ry="36" fill="url(#cakePlateGrad)"/><ellipse cx="260" cy="374" rx="120" ry="19" fill="#fff8fb" opacity=".82"/></g>
-            <g class="cake-piece cake-sponge cake-sponge--bottom" data-piece="bottom"><path d="M150 286h220v72c0 21-49 38-110 38s-110-17-110-38z" fill="url(#cakeSpongeGrad)"/><ellipse cx="260" cy="286" rx="110" ry="38" fill="#ffd98a"/><path d="M178 320c28 18 139 17 166-2" fill="none" stroke="#b76535" stroke-width="5" opacity=".35" stroke-linecap="round"/></g>
-            <g class="cake-piece cake-cream" data-piece="cream"><ellipse cx="260" cy="278" rx="116" ry="34" fill="url(#cakeCreamGrad)"/><path d="M154 278c14 18 29 23 46 10 16 19 37 19 54 2 18 17 44 16 61-1 19 14 37 12 52-10v28c-8 24-205 25-213 0z" fill="#fff8f2"/></g>
-            <g class="cake-piece cake-sponge cake-sponge--top" data-piece="middle"><path d="M170 214h180v58c0 18-40 32-90 32s-90-14-90-32z" fill="url(#cakeSpongeGrad)"/><ellipse cx="260" cy="214" rx="90" ry="32" fill="#ffd98a"/></g>
-            <g class="cake-piece cake-frosting" data-piece="frosting"><path d="M166 207c9-35 43-59 94-59s85 24 94 59c-15 25-174 25-188 0z" fill="url(#cakeCreamGrad)"/><ellipse cx="260" cy="207" rx="94" ry="32" fill="#fff8f2"/><path d="M184 223c18 15 38 14 55 0 18 14 41 14 61 0 18 14 37 12 54-2" fill="none" stroke="#ff8fba" stroke-width="6" stroke-linecap="round" opacity=".46"/></g>
-            <g class="cake-piece cake-berries" data-piece="berries"><circle cx="218" cy="174" r="18" fill="#f14262"/><circle cx="257" cy="158" r="21" fill="#ff4f75"/><circle cx="302" cy="174" r="18" fill="#e93458"/><circle cx="238" cy="190" r="12" fill="#ff7da0"/><circle cx="280" cy="190" r="12" fill="#ff7da0"/></g>
-            <g class="cake-piece cake-candle" data-piece="candle"><rect x="251" y="92" width="18" height="68" rx="6" fill="#fff"/><path d="M251 100h18M251 118h18M251 136h18" stroke="#ff8fba" stroke-width="5"/><path d="M260 72c22 27-8 38 0 0z" fill="#ffb238"/><path d="M260 80c9 14-4 20 0 0z" fill="#fff4a8"/></g>
-            <g class="cake-guide" aria-hidden="true">
-              <line x1="124" y1="145" x2="207" y2="174"/><line x1="390" y1="145" x2="317" y2="190"/><line x1="112" y1="308" x2="154" y2="278"/><line x1="408" y1="344" x2="370" y2="286"/>
-            </g>
-            <g class="cake-labels" aria-hidden="true">
-              <text x="66" y="142">berries</text><text x="378" y="142">cream</text><text x="58" y="316">sponge</text><text x="404" y="352">plate</text>
-            </g>
-          </svg>
+    <section class="craft v2-craft" id="craft" data-cake-mode="assembled">
+      <div class="craft__copy v2-craft__copy">
+        <h2>Layer-by-layer cake craft</h2>
+        <p>This placeholder uses the supplied pistachio mochi cake layer guide while the custom animation is refined.</p>
+        <div class="craft__controls" aria-label="Cake assembly controls">
+          <button class="v2-button v2-button--ghost" type="button" data-cake-action="explode">Explode</button>
+          <button class="v2-button v2-button--ghost" type="button" data-cake-action="assemble">Assemble</button>
+          <button class="v2-button v2-button--primary" type="button" data-cake-action="replay">Replay</button>
+        </div>
+        <p class="craft__status" id="cakeStatus" aria-live="polite">Cake assembled</p>
+      </div>
+      <div class="craft__panel v2-cake-panel">
+        <figure class="v2-cake-placeholder">
+          <img src="assets/deconstructed-cake-placeholder.jpg" alt="DÉESSES pistachio mochi cake layer guide placeholder showing pistachio cream, whipped cream, vanilla sponge, mochi filling and pistachio crumble" width="1024" height="1280" loading="lazy" />
+          <figcaption>Placeholder layer guide · Pistachio mochi cake</figcaption>
+        </figure>
+        <div class="cake-stage v2-cake-stage--legacy" aria-hidden="true" aria-label="Animated exploded-view celebration cake">
+          <div class="cake-piece cake-piece--candle">✦</div>
+          <div class="cake-piece cake-piece--berries"></div>
+          <div class="cake-piece cake-piece--cream"></div>
+          <div class="cake-piece cake-piece--sponge"></div>
+          <div class="cake-piece cake-piece--plate"></div>
         </div>
       </div>
     </section>
 
-    <!-- Menu -->
-    <section class="menu" id="menu">
-      <div class="section__head">
-        <p class="eyebrow" data-i18n="menuEyebrow">The Menu</p>
-        <h2 data-i18n="menuTitle">Cakes, pastries &amp; bakery.</h2>
-        <p class="section__sub" data-i18n="menuSub">
-          Filter by category and by branch. Prices marked
-          <em>“from public posts”</em> come from older social posts and may have changed.
-        </p>
-      </div>
-
-      <div class="filters" role="group" aria-label="Menu filters">
-        <div class="filters__row" id="categoryFilters" aria-label="Filter by category">
-          <span class="filters__label" data-i18n="category">Category</span>
-          <!-- chips injected -->
-        </div>
-        <div class="filters__row" id="branchFilters" aria-label="Filter by branch">
-          <span class="filters__label" data-i18n="branch">Branch</span>
-          <!-- chips injected -->
-        </div>
-      </div>
-
-      <div class="menu__grid" id="menuGrid" aria-live="polite">
-        <!-- Product cards injected by script.js -->
-      </div>
-      <p class="menu__empty" id="menuEmpty" hidden data-i18n="noItems">No items match this filter.</p>
-
-      <p class="note" data-i18n="noteAssets">
-        Images are temporary local preview files and should be replaced with
-        approved assets before delivery. Seasonal prices are past examples,
-        not current pricing.
-      </p>
+    <section class="v2-how" id="how-it-works">
+      <h2>How ordering works</h2>
+      <ol>
+        <li><strong>Choose</strong><span>Select products from cakes, pastries or bakery breads.</span></li>
+        <li><strong>Plan</strong><span>Pick your branch, size, date and message details.</span></li>
+        <li><strong>Confirm</strong><span>Send the WhatsApp enquiry for shop confirmation.</span></li>
+        <li><strong>Enjoy</strong><span>Pick up fresh bakes at your selected counter.</span></li>
+      </ol>
     </section>
 
-    <!-- Order -->
-    <section class="order" id="order">
-      <div class="section__head">
-        <p class="eyebrow" data-i18n="orderEyebrow">Pre-order</p>
-        <h2 data-i18n="orderTitle">Reserve before you visit.</h2>
-        <p class="section__sub" data-i18n="orderSub">
-          Cakes and festive bakes are made to order in limited daily batches —
-          message ahead to reserve.
-        </p>
+    <section class="social v2-social" id="social">
+      <div class="social__text v2-social__head">
+        <h2>Follow our creations</h2>
+        <p><a href="https://www.instagram.com/deesses_bakery/" target="_blank" rel="noopener">@deesses_bakery</a></p>
       </div>
-      <div class="order__cards">
-        <a class="order-card order-card--ig" href="https://www.instagram.com/deesses_bakery/" target="_blank" rel="noopener">
-          <span class="order-card__icon ig-mark ig-mark--lg" aria-hidden="true"></span>
-          <h3>Instagram DM</h3>
-          <p>@deesses_bakery</p>
-          <span class="order-card__hint" data-i18n="dmHint">Send a direct message</span>
-        </a>
-        <a class="order-card order-card--wa" href="https://wa.me/85268128098?text=%E4%BD%A0%E5%A5%BD%20D%C3%89ESSES%20Bakery%EF%BC%8C%E6%88%91%E6%83%B3%E6%9F%A5%E8%A9%A2%2F%E9%A0%90%E8%A8%82%E7%94%A2%E5%93%81%E5%8F%8A%E5%8F%96%E8%B2%A8%E5%AE%89%E6%8E%92%E3%80%82" target="_blank" rel="noopener">
-          <span class="order-card__icon order-card__icon--wa" aria-hidden="true">✆</span>
-          <h3>WhatsApp</h3>
-          <p>6812&nbsp;8098</p>
-          <span class="order-card__hint" data-i18n="waHint">Message to pre-order</span>
-        </a>
-      </div>
-      <p class="note" data-i18n="orderNote">Pre-order channel per the brand's public Instagram bio. Availability and lead times vary by branch and season.</p>
-    </section>
-
-    <!-- Instagram social proof -->
-    <section class="social" id="social">
-      <div class="social__inner">
-        <div class="social__text">
-          <p class="eyebrow" data-i18n="follow">Follow</p>
-          <h2>@deesses_bakery</h2>
-          <p class="social__lead" data-i18n="socialLead">
-            <strong>DÉESSES</strong> — Artemis by Deesses Bakery. Bakery. New flavours, seasonal
-            cakes and branch updates land on Instagram first.
-          </p>
-          <p class="social__counts" data-i18n="socialCounts"><strong>436</strong> posts · <strong>~6,250</strong> followers</p>
-          <a href="https://www.instagram.com/deesses_bakery/" class="btn btn--primary" target="_blank" rel="noopener">
-            <span class="ig-mark" aria-hidden="true"></span>
-            <span data-i18n="openInstagram">Open Instagram</span>
-          </a>
-        </div>
-        <div class="social__grid" id="socialGrid" aria-label="Instagram preview tiles">
-          <!-- preview tiles injected -->
-        </div>
-      </div>
+      <div class="social__grid v2-social-grid" id="socialGrid"></div>
     </section>
   </main>
 
-  <footer class="footer">
-    <div class="footer__inner">
-      <div class="footer__top">
-        <div>
-          <p class="footer__brand">DÉESSES Bakery</p>
-          <p class="footer__tag" data-i18n="footerTag">Artemis by Deesses Bakery · Hong Kong</p>
-        </div>
-        <a href="https://www.instagram.com/deesses_bakery/" class="footer__ig" target="_blank" rel="noopener">
-          <span class="ig-mark" aria-hidden="true"></span>
-          @deesses_bakery
+  <footer class="footer v2-footer" id="contact">
+    <div class="footer__inner v2-footer__inner">
+      <div>
+        <a href="#top" class="v2-brand v2-footer-brand">
+          <img class="v2-brand__logo" src="assets/deesses-instagram-logo.jpg" alt="DÉESSES Bakery logo" width="48" height="48" />
+          <span class="v2-brand__name">DÉESSES<small>Bakery</small></span>
         </a>
+        <p>An online cake and pastry ordering concept.</p>
       </div>
-
-      <div class="footer__branches" id="footerBranches">
-        <!-- compact branch contacts injected -->
-      </div>
-
-      <p class="footer__fine" data-i18n="footerFine">
-        <strong>Static demo site.</strong> This is an unofficial design demo built for presentation.
-        Branch names, addresses, phone numbers and the pre-order contact are taken from the brand's
-        public Instagram bio and public listings (OpenRice / AIRSIDE) for illustration. Seasonal
-        prices shown are drawn from older public posts and may have changed. Product images are
-        temporary local preview files and should be replaced with approved assets before
-        client delivery. Please confirm all hours, pricing and availability with the business directly.
-      </p>
+      <div class="footer__branches v2-footer-branches" id="footerBranches"></div>
+      <form class="v2-subscribe" action="https://wa.me/85268128098" target="_blank">
+        <label>Stay in the loop<input type="email" placeholder="Email address" /></label>
+        <button class="v2-button v2-button--primary" type="submit">Subscribe</button>
+      </form>
     </div>
+    <p class="v2-footer-note">Static design demo. Product images are temporary preview assets. Confirm all prices, availability and pickup details with the business directly.</p>
   </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
-  <script src="script.js?v=hero-readability-1" defer></script>
+  <script src="script.js?v=brand-logo-1"></script>
+  <script>
+    (function () {
+      var form = document.querySelector('[data-v2-custom-order]');
+      if (!form) return;
+      var date = form.querySelector('input[name="pickupDate"]');
+      if (date) {
+        var now = new Date();
+        var local = new Date(now.getTime() - now.getTimezoneOffset() * 60000);
+        date.min = local.toISOString().slice(0, 10);
+      }
+      form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        var data = new FormData(form);
+        var lines = [
+          '你好 DÉESSES Bakery，我想查詢自訂蛋糕：',
+          'Cake type: ' + (data.get('cakeType') || ''),
+          'Size: ' + (data.get('size') || ''),
+          'Flavour: ' + (data.get('flavour') || ''),
+          'Pickup date: ' + (data.get('pickupDate') || 'To be confirmed'),
+          'Method: ' + (data.get('method') || 'Pickup'),
+          'Message: ' + (data.get('message') || 'None'),
+          'Notes: ' + (data.get('notes') || 'None'),
+          '請確認供應、最終價錢及取貨安排，謝謝。'
+        ];
+        window.open('https://wa.me/85268128098?text=' + encodeURIComponent(lines.join('\n')), '_blank', 'noopener');
+      });
+    })();
+  </script>
 </body>
 </html>
