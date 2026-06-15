@@ -26,7 +26,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css?v=brand-logo-1" />
-  <link rel="stylesheet" href="site.css?v=concept-11" />
+  <link rel="stylesheet" href="site.css?v=concept-12" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -141,28 +141,37 @@
         <h2 id="productSpotlightTitle">Choose a spotlight collection.</h2>
         <p class="section__sub">Three clear product spotlights: celebration cakes, gift-ready pastries and everyday bakery breads. Pick the collection you want to view.</p>
       </div>
-      <div class="site-product-spotlight__grid" aria-label="Product spotlight categories">
-        <article class="site-product-spotlight__card site-product-spotlight__card--cake">
-          <img src="assets/strawberry.jpg" alt="Strawberry celebration cake with cream and fruit" width="520" height="460" loading="lazy" />
-          <div>
+      <div class="site-product-spotlight__stack" aria-label="Product spotlight categories">
+        <article class="site-product-spotlight__section site-product-spotlight__section--cake">
+          <div class="site-product-spotlight__photos" aria-label="Cake spotlight photos">
+            <img class="site-product-spotlight__photo site-product-spotlight__photo--main" src="assets/strawberry.jpg" alt="Strawberry celebration cake with cream and fruit" width="720" height="620" loading="lazy" />
+            <img class="site-product-spotlight__photo site-product-spotlight__photo--accent" src="assets/mini.jpg" alt="Mini cakes and petite cake selection" width="420" height="360" loading="lazy" />
+          </div>
+          <div class="site-product-spotlight__copy">
             <span class="site-product-spotlight__tag">Cake spotlight</span>
             <h3>Cakes</h3>
             <p>Celebration cakes, mini cakes and seasonal cake picks for birthdays and gifting.</p>
             <a class="site-button site-button--primary" href="cakes.html">View cakes</a>
           </div>
         </article>
-        <article class="site-product-spotlight__card site-product-spotlight__card--pastry">
-          <img src="assets/croissant.jpg" alt="Mochi croissants from DÉESSES Bakery" width="520" height="460" loading="lazy" />
-          <div>
+        <article class="site-product-spotlight__section site-product-spotlight__section--pastry site-product-spotlight__section--reverse">
+          <div class="site-product-spotlight__copy">
             <span class="site-product-spotlight__tag">Pastry spotlight</span>
             <h3>Pastries</h3>
             <p>Mochi croissants, petite pastries and polished gift-ready sweet bites.</p>
             <a class="site-button site-button--primary" href="pastries.html">View pastries</a>
           </div>
+          <div class="site-product-spotlight__photos" aria-label="Pastry spotlight photos">
+            <img class="site-product-spotlight__photo site-product-spotlight__photo--main" src="assets/croissant.jpg" alt="Mochi croissants from DÉESSES Bakery" width="720" height="620" loading="lazy" />
+            <img class="site-product-spotlight__photo site-product-spotlight__photo--accent" src="assets/mini.jpg" alt="Mini rainbow croissants and petite pastries" width="420" height="360" loading="lazy" />
+          </div>
         </article>
-        <article class="site-product-spotlight__card site-product-spotlight__card--bakery">
-          <img src="assets/sourdough.jpg" alt="Fresh sourdough and bakery breads" width="520" height="460" loading="lazy" />
-          <div>
+        <article class="site-product-spotlight__section site-product-spotlight__section--bakery">
+          <div class="site-product-spotlight__photos" aria-label="Bakery spotlight photos">
+            <img class="site-product-spotlight__photo site-product-spotlight__photo--main" src="assets/sourdough.jpg" alt="Fresh sourdough and bakery breads" width="720" height="620" loading="lazy" />
+            <img class="site-product-spotlight__photo site-product-spotlight__photo--accent" src="assets/front-page-bakery-scene.jpg" alt="DÉESSES bakery counter with fresh bakes" width="420" height="360" loading="lazy" />
+          </div>
+          <div class="site-product-spotlight__copy">
             <span class="site-product-spotlight__tag">Bakery spotlight</span>
             <h3>Bakery</h3>
             <p>Fresh breads and everyday bakery picks for shoppers who want something simple.</p>

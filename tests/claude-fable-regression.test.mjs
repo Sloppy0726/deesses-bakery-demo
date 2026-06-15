@@ -161,7 +161,7 @@ test('cake craft placeholder appears only on the front page', () => {
 
 test('root loads the current scripts and motion layer progressively', () => {
   assert.match(html, /script\.js\?v=brand-logo-1/, 'site script should be loaded on the root');
-  assert.match(html, /site\.css\?v=concept-11/, 'root should load the current site stylesheet cache key');
+  assert.match(html, /site\.css\?v=concept-12/, 'root should load the current site stylesheet cache key');
   assert.match(js, /function initGsapTasteMotion\(\)/, 'motion initializer should remain available as progressive enhancement');
   assert.match(js, /prefersReducedMotion\(\) \|\| !gsap/, 'motion should disable itself for reduced-motion users or when GSAP is unavailable');
   assert.match(js, /__deessesGsapMotion\s*=\s*\{ enabled:\s*true/, 'motion status should be exposed for browser verification when active');
@@ -188,9 +188,9 @@ test('Homepage separates category spotlights and cake-only custom ordering', () 
   assert.doesNotMatch(homeCopy, /full menu|Browse full menu/i, 'Homepage should not imply there is a full menu');
   assert.match(homeCopy, /href="cakes\.html#order"[^>]*data-i18n="order"/, 'Homepage Order nav should send shoppers to the cakes custom-order flow');
   assert.match(homeCopy, /href="cakes\.html"[^>]*>Cakes[\s\S]*href="pastries\.html"[^>]*>Pastries[\s\S]*href="bakery\.html"[^>]*>Bakery/, 'Homepage top nav category links should open dedicated category pages');
-  assert.match(homeCopy, /class="site-product-spotlight"[\s\S]*Choose a spotlight collection[\s\S]*site-product-spotlight__card--cake[\s\S]*View cakes[\s\S]*site-product-spotlight__card--pastry[\s\S]*View pastries[\s\S]*site-product-spotlight__card--bakery[\s\S]*View bakery/, 'Homepage product spotlight should present three clear category sections with direct category buttons');
+  assert.match(homeCopy, /class="site-product-spotlight"[\s\S]*Choose a spotlight collection[\s\S]*site-product-spotlight__section--cake[\s\S]*site-product-spotlight__photos[\s\S]*site-product-spotlight__copy[\s\S]*View cakes[\s\S]*site-product-spotlight__section--pastry site-product-spotlight__section--reverse[\s\S]*site-product-spotlight__copy[\s\S]*View pastries[\s\S]*site-product-spotlight__photos[\s\S]*site-product-spotlight__section--bakery[\s\S]*site-product-spotlight__photos[\s\S]*site-product-spotlight__copy[\s\S]*View bakery/, 'Homepage product spotlight should present three horizontal alternating category sections with direct category buttons');
   assert.doesNotMatch(homeCopy, /A cake worth stopping for|View cake spotlight|Browse full menu/, 'Old confusing single-product spotlight copy should be removed');
-  assert.match(siteCss, /\.site-product-spotlight__grid[\s\S]*grid-template-columns:\s*repeat\(3, minmax\(0, 1fr\)\)[\s\S]*\.site-product-spotlight__card/, 'Product spotlight should use a three-card category layout on desktop');
+  assert.match(siteCss, /\.site-product-spotlight__stack[\s\S]*\.site-product-spotlight__section[\s\S]*grid-template-columns:\s*minmax\(0, 1\.12fr\) minmax\(320px, 0\.88fr\)[\s\S]*\.site-product-spotlight__section--reverse[\s\S]*grid-template-columns:\s*minmax\(320px, 0\.88fr\) minmax\(0, 1\.12fr\)/, 'Product spotlight should use horizontal alternating image/text sections on desktop');
 
   assert.match(menuHtml, /<body class="site menu-page">/, 'separate product menu page should have the menu page body class');
   assert.match(menuHtml, /class="menu site-menu" id="menu"[\s\S]*id="categoryFilters"[\s\S]*id="branchFilters"[\s\S]*id="menuGrid"/, 'separate product menu page should keep filters and product grid');
