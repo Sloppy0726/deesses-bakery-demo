@@ -485,6 +485,7 @@
      ========================================================= */
   var body = document.body;
   var nav = document.getElementById("nav");
+  var CATEGORY_ROUTES = { cake: "cakes.html", pastry: "pastries.html", bakery: "bakery.html" };
   var activeBranch = "all";
   var activeCategory = "all";
   var activeSearch = "";
@@ -494,19 +495,34 @@
     return !!document.getElementById("menuGrid");
   }
 
+  function categoryRoute(cat) {
+    return CATEGORY_ROUTES[cat] || null;
+  }
+
+  function fixedCategoryPage() {
+    var cat = body && body.getAttribute("data-category-page");
+    return categoryRoute(cat) ? cat : null;
+  }
+
   function menuUrl(params) {
     params = params || {};
+    var route = categoryRoute(params.cat) || "menu.html";
     var q = new URLSearchParams();
-    if (params.cat && params.cat !== "all") q.set("cat", params.cat);
     if (params.branch && params.branch !== "all") q.set("branch", params.branch);
     if (params.search) q.set("q", params.search);
     var query = q.toString();
-    return "menu.html" + (query ? "?" + query : "") + "#menu";
+    return route + (query ? "?" + query : "") + "#menu";
   }
 
   function goToMenu(params) {
+    var fixedCat = fixedCategoryPage();
+    if (hasProductMenu() && fixedCat && params && params.cat && params.cat !== fixedCat) {
+      window.location.href = menuUrl(params);
+      return;
+    }
     if (hasProductMenu()) {
-      if (params && params.cat) activeCategory = params.cat;
+      if (fixedCat) activeCategory = fixedCat;
+      else if (params && params.cat) activeCategory = params.cat;
       if (params && params.branch) activeBranch = params.branch;
       if (params && Object.prototype.hasOwnProperty.call(params, "search")) activeSearch = params.search || "";
       syncChips();
@@ -521,11 +537,13 @@
 
   function applyInitialMenuParams() {
     if (!hasProductMenu()) return;
+    var fixedCat = fixedCategoryPage();
     var params = new URLSearchParams(window.location.search);
     var cat = params.get("cat");
     var branch = params.get("branch");
     var search = params.get("q");
-    if (cat === "cake" || cat === "pastry" || cat === "bakery") activeCategory = cat;
+    if (fixedCat) activeCategory = fixedCat;
+    else if (cat === "cake" || cat === "pastry" || cat === "bakery") activeCategory = cat;
     if (branchName(branch)) activeBranch = branch;
     if (search) activeSearch = search.trim().toLowerCase();
     var input = document.getElementById("heroSearchInput");
@@ -587,6 +605,7 @@
     var catRow = document.getElementById("categoryFilters");
     var brRow = document.getElementById("branchFilters");
     if (!catRow || !brRow) return;
+    var fixedCat = fixedCategoryPage();
     catRow.querySelectorAll("button").forEach(function (node) { node.remove(); });
     brRow.querySelectorAll("button").forEach(function (node) { node.remove(); });
     var catLabel = catRow.querySelector(".filters__label");
@@ -605,10 +624,14 @@
       return c;
     }
 
-    chip(catRow, "all", tx("all"), function () { selectCategory("all"); }, "cat");
-    CATEGORIES.forEach(function (c) {
-      chip(catRow, c.id, c.emoji + " " + (currentLanguage === "zh" ? c.labelZh : c.labelEn), function () { selectCategory(c.id); }, "cat");
-    });
+    catRow.hidden = !!fixedCat;
+    catRow.setAttribute("aria-hidden", fixedCat ? "true" : "false");
+    if (!fixedCat) {
+      chip(catRow, "all", tx("all"), function () { selectCategory("all"); }, "cat");
+      CATEGORIES.forEach(function (c) {
+        chip(catRow, c.id, c.emoji + " " + (currentLanguage === "zh" ? c.labelZh : c.labelEn), function () { selectCategory(c.id); }, "cat");
+      });
+    }
 
     chip(brRow, "all", tx("allBranches"), function () { selectBranch("all"); }, "br");
     BRANCHES.forEach(function (b) {

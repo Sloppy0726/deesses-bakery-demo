@@ -4,6 +4,9 @@ import { readFileSync } from 'node:fs';
 const html = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
 const homeCopy = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
 const menuHtml = readFileSync(new URL('../menu.html', import.meta.url), 'utf8');
+const cakesHtml = readFileSync(new URL('../cakes.html', import.meta.url), 'utf8');
+const pastriesHtml = readFileSync(new URL('../pastries.html', import.meta.url), 'utf8');
+const bakeryHtml = readFileSync(new URL('../bakery.html', import.meta.url), 'utf8');
 const js = readFileSync(new URL('../script.js', import.meta.url), 'utf8');
 const css = readFileSync(new URL('../styles.css', import.meta.url), 'utf8');
 const siteCss = readFileSync(new URL('../site.css', import.meta.url), 'utf8');
@@ -182,16 +185,29 @@ test('Homepage separates the product catalogue from the front page like a bakery
   assert.doesNotMatch(homeCopy, /id="branches"|id="branchGrid"|Choose a pickup branch/, 'Homepage should not render pickup branch selection');
   assert.doesNotMatch(homeCopy, /id="order"|data-custom-order|Custom Cake Order|Design your perfect cake/, 'Homepage should not render the custom cake order flow');
   assert.match(homeCopy, /href="menu\.html#order"[^>]*data-i18n="order"/, 'Homepage Order nav should send shoppers to the menu page order flow');
-  assert.match(homeCopy, /class="site-product-spotlight"[\s\S]*Product Spotlight[\s\S]*menu\.html\?cat=cake&q=strawberry#menu[\s\S]*menu\.html\?cat=pastry&q=mochi#menu[\s\S]*menu\.html\?cat=bakery&q=sourdough#menu/, 'Homepage should use a product spotlight section with filtered links to the menu page');
+  assert.match(homeCopy, /href="cakes\.html"[^>]*>Cakes[\s\S]*href="pastries\.html"[^>]*>Pastries[\s\S]*href="bakery\.html"[^>]*>Bakery/, 'Homepage top nav category links should open dedicated category pages, not the shared menu filter UI');
+  assert.match(homeCopy, /class="site-product-spotlight"[\s\S]*Product Spotlight[\s\S]*cakes\.html\?q=strawberry#menu[\s\S]*pastries\.html\?q=mochi#menu[\s\S]*bakery\.html\?q=sourdough#menu/, 'Homepage product spotlight should deep-link into dedicated category pages');
   assert.match(menuHtml, /<body class="site menu-page">/, 'separate product menu page should have the menu page body class');
+  assert.match(menuHtml, /href="cakes\.html"[^>]*>Cakes[\s\S]*href="pastries\.html"[^>]*>Pastries[\s\S]*href="bakery\.html"[^>]*>Bakery/, 'Menu top nav category links should open dedicated category pages');
   assert.match(menuHtml, /class="menu site-menu" id="menu"[\s\S]*id="categoryFilters"[\s\S]*id="branchFilters"[\s\S]*id="menuGrid"/, 'separate product menu page should keep filters and product grid');
   assert.match(menuHtml, /id="branches"|id="branchFilters"/, 'Menu page should keep branch filtering/selection controls');
   assert.match(menuHtml, /id="order"[\s\S]*data-custom-order[\s\S]*Custom Cake Order/, 'Menu page should keep the custom cake order flow');
+  [
+    ['cake', 'Cake Collection', cakesHtml],
+    ['pastry', 'Pastry Collection', pastriesHtml],
+    ['bakery', 'Bakery Collection', bakeryHtml]
+  ].forEach(([cat, heading, page]) => {
+    assert.match(page, new RegExp(`data-category-page="${cat}"`), `${heading} page should declare its fixed category`);
+    assert.match(page, new RegExp(`${heading}[\\s\\S]*id="categoryFilters"[^>]*hidden[^>]*aria-hidden="true"[\\s\\S]*id="branchFilters"`), `${heading} page should hide the all-category filter row but keep branch filtering`);
+    assert.match(page, /id="order"[\s\S]*data-custom-order[\s\S]*Custom Cake Order/, `${heading} page should keep the order flow`);
+  });
   assert.match(siteCss, /\.site-product-spotlight__stage[\s\S]*grid-template-columns:\s*minmax\(0, 1\.35fr\) minmax\(280px, 0\.65fr\)/, 'homepage product spotlight should use an asymmetric featured-product layout on desktop');
   assert.match(siteCss, /\.site-menu-hero[\s\S]*\.menu-page \.site-menu/, 'menu page should have a dedicated compact menu hero');
   assert.match(js, /function menuUrl\(params\)/, 'JS should build filtered menu URLs for cross-page navigation');
-  assert.match(js, /q\.set\("cat", params\.cat\)/, 'menu URL should include category filters');
+  assert.match(js, /CATEGORY_ROUTES\s*=\s*\{ cake:\s*"cakes\.html", pastry:\s*"pastries\.html", bakery:\s*"bakery\.html" \}/, 'JS should map product categories to dedicated static pages');
+  assert.match(js, /var route = categoryRoute\(params\.cat\) \|\| "menu\.html"/, 'menu URL should route category requests to dedicated category pages');
   assert.match(js, /q\.set\("branch", params\.branch\)/, 'menu URL should include branch filters');
   assert.match(js, /q\.set\("q", params\.search\)/, 'menu URL should include search filters');
-  assert.match(js, /function applyInitialMenuParams\(\)[\s\S]*params\.get\("cat"\)[\s\S]*params\.get\("branch"\)[\s\S]*params\.get\("q"\)/, 'menu page should read URL filters on load');
+  assert.match(js, /function fixedCategoryPage\(\)[\s\S]*data-category-page|body\.getAttribute\("data-category-page"\)/, 'category pages should lock the active category from body data');
+  assert.match(js, /function applyInitialMenuParams\(\)[\s\S]*fixedCategoryPage\(\)[\s\S]*params\.get\("branch"\)[\s\S]*params\.get\("q"\)/, 'menu/category pages should read route/category plus branch/search params on load');
 });
