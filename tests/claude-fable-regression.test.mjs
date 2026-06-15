@@ -179,9 +179,14 @@ test('Homepage separates the product catalogue from the front page like a bakery
   assert.doesNotMatch(homeCopy, /class="site-category-dock hero-category-nav"|aria-label="Quick order categories"/, 'Homepage should not render the deleted quick category strip');
   assert.doesNotMatch(siteCss, /\.site-category-dock/, 'deleted quick category strip CSS should not remain');
   assert.doesNotMatch(homeCopy, /id="menuGrid"/, 'Homepage should not render the full product grid');
+  assert.doesNotMatch(homeCopy, /id="branches"|id="branchGrid"|Choose a pickup branch/, 'Homepage should not render pickup branch selection');
+  assert.doesNotMatch(homeCopy, /id="order"|data-custom-order|Custom Cake Order|Design your perfect cake/, 'Homepage should not render the custom cake order flow');
+  assert.match(homeCopy, /href="menu\.html#order"[^>]*data-i18n="order"/, 'Homepage Order nav should send shoppers to the menu page order flow');
   assert.match(homeCopy, /class="site-product-spotlight"[\s\S]*Product Spotlight[\s\S]*menu\.html\?cat=cake&q=strawberry#menu[\s\S]*menu\.html\?cat=pastry&q=mochi#menu[\s\S]*menu\.html\?cat=bakery&q=sourdough#menu/, 'Homepage should use a product spotlight section with filtered links to the menu page');
   assert.match(menuHtml, /<body class="site menu-page">/, 'separate product menu page should have the menu page body class');
   assert.match(menuHtml, /class="menu site-menu" id="menu"[\s\S]*id="categoryFilters"[\s\S]*id="branchFilters"[\s\S]*id="menuGrid"/, 'separate product menu page should keep filters and product grid');
+  assert.match(menuHtml, /id="branches"|id="branchFilters"/, 'Menu page should keep branch filtering/selection controls');
+  assert.match(menuHtml, /id="order"[\s\S]*data-custom-order[\s\S]*Custom Cake Order/, 'Menu page should keep the custom cake order flow');
   assert.match(siteCss, /\.site-product-spotlight__stage[\s\S]*grid-template-columns:\s*minmax\(0, 1\.35fr\) minmax\(280px, 0\.65fr\)/, 'homepage product spotlight should use an asymmetric featured-product layout on desktop');
   assert.match(siteCss, /\.site-menu-hero[\s\S]*\.menu-page \.site-menu/, 'menu page should have a dedicated compact menu hero');
   assert.match(js, /function menuUrl\(params\)/, 'JS should build filtered menu URLs for cross-page navigation');
