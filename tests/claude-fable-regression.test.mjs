@@ -163,9 +163,9 @@ test('cake craft placeholder appears only on the front page', () => {
 
 test('language toggle localizes current visible site sections', () => {
   assert.match(js, /home:\s*"Home"[\s\S]*home:\s*"首頁"/, 'nav home label should have English and Chinese copy');
-  assert.match(js, /homeHeroTitle:\s*"Order Your<br \/>Sweet Moments"[\s\S]*homeHeroTitle:\s*"甜蜜時刻<br \/>細緻包好"/, 'homepage hero should have more polished Chinese copy');
-  assert.match(js, /productSpotlightTitle:[\s\S]*先選一個想送出的味道/, 'product spotlight should have more polished Chinese copy');
-  assert.match(js, /breadPageTitle:[\s\S]*每日出爐的柔軟香氣/, 'breads page hero should have more polished Chinese copy');
+  assert.match(js, /homeHeroTitle:\s*"Order Your<br \/>Sweet Moments"[\s\S]*homeHeroTitle:\s*"把心意焗成<br \/>甜蜜時刻"/, 'homepage hero should have more polished Chinese copy');
+  assert.match(js, /productSpotlightTitle:[\s\S]*為今天挑一份甜/, 'product spotlight should have more polished Chinese copy');
+  assert.match(js, /breadPageTitle:[\s\S]*每日出爐，一口柔軟/, 'breads page hero should have more polished Chinese copy');
   assert.match(js, /function localizeCurrentSite\(\)[\s\S]*localizeNavigation\(\)[\s\S]*localizeHomePage\(\)[\s\S]*localizeMenuPage\(\)/, 'language toggle should localize duplicated current-site sections beyond data-i18n nodes');
   assert.match(js, /pageCategory === 'cake'[\s\S]*category-page--cake[\s\S]*pageCategory === 'pastry'[\s\S]*category-page--pastry[\s\S]*pageCategory === 'bakery'[\s\S]*category-page--breads/, 'category page localization should detect cakes, pastries and breads consistently instead of falling back to Shop menu');
   assert.match(js, /document\.querySelectorAll\('\.site-nav__links a\[data-hero-filter="cake"\]'\)[\s\S]*cakesPlural/, 'language toggle should localize static category nav labels');
