@@ -193,7 +193,7 @@ test('language toggle localizes current visible site sections', () => {
 });
 
 test('root loads the current scripts and motion layer progressively', () => {
-  assert.match(html, /script\.js\?v=custom-page-1/, 'site script should be loaded on the root');
+  assert.match(html, /script\.js\?v=custom-page-2/, 'site script should be loaded on the root');
   assert.match(html, /site\.css\?v=concept-16/, 'root should load the current site stylesheet cache key');
   assert.match(js, /function initGsapTasteMotion\(\)/, 'motion initializer should remain available as progressive enhancement');
   assert.match(js, /prefersReducedMotion\(\) \|\| !gsap/, 'motion should disable itself for reduced-motion users or when GSAP is unavailable');
@@ -228,7 +228,8 @@ test('Homepage separates category spotlights and cake-only custom ordering', () 
   assert.match(menuHtml, /<body class="site menu-page">/, 'separate product menu page should have the menu page body class');
   assert.match(menuHtml, /class="menu site-menu" id="menu"[\s\S]*id="categoryFilters"[\s\S]*id="branchFilters"[\s\S]*id="menuGrid"/, 'separate product menu page should keep filters and product grid');
   assert.doesNotMatch(menuHtml + cakesHtml + pastriesHtml + breadsHtml, /id="order"|href="#order"|data-custom-order|Custom Cake Order|Design your perfect cake|Send Custom Order/, 'Custom cake ordering should only appear on the dedicated Custom Cake page');
-  assert.match(menuHtml + cakesHtml + pastriesHtml + breadsHtml, /href="custom-cake\.html"/, 'Product/category pages should send Order links to the dedicated Custom Cake page');
+  assert.doesNotMatch(cakesHtml, /custom-cake\.html|Custom Cake|custom cake|自訂蛋糕|Order Now|data-i18n="order"/, 'Cakes page should not show or link to the Custom Cake area');
+  assert.match(menuHtml + pastriesHtml + breadsHtml, /href="custom-cake\.html"/, 'Non-cake product pages should still send Order links to the dedicated Custom Cake page');
   assert.match(bakeryRedirectHtml, /url=breads\.html|location\.replace\("breads\.html/, 'Old bakery URL should redirect to renamed Breads category page');
   assert.match(customCakeHtml, /<body class="site menu-page custom-cake-page">/, 'Custom Cake page should be a dedicated route');
   assert.match(customCakeHtml, /<div class="site-radio-options">[\s\S]*name="method" value="Pickup"[\s\S]*name="method" value="Delivery"[\s\S]*<\/div>/, 'Custom cake pickup/delivery radio labels should be grouped for responsive horizontal layout');
