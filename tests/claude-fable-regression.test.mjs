@@ -175,6 +175,7 @@ test('cake craft placeholder appears only on the front page', () => {
 
 test('language toggle localizes current visible site sections', () => {
   assert.match(js, /home:\s*"Home"[\s\S]*home:\s*"首頁"/, 'nav home label should have English and Chinese copy');
+  assert.match(js, /order:\s*"Custom Cake"[\s\S]*order:\s*"自訂蛋糕"/, 'top bar order link should read Custom Cake / 自訂蛋糕');
   assert.match(js, /homeHeroTitle:\s*"Order Your<br \/>Sweet Moments"[\s\S]*homeHeroTitle:\s*"把心意焗成<br \/>甜蜜時刻"/, 'homepage hero should have more polished Chinese copy');
   assert.match(js, /productSpotlightTitle:[\s\S]*為今天挑一份甜/, 'product spotlight should have more polished Chinese copy');
   assert.match(js, /breadPageTitle:[\s\S]*每日出爐，一口柔軟/, 'breads page hero should have more polished Chinese copy');
@@ -191,7 +192,7 @@ test('language toggle localizes current visible site sections', () => {
 });
 
 test('root loads the current scripts and motion layer progressively', () => {
-  assert.match(html, /script\.js\?v=zh-coverage-1/, 'site script should be loaded on the root');
+  assert.match(html, /script\.js\?v=topbar-custom-cake-1/, 'site script should be loaded on the root');
   assert.match(html, /site\.css\?v=concept-15/, 'root should load the current site stylesheet cache key');
   assert.match(js, /function initGsapTasteMotion\(\)/, 'motion initializer should remain available as progressive enhancement');
   assert.match(js, /prefersReducedMotion\(\) \|\| !gsap/, 'motion should disable itself for reduced-motion users or when GSAP is unavailable');
