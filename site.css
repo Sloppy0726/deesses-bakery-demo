@@ -51,6 +51,20 @@
   letter-spacing: -0.025em;
 }
 
+.site:lang(zh-Hant-HK) {
+  font-family: "Noto Sans TC", "Manrope", system-ui, sans-serif;
+  --site-zh-heading: "Noto Serif TC", "Noto Sans TC", serif;
+}
+
+.site:lang(zh-Hant-HK) h1,
+.site:lang(zh-Hant-HK) h2,
+.site:lang(zh-Hant-HK) h3 {
+  font-family: var(--site-zh-heading);
+  font-weight: 700;
+  letter-spacing: 0.045em;
+  line-height: 1.08;
+}
+
 .site section { padding: clamp(46px, 7vw, 92px) clamp(18px, 5vw, 56px); }
 
 .site .reveal-on-scroll {
@@ -230,6 +244,26 @@
   line-height: 1;
   letter-spacing: 0.02em;
 }
+.site:lang(zh-Hant-HK) .site-script {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55em;
+  font-family: "Noto Serif TC", "Noto Sans TC", serif;
+  font-size: clamp(0.92rem, 1.4vw, 1.08rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.18em;
+  color: var(--site-rose-dark);
+}
+.site:lang(zh-Hant-HK) .site-script::before,
+.site:lang(zh-Hant-HK) .site-script::after {
+  content: "";
+  width: 1.9em;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, currentColor);
+  opacity: 0.58;
+}
+.site:lang(zh-Hant-HK) .site-script::after { background: linear-gradient(90deg, currentColor, transparent); }
 .site-hero__title {
   margin: 0;
   max-width: 560px;
@@ -355,6 +389,18 @@
   transform: translateX(-50%);
   opacity: 0.8;
 }
+.site:lang(zh-Hant-HK).category-page #menu .site-section-head h2 {
+  font-family: "Noto Serif TC", "Noto Sans TC", serif;
+  font-size: clamp(2.7rem, 6.2vw, 4.5rem);
+  font-weight: 900;
+  line-height: 1.08;
+  letter-spacing: 0.12em;
+  text-indent: 0.12em;
+}
+.site:lang(zh-Hant-HK).category-page #menu .site-section-head h2::after {
+  width: min(150px, 46%);
+  height: 3px;
+}
 
 .site-product-spotlight {
   max-width: 1210px;
@@ -462,6 +508,21 @@
   box-shadow: var(--site-shadow);
 }
 .site-menu-hero h1 { margin: 0; max-width: 780px; font-size: clamp(3.2rem, 7vw, 6.1rem); line-height: 0.9; }
+.site:lang(zh-Hant-HK) .site-hero__title,
+.site:lang(zh-Hant-HK) .site-menu-hero h1 {
+  max-width: 720px;
+  font-size: clamp(3rem, 5.8vw, 5.25rem);
+  line-height: 1.06;
+  letter-spacing: 0.05em;
+}
+.site:lang(zh-Hant-HK) .site-hero__copy,
+.site:lang(zh-Hant-HK) .site-menu-hero p:not(.site-script),
+.site:lang(zh-Hant-HK) .site-product-spotlight__copy p,
+.site:lang(zh-Hant-HK) .site-section-head .section__sub {
+  font-size: 1rem;
+  line-height: 1.9;
+  letter-spacing: 0.035em;
+}
 .site-menu-hero p:not(.site-script) { max-width: 58ch; color: var(--site-muted); }
 .site-menu-search { align-self: end; margin: 0; background: rgba(255,255,255,0.88); }
 .menu-page .site-menu { padding-top: clamp(34px, 5vw, 62px); }

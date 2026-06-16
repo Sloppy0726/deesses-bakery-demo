@@ -163,18 +163,21 @@ test('cake craft placeholder appears only on the front page', () => {
 
 test('language toggle localizes current visible site sections', () => {
   assert.match(js, /home:\s*"Home"[\s\S]*home:\s*"首頁"/, 'nav home label should have English and Chinese copy');
-  assert.match(js, /homeHeroTitle:\s*"Order Your<br \/>Sweet Moments"[\s\S]*homeHeroTitle:\s*"訂購你的<br \/>甜蜜時刻"/, 'homepage hero should have Chinese copy');
-  assert.match(js, /productSpotlightTitle:[\s\S]*選擇想看的產品系列/, 'product spotlight should have Chinese copy');
-  assert.match(js, /breadPageTitle:[\s\S]*每日新鮮麵包/, 'breads page hero should have Chinese copy');
+  assert.match(js, /homeHeroTitle:\s*"Order Your<br \/>Sweet Moments"[\s\S]*homeHeroTitle:\s*"甜蜜時刻<br \/>細緻包好"/, 'homepage hero should have more polished Chinese copy');
+  assert.match(js, /productSpotlightTitle:[\s\S]*先選一個想送出的味道/, 'product spotlight should have more polished Chinese copy');
+  assert.match(js, /breadPageTitle:[\s\S]*每日出爐的柔軟香氣/, 'breads page hero should have more polished Chinese copy');
   assert.match(js, /function localizeCurrentSite\(\)[\s\S]*localizeNavigation\(\)[\s\S]*localizeHomePage\(\)[\s\S]*localizeMenuPage\(\)/, 'language toggle should localize duplicated current-site sections beyond data-i18n nodes');
   assert.match(js, /pageCategory === 'cake'[\s\S]*category-page--cake[\s\S]*pageCategory === 'pastry'[\s\S]*category-page--pastry[\s\S]*pageCategory === 'bakery'[\s\S]*category-page--breads/, 'category page localization should detect cakes, pastries and breads consistently instead of falling back to Shop menu');
   assert.match(js, /document\.querySelectorAll\('\.site-nav__links a\[data-hero-filter="cake"\]'\)[\s\S]*cakesPlural/, 'language toggle should localize static category nav labels');
   assert.match(js, /localizeStatic\(\)[\s\S]*syncLanguageButtons\(\)[\s\S]*renderBranches\(\)[\s\S]*renderFilters\(\)[\s\S]*renderMenu\(\)/, 'setLanguage should refresh static and generated content');
+  assert.match(html + menuHtml + cakesHtml + pastriesHtml + breadsHtml, /Noto\+Serif\+TC:wght@500;700;900/, 'pages should load a dedicated Chinese serif display font');
+  assert.match(siteCss, /\.site:lang\(zh-Hant-HK\) h1[\s\S]*Noto Serif TC|--site-zh-heading:\s*"Noto Serif TC"/, 'Chinese headings should use a dedicated display face');
+  assert.match(siteCss, /\.site:lang\(zh-Hant-HK\) \.site-script[\s\S]*letter-spacing:\s*0\.18em/, 'Chinese eyebrow labels should receive a designed typographic treatment');
 });
 
 test('root loads the current scripts and motion layer progressively', () => {
   assert.match(html, /script\.js\?v=brand-logo-1/, 'site script should be loaded on the root');
-  assert.match(html, /site\.css\?v=concept-12/, 'root should load the current site stylesheet cache key');
+  assert.match(html, /site\.css\?v=concept-13/, 'root should load the current site stylesheet cache key');
   assert.match(js, /function initGsapTasteMotion\(\)/, 'motion initializer should remain available as progressive enhancement');
   assert.match(js, /prefersReducedMotion\(\) \|\| !gsap/, 'motion should disable itself for reduced-motion users or when GSAP is unavailable');
   assert.match(js, /__deessesGsapMotion\s*=\s*\{ enabled:\s*true/, 'motion status should be exposed for browser verification when active');
