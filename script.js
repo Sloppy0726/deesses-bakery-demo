@@ -190,7 +190,7 @@
       footerNote: "Static design demo. Product images are temporary preview assets. Confirm all prices, availability and pickup details with the business directly.",
       cakeCollection: "Cake Collection",
       cakePageTitle: "Celebration cakes made to order.",
-      cakePageCopy: "Browse celebration cakes, minis and seasonal cake picks before sending a custom order enquiry.",
+      cakePageCopy: "Browse celebration cakes, minis and seasonal cake picks as their own collection.",
       shopCakes: "Shop cakes",
       shopCakesCopy: "A focused cake collection with branch availability, search and product detail ordering.",
       pastryCollection: "Pastry Collection",
