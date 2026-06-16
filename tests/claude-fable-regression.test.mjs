@@ -5,6 +5,7 @@ const html = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
 const homeCopy = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
 const menuHtml = readFileSync(new URL('../menu.html', import.meta.url), 'utf8');
 const cakesHtml = readFileSync(new URL('../cakes.html', import.meta.url), 'utf8');
+const customCakeHtml = readFileSync(new URL('../custom-cake.html', import.meta.url), 'utf8');
 const pastriesHtml = readFileSync(new URL('../pastries.html', import.meta.url), 'utf8');
 const breadsHtml = readFileSync(new URL('../breads.html', import.meta.url), 'utf8');
 const bakeryRedirectHtml = readFileSync(new URL('../bakery.html', import.meta.url), 'utf8');
@@ -192,8 +193,8 @@ test('language toggle localizes current visible site sections', () => {
 });
 
 test('root loads the current scripts and motion layer progressively', () => {
-  assert.match(html, /script\.js\?v=topbar-custom-cake-1/, 'site script should be loaded on the root');
-  assert.match(html, /site\.css\?v=concept-15/, 'root should load the current site stylesheet cache key');
+  assert.match(html, /script\.js\?v=custom-page-1/, 'site script should be loaded on the root');
+  assert.match(html, /site\.css\?v=concept-16/, 'root should load the current site stylesheet cache key');
   assert.match(js, /function initGsapTasteMotion\(\)/, 'motion initializer should remain available as progressive enhancement');
   assert.match(js, /prefersReducedMotion\(\) \|\| !gsap/, 'motion should disable itself for reduced-motion users or when GSAP is unavailable');
   assert.match(js, /__deessesGsapMotion\s*=\s*\{ enabled:\s*true/, 'motion status should be exposed for browser verification when active');
@@ -218,7 +219,7 @@ test('Homepage separates category spotlights and cake-only custom ordering', () 
   assert.doesNotMatch(homeCopy, /id="menuGrid"|id="branches"|id="branchGrid"|Choose a pickup branch/, 'Homepage should not render product grid or pickup branch selection');
   assert.doesNotMatch(homeCopy, /id="order"|data-custom-order|Custom Cake Order|Design your perfect cake|custom cake/i, 'Homepage should not render or promote the custom cake order flow');
   assert.doesNotMatch(homeCopy, /full menu|Browse full menu/i, 'Homepage should not imply there is a full menu');
-  assert.match(homeCopy, /href="cakes\.html#order"[^>]*data-i18n="order"/, 'Homepage Order nav should send shoppers to the cakes custom-order flow');
+  assert.match(homeCopy, /href="custom-cake\.html"[^>]*data-i18n="order"/, 'Homepage Order nav should send shoppers to the dedicated Custom Cake page');
   assert.match(homeCopy, /href="cakes\.html"[^>]*>Cakes[\s\S]*href="pastries\.html"[^>]*>Pastries[\s\S]*href="breads\.html"[^>]*>Breads/, 'Homepage top nav category links should open dedicated category pages');
   assert.match(homeCopy, /class="site-product-spotlight"[\s\S]*Choose a spotlight collection[\s\S]*site-product-spotlight__section--cake[\s\S]*site-product-spotlight__photos[\s\S]*site-product-spotlight__copy[\s\S]*View cakes[\s\S]*site-product-spotlight__section--pastry site-product-spotlight__section--reverse[\s\S]*site-product-spotlight__copy[\s\S]*View pastries[\s\S]*site-product-spotlight__photos[\s\S]*site-product-spotlight__section--breads[\s\S]*site-product-spotlight__photos[\s\S]*site-product-spotlight__copy[\s\S]*View breads/, 'Homepage product spotlight should present three horizontal alternating category sections with direct category buttons');
   assert.doesNotMatch(homeCopy, /A cake worth stopping for|View cake spotlight|Browse full menu/, 'Old confusing single-product spotlight copy should be removed');
@@ -226,12 +227,14 @@ test('Homepage separates category spotlights and cake-only custom ordering', () 
 
   assert.match(menuHtml, /<body class="site menu-page">/, 'separate product menu page should have the menu page body class');
   assert.match(menuHtml, /class="menu site-menu" id="menu"[\s\S]*id="categoryFilters"[\s\S]*id="branchFilters"[\s\S]*id="menuGrid"/, 'separate product menu page should keep filters and product grid');
-  assert.doesNotMatch(menuHtml + pastriesHtml + breadsHtml, /id="order"|href="#order"|data-custom-order|Custom Cake Order|Design your perfect cake|Send Custom Order/, 'Custom cake ordering should only appear on the cakes category page and other pages should not link to missing #order anchors');
-  assert.match(menuHtml + pastriesHtml + breadsHtml, /href="cakes\.html#order"/, 'Non-cake pages should send Order links to the cakes custom-order flow');
+  assert.doesNotMatch(menuHtml + cakesHtml + pastriesHtml + breadsHtml, /id="order"|href="#order"|data-custom-order|Custom Cake Order|Design your perfect cake|Send Custom Order/, 'Custom cake ordering should only appear on the dedicated Custom Cake page');
+  assert.match(menuHtml + cakesHtml + pastriesHtml + breadsHtml, /href="custom-cake\.html"/, 'Product/category pages should send Order links to the dedicated Custom Cake page');
   assert.match(bakeryRedirectHtml, /url=breads\.html|location\.replace\("breads\.html/, 'Old bakery URL should redirect to renamed Breads category page');
-  assert.match(cakesHtml, /<div class="site-radio-options">[\s\S]*name="method" value="Pickup"[\s\S]*name="method" value="Delivery"[\s\S]*<\/div>/, 'Custom cake pickup/delivery radio labels should be grouped for responsive horizontal layout');
-  assert.match(cakesHtml, /id="order"[\s\S]*data-custom-order[\s\S]*Custom Cake Order[\s\S]*Send Custom Order/, 'Cakes page should keep the custom cake order flow');
-  assert.match(cakesHtml, /id="hero"[\s\S]*Cake Collection[\s\S]*id="menu"[\s\S]*Shop cakes[\s\S]*id="branchFilters"[\s\S]*id="menuGrid"[\s\S]*id="order"[\s\S]*data-custom-order/, 'Cakes page should show the cake collection/product grid first and keep custom cake order as a separate anchor');
+  assert.match(customCakeHtml, /<body class="site menu-page custom-cake-page">/, 'Custom Cake page should be a dedicated route');
+  assert.match(customCakeHtml, /<div class="site-radio-options">[\s\S]*name="method" value="Pickup"[\s\S]*name="method" value="Delivery"[\s\S]*<\/div>/, 'Custom cake pickup/delivery radio labels should be grouped for responsive horizontal layout');
+  assert.match(customCakeHtml, /id="order"[\s\S]*data-custom-order[\s\S]*Custom Cake Order[\s\S]*Send Custom Order/, 'Custom Cake page should keep the custom cake order flow');
+  assert.doesNotMatch(customCakeHtml, /id="menuGrid"|id="branchFilters"|class="menu site-menu"/, 'Custom Cake page should not duplicate the Cakes product grid');
+  assert.match(js, /custom-cake-page[\s\S]*customCakeOrder[\s\S]*customCakeTitle[\s\S]*customCakeHeroCopy/, 'language toggle should localize the dedicated Custom Cake page hero');
 
   assert.match(cakesHtml, /data-category-page="cake"/, 'Cakes page should declare its fixed category');
   assert.doesNotMatch(cakesHtml, /class="skip-link"|Skip to products|Skip to menu/, 'Cakes page should not show a confusing skip-link pill');

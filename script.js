@@ -210,6 +210,7 @@
       shopMenuCopy: "Browse all available products with branch availability, search and product detail ordering.",
       customCakeOrder: "Custom Cake Order",
       customCakeTitle: "Design your perfect cake.",
+      customCakeHeroCopy: "Choose cake type, size, flavour, pickup date and delivery preference, then send the custom cake enquiry directly to WhatsApp.",
       cakeTypeLabel: "Cake type",
       sizeLabel: "Size",
       flavourLabel: "Flavour",
@@ -356,7 +357,7 @@
       cakePageTitle: "為重要日子，留一份甜。",
       cakePageCopy: "瀏覽慶祝蛋糕、迷你蛋糕與節日推介，再把口味、尺寸和祝福語一起發送查詢。",
       shopCakes: "挑選蛋糕",
-      shopCakesCopy: "按分店查看蛋糕供應；想做專屬款式，可在下方填寫自訂蛋糕查詢。",
+      shopCakesCopy: "按分店查看蛋糕供應；想做專屬款式，請前往自訂蛋糕頁面。",
       pastryCollection: "法式酥點系列",
       pastryPageTitle: "酥香小禮，漂亮帶走。",
       pastryPageCopy: "從麻糬牛角酥到精緻小點，挑一盒適合下午茶、探訪或送禮的甜。",
@@ -374,6 +375,7 @@
       shopMenuCopy: "瀏覽所有產品，包含分店供應、搜尋及產品詳情訂購。",
       customCakeOrder: "自訂蛋糕訂購",
       customCakeTitle: "設計你的專屬蛋糕。",
+      customCakeHeroCopy: "選擇蛋糕類型、尺寸、口味、取貨日期及取貨／送貨方式，再直接發送 WhatsApp 自訂蛋糕查詢。",
       cakeTypeLabel: "蛋糕類型",
       sizeLabel: "尺寸",
       flavourLabel: "口味",
@@ -505,6 +507,12 @@
     var hero = document.querySelector('.site-menu-hero');
     if (!hero) return;
     var body = document.body;
+    if (body.classList.contains('custom-cake-page')) {
+      setText('.site-menu-hero .site-script', 'customCakeOrder');
+      setText('.site-menu-hero h1', 'customCakeTitle');
+      setText('.site-menu-hero > div > p:not(.site-script)', 'customCakeHeroCopy');
+      return;
+    }
     var pageCategory = body.getAttribute('data-category-page');
     var prefix = pageCategory === 'cake' || body.classList.contains('category-page--cake') || body.classList.contains('category-page--cakes') ? 'cake'
       : pageCategory === 'pastry' || body.classList.contains('category-page--pastry') || body.classList.contains('category-page--pastries') ? 'pastry'
