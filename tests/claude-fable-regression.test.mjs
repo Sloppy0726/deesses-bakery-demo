@@ -193,8 +193,8 @@ test('language toggle localizes current visible site sections', () => {
 });
 
 test('root loads the current scripts and motion layer progressively', () => {
-  assert.match(html, /script\.js\?v=custom-page-3/, 'site script should be loaded on the root');
-  assert.match(html, /site\.css\?v=concept-16/, 'root should load the current site stylesheet cache key');
+  assert.match(html, /script\.js\?v=reviews-placeholder-1/, 'site script should be loaded on the root');
+  assert.match(html, /site\.css\?v=concept-17/, 'root should load the current site stylesheet cache key');
   assert.match(js, /function initGsapTasteMotion\(\)/, 'motion initializer should remain available as progressive enhancement');
   assert.match(js, /prefersReducedMotion\(\) \|\| !gsap/, 'motion should disable itself for reduced-motion users or when GSAP is unavailable');
   assert.match(js, /__deessesGsapMotion\s*=\s*\{ enabled:\s*true/, 'motion status should be exposed for browser verification when active');
@@ -223,11 +223,16 @@ test('Homepage separates category spotlights and cake-only custom ordering', () 
   assert.match(homeCopy, /href="cakes\.html"[^>]*>Cakes[\s\S]*href="pastries\.html"[^>]*>Pastries[\s\S]*href="breads\.html"[^>]*>Breads/, 'Homepage top nav category links should open dedicated category pages');
   assert.match(homeCopy, /class="site-product-spotlight"[\s\S]*Choose a spotlight collection[\s\S]*site-product-spotlight__section--cake[\s\S]*site-product-spotlight__photos[\s\S]*site-product-spotlight__copy[\s\S]*View cakes[\s\S]*site-product-spotlight__section--pastry site-product-spotlight__section--reverse[\s\S]*site-product-spotlight__copy[\s\S]*View pastries[\s\S]*site-product-spotlight__photos[\s\S]*site-product-spotlight__section--breads[\s\S]*site-product-spotlight__photos[\s\S]*site-product-spotlight__copy[\s\S]*View breads/, 'Homepage product spotlight should present three horizontal alternating category sections with direct category buttons');
   assert.doesNotMatch(homeCopy, /A cake worth stopping for|View cake spotlight|Browse full menu/, 'Old confusing single-product spotlight copy should be removed');
+  assert.match(homeCopy, /<section class="social site-social" id="social">[\s\S]*Follow our creations[\s\S]*id="socialGrid"/, 'Homepage should keep the Follow our creations social gallery');
+  assert.match(homeCopy, /id="customer-reviews"[\s\S]*Customer Reviews[\s\S]*Loved by our customers[\s\S]*site-review-placeholder__card/, 'Homepage should include a customer review placeholder section');
+  assert.match(siteCss, /\.site-review-placeholder[\s\S]*\.site-review-placeholder__grid[\s\S]*grid-template-columns:\s*repeat\(3, minmax\(0, 1fr\)\)[\s\S]*\.site-review-placeholder__card/, 'Customer review placeholder should have styled cards');
+  assert.match(js, /customerReviewsEyebrow:[\s\S]*客人好評[\s\S]*customerReviewPlaceholderCopy/, 'Customer review placeholder should be localizable');
   assert.match(siteCss, /\.site-product-spotlight__stack[\s\S]*\.site-product-spotlight__section[\s\S]*grid-template-columns:\s*minmax\(0, 1\.12fr\) minmax\(320px, 0\.88fr\)[\s\S]*\.site-product-spotlight__section--reverse[\s\S]*grid-template-columns:\s*minmax\(320px, 0\.88fr\) minmax\(0, 1\.12fr\)/, 'Product spotlight should use horizontal alternating image/text sections on desktop');
 
   assert.match(menuHtml, /<body class="site menu-page">/, 'separate product menu page should have the menu page body class');
   assert.match(menuHtml, /class="menu site-menu" id="menu"[\s\S]*id="categoryFilters"[\s\S]*id="branchFilters"[\s\S]*id="menuGrid"/, 'separate product menu page should keep filters and product grid');
   assert.doesNotMatch(menuHtml + cakesHtml + pastriesHtml + breadsHtml, /id="order"|href="#order"|data-custom-order|Custom Cake Order|Design your perfect cake|Send Custom Order/, 'Custom cake ordering should only appear on the dedicated Custom Cake page');
+  assert.doesNotMatch(cakesHtml + pastriesHtml + breadsHtml + customCakeHtml, /<section class="social site-social" id="social">|id="socialGrid"|Follow our creations/, 'Category and Custom Cake pages should not repeat the homepage Follow our creations social gallery');
   assert.match(cakesHtml, /<ul class="nav__links site-nav__links"[\s\S]*href="custom-cake\.html"[^>]*data-i18n="order"[\s\S]*class="nav__cta site-order-pill"/, 'Cakes page should keep the shared top-bar Custom Cake/Order navigation');
   assert.doesNotMatch(cakesHtml.split('</header>')[1], /custom-cake\.html|Custom Cake|custom cake|自訂蛋糕|data-i18n="order"|id="order"|data-custom-order/, 'Cakes page body below the shared header should not show or link to the Custom Cake area');
   assert.match(menuHtml + pastriesHtml + breadsHtml, /href="custom-cake\.html"/, 'Non-cake product pages should still send Order links to the dedicated Custom Cake page');
