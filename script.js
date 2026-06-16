@@ -533,6 +533,21 @@
     setText('.site-inspiration-card a', 'viewCakeGallery', order);
     setText('.site-custom-form .site-script', 'customCakeOrder', order);
     setText('.site-custom-form h2', 'customCakeTitle', order);
+    var optionCopy = currentLanguage === 'zh' ? [
+      ['慶祝蛋糕', '水果蛋糕', '節日禮盒', '自訂款式'],
+      ['6 吋（約 6–8 人）', '4 吋', '5 吋', '8 吋'],
+      ['雲呢拿士多啤梨', '白桃', '玫瑰紅桑子', '朱古力']
+    ] : [
+      ['Celebration Cake', 'Fruit Cake', 'Seasonal Gift', 'Custom Order'],
+      ['6 inch (serves 6-8)', '4 inch', '5 inch', '8 inch'],
+      ['Vanilla and Strawberry', 'White Peach', 'Rose Raspberry', 'Chocolate']
+    ];
+    order.querySelectorAll('.site-form-grid select').forEach(function (select, selectIndex) {
+      var values = optionCopy[selectIndex] || [];
+      Array.prototype.forEach.call(select.options, function (option, optionIndex) {
+        if (values[optionIndex]) option.textContent = values[optionIndex];
+      });
+    });
     var labels = order.querySelectorAll('.site-custom-form > label, .site-form-grid label');
     var labelKeys = ['cakeTypeLabel', 'sizeLabel', 'flavourLabel', 'pickupDateLabel', 'cakeMessageLabel', 'notesLabel'];
     labels.forEach(function (label, index) {
