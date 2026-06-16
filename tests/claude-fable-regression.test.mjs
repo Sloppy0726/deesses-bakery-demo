@@ -129,6 +129,11 @@ test('hero intro panel stays bright while the opening gallery remains visible', 
   assert.match(css, /\.hero-category-nav a\s*\{[\s\S]*background:\s*rgba\(255,255,255,0\.42\)/, 'hero quick links should stay translucent but easier to read');
 });
 
+test('mobile homepage hero keeps the bakery photo visible behind a readable translucent panel', () => {
+  assert.match(siteCss, /@media \(max-width:\s*760px\)[\s\S]*\.site-hero\s*\{[\s\S]*rgba\(255, 249, 246, 0\.86\)[\s\S]*rgba\(255, 249, 246, 0\.18\)[\s\S]*front-page-bakery-scene\.jpg/, 'mobile site hero should lighten its wash without hiding the cake background image');
+  assert.match(siteCss, /@media \(max-width:\s*760px\)[\s\S]*\.site-hero__content\s*\{[\s\S]*rgba\(255, 252, 249, 0\.64\)[\s\S]*rgba\(255, 244, 239, 0\.38\)[\s\S]*backdrop-filter:\s*blur\(3px\) saturate\(118%\)/, 'mobile site hero text panel should be translucent but still readable');
+});
+
 test('Root homepage is active with language switch available', () => {
   assert.match(html, /<body class="site">/, 'root index should render the active website');
   assert.match(html, /class="language-switch site-language"[\s\S]*data-language="en"[\s\S]*data-language="zh"/, 'nav language switch should expose EN and Traditional Chinese buttons');

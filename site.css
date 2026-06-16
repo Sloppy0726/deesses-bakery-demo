@@ -882,7 +882,20 @@
   .site-order-pill { display: none; }
   .site .nav__links { top: calc(100% + 10px); background: #fffaf6; border-color: var(--site-line); box-shadow: var(--site-shadow); }
   .site .nav__links a { color: var(--site-ink); }
-  .site-hero { padding-top: 42px; background-position: 60% center; }
+  .site-hero {
+    padding-top: 42px;
+    background-image:
+      linear-gradient(180deg, rgba(255, 249, 246, 0.86) 0%, rgba(255, 249, 246, 0.58) 46%, rgba(255, 249, 246, 0.18) 76%, rgba(255, 247, 242, 0.04) 100%),
+      url("assets/front-page-bakery-scene.jpg");
+    background-position: 60% center;
+  }
+  .site-hero__content {
+    border-color: rgba(255, 255, 255, 0.58);
+    background: linear-gradient(135deg, rgba(255, 252, 249, 0.64), rgba(255, 244, 239, 0.38));
+    box-shadow: 0 20px 56px rgba(126, 72, 54, 0.1);
+    -webkit-backdrop-filter: blur(3px) saturate(118%);
+    backdrop-filter: blur(3px) saturate(118%);
+  }
   .site-hero__title { font-size: clamp(3.35rem, 16vw, 4.75rem); }
   .site-search { grid-template-columns: 1fr; border-radius: 14px; padding: 8px; }
   .site-search button { width: 100%; min-height: 42px; }
