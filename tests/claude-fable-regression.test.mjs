@@ -166,10 +166,10 @@ test('Pineapple-style scroll reveal animations are wired with reduced-motion sup
 });
 
 test('cake craft placeholder appears only on the front page', () => {
-  assert.match(html, /id="craft"[\s\S]*Layer-by-layer cake craft[\s\S]*deconstructed-cake-placeholder\.jpg/, 'front page should keep the layer-by-layer cake craft section');
+  assert.match(html, /id="craft"[\s\S]*Layer-by-layer cake craft[\s\S]*cake-layer-guide\.jpg/, 'front page should keep the layer-by-layer cake craft section');
   assert.match(html, /data-cake-action="explode"/, 'front-page craft section should keep accessible controls');
   assert.match(html, /aria-live="polite"[^>]*id="cakeStatus"|id="cakeStatus"[^>]*aria-live="polite"/, 'cake status should announce state changes');
-  assert.doesNotMatch(menuHtml + cakesHtml + pastriesHtml + breadsHtml, /id="craft"|Layer-by-layer cake craft|deconstructed-cake-placeholder\.jpg/, 'layer-by-layer cake craft should not appear on menu or category pages');
+  assert.doesNotMatch(menuHtml + cakesHtml + pastriesHtml + breadsHtml, /id="craft"|Layer-by-layer cake craft|cake-layer-guide\.jpg/, 'layer-by-layer cake craft should not appear on menu or category pages');
   assert.match(siteCss, /\.site-cake-placeholder[\s\S]*\.site-cake-placeholder img/, 'Cake placeholder styles should remain for the front-page craft section');
   assert.match(js, /wireCakeAssembly[\s\S]*__cakeAssemblyStatus/, 'cake assembly JS wiring/status missing');
 });
