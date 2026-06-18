@@ -9,6 +9,8 @@ const customCakeHtml = readFileSync(new URL('../custom-cake.html', import.meta.u
 const pastriesHtml = readFileSync(new URL('../pastries.html', import.meta.url), 'utf8');
 const breadsHtml = readFileSync(new URL('../breads.html', import.meta.url), 'utf8');
 const bakeryRedirectHtml = readFileSync(new URL('../bakery.html', import.meta.url), 'utf8');
+const privacyHtml = readFileSync(new URL('../privacy-policy.html', import.meta.url), 'utf8');
+const termsHtml = readFileSync(new URL('../terms-and-conditions.html', import.meta.url), 'utf8');
 const js = readFileSync(new URL('../script.js', import.meta.url), 'utf8');
 const css = readFileSync(new URL('../styles.css', import.meta.url), 'utf8');
 const siteCss = readFileSync(new URL('../site.css', import.meta.url), 'utf8');
@@ -200,11 +202,23 @@ test('language toggle localizes current visible site sections', () => {
 });
 
 test('root loads the current scripts and motion layer progressively', () => {
-  assert.match(html, /script\.js\?v=signature-i18n-1/, 'site script should be loaded on the root');
-  assert.match(html, /site\.css\?v=concept-18/, 'root should load the current site stylesheet cache key');
+  assert.match(html, /script\.js\?v=legal-footer-1/, 'site script should be loaded on the root');
+  assert.match(html, /site\.css\?v=legal-footer-1/, 'root should load the current site stylesheet cache key');
   assert.match(js, /function initGsapTasteMotion\(\)/, 'motion initializer should remain available as progressive enhancement');
   assert.match(js, /prefersReducedMotion\(\) \|\| !gsap/, 'motion should disable itself for reduced-motion users or when GSAP is unavailable');
   assert.match(js, /__deessesGsapMotion\s*=\s*\{ enabled:\s*true/, 'motion status should be exposed for browser verification when active');
+});
+
+test('every public page has legal footer links and placeholder legal pages', () => {
+  const publicPages = [html, menuHtml, cakesHtml, pastriesHtml, breadsHtml, customCakeHtml, privacyHtml, termsHtml];
+  publicPages.forEach((page, index) => {
+    assert.match(page, /class="site-footer-legal"[\s\S]*All rights reserved[\s\S]*href="privacy-policy\.html"[\s\S]*href="terms-and-conditions\.html"/, `public page ${index + 1} should include legal footer links`);
+    assert.match(page, /site\.css\?v=legal-footer-1[\s\S]*script\.js\?v=legal-footer-1/, `public page ${index + 1} should use the legal footer cache keys`);
+  });
+  assert.match(privacyHtml, /id="privacyPolicyTitle"[\s\S]*data-i18n="privacyPolicyCopy"[\s\S]*Placeholder privacy policy text/, 'Privacy policy page should exist with placeholder copy');
+  assert.match(termsHtml, /id="termsConditionsTitle"[\s\S]*data-i18n="termsConditionsCopy"[\s\S]*Placeholder terms and conditions text/, 'Terms and conditions page should exist with placeholder copy');
+  assert.match(js, /legalRights:[\s\S]*All rights reserved[\s\S]*privacyPolicy:[\s\S]*Privacy Policy[\s\S]*termsConditions:[\s\S]*Terms & Conditions[\s\S]*legalRights:[\s\S]*版權所有[\s\S]*privacyPolicy:[\s\S]*私隱政策[\s\S]*termsConditions:[\s\S]*條款及細則/, 'Legal footer and legal page text should be bilingual-ready');
+  assert.match(siteCss, /\.site-footer-legal[\s\S]*\.site-legal-page[\s\S]*\.site-legal-placeholder/, 'Legal footer and legal placeholder pages should be styled');
 });
 
 test('design taste refinements keep the page polished without adding clutter', () => {

@@ -3,21 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DÉESSES Bakery - Cakes</title>
-  <meta name="description" content="DÉESSES Bakery cakes page with celebration cakes, mini cakes, seasonal cake designs and WhatsApp pre-order flow." />
+  <title>Terms & Conditions | DÉESSES Bakery</title>
+  <meta name="description" content="Terms and conditions placeholder for the DÉESSES Bakery website demo." />
   <meta name="theme-color" content="#fff7f2" />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23fff7f2'/%3E%3Ctext x='50%25' y='56%25' dominant-baseline='middle' text-anchor='middle' font-size='34'%3E%E2%99%A1%3C/text%3E%3C/svg%3E" />
   <link rel="apple-touch-icon" href="assets/deesses-instagram-logo.jpg" />
-  <link rel="preload" as="image" href="assets/front-page-bakery-scene.jpg" />
-  <link rel="preload" as="image" href="assets/mini.jpg" />
-  <link rel="preload" as="image" href="assets/strawberry.jpg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@500;700;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css?v=brand-logo-1" />
   <link rel="stylesheet" href="site.css?v=legal-footer-1" />
 </head>
-<body class="site menu-page category-page category-page--cake" data-category-page="cake">
+<body class="site menu-page legal-page">
   <header class="nav site-nav" id="nav">
     <nav class="nav__inner site-nav__inner" aria-label="Primary">
       <a href="index.html" class="nav__brand site-brand">
@@ -39,71 +36,20 @@
         <button type="button" data-language="en" aria-pressed="false"><span>EN</span></button>
         <button type="button" data-language="zh" aria-pressed="false"><span>繁</span></button>
       </div>
-
       <a href="custom-cake.html" class="nav__cta site-order-pill">Order Now <span aria-hidden="true">♡</span></a>
     </nav>
   </header>
 
-  <aside class="social-float site-social-float" aria-label="Quick social links" data-i18n-aria="quickSocialLinks">
-    <button class="social-trigger site-social-trigger" type="button" aria-haspopup="true" aria-expanded="false" data-social-trigger>
-      <span class="site-social-trigger__icon" aria-hidden="true">♡</span>
-      <span class="social-trigger__label" data-i18n="socialLabel">Social</span>
-    </button>
-    <div class="social-menu" role="menu">
-      <a role="menuitem" href="https://www.instagram.com/deesses_bakery/" target="_blank" rel="noopener">
-        <span class="social-icon" aria-hidden="true">◎</span>
-        <span><strong>Instagram</strong><small data-i18n="socialInstagramHint">Latest cakes / DM pre-order</small></span>
-      </a>
-      <a role="menuitem" href="https://wa.me/85268128098" target="_blank" rel="noopener">
-        <span class="social-icon" aria-hidden="true">✆</span>
-        <span><strong>WhatsApp</strong><small data-i18n="socialWhatsappHint">Message to pre-order</small></span>
-      </a>
-      <a role="menuitem" href="index.html#social">
-        <span class="social-icon" aria-hidden="true">✧</span>
-        <span><strong data-i18n="socialGalleryTitle">Social gallery</strong><small data-i18n="socialGalleryHint">Preview posts and updates</small></span>
-      </a>
-    </div>
-  </aside>
-
-  <main id="top">
-    <section class="site-menu-hero" id="hero">
-      <div>
-        <p class="site-script">Cake Collection</p>
-        <h1>Cakes for sweet moments.</h1>
-        <p>Browse celebration cakes, mini cakes and seasonal cake designs as their own collection.</p>
+  <main id="top" class="site-legal-main">
+    <section class="site-legal-page" aria-labelledby="termsConditionsTitle">
+      <p class="site-script" data-i18n="termsConditions">Terms &amp; Conditions</p>
+      <h1 id="termsConditionsTitle" data-i18n="termsConditionsTitle">Terms &amp; Conditions</h1>
+      <p class="section__sub" data-i18n="termsConditionsCopy">Placeholder terms and conditions text. Replace this section with the final business terms before launch.</p>
+      <div class="site-legal-placeholder">
+        <p data-i18n="termsConditionsCopy">Placeholder terms and conditions text. Replace this section with the final business terms before launch.</p>
       </div>
-      <form class="hero-search site-search site-menu-search" role="search" aria-label="Search DÉESSES menu" data-i18n-aria="searchMenu" data-hero-search>
-        <label class="sr-only" for="heroSearchInput" data-i18n="searchMenu">Search menu</label>
-        <input id="heroSearchInput" type="search" placeholder="Search menu" data-i18n-placeholder="searchMenu" autocomplete="off" />
-        <button type="submit" data-i18n="searchButton">Search</button>
-      </form>
+      <p><a class="site-button site-button--ghost" href="index.html" data-i18n="legalBackHome">Back to homepage</a></p>
     </section>
-
-    <section class="menu site-menu" id="menu">
-      <div class="section__head site-section-head">
-        <h2>Shop cakes</h2>
-        <p class="section__sub">A dedicated cake collection with branch availability, search and product detail ordering.</p>
-      </div>
-      <div class="filters site-filters" role="group" aria-label="Menu filters">
-        <div class="filters__row site-filters__row" id="branchFilters" aria-label="Filter by branch">
-          <span class="filters__label">Branch</span>
-        </div>
-      </div>
-      <div class="product-grid site-product-grid" id="menuGrid" aria-live="polite"></div>
-      <p class="menu__empty site-empty" id="menuEmpty" hidden>No items match this filter.</p>
-    </section>
-
-
-    <section class="site-how" id="how-it-works">
-      <h2>How ordering works</h2>
-      <ol>
-        <li><strong>Choose</strong><span>Select products from cakes, pastries or fresh breads.</span></li>
-        <li><strong>Plan</strong><span>Pick your branch, size, date and message details.</span></li>
-        <li><strong>Confirm</strong><span>Send the WhatsApp enquiry for shop confirmation.</span></li>
-        <li><strong>Enjoy</strong><span>Pick up fresh bakes at your selected counter.</span></li>
-      </ol>
-    </section>
-
   </main>
 
   <footer class="footer site-footer" id="contact">
