@@ -1685,17 +1685,37 @@
       node.style.setProperty("--reveal-delay", Math.min(index % 5, 4) * 65 + "ms");
     });
 
+    function revealPassedTargets() {
+      targets.forEach(function (node) {
+        var rect = node.getBoundingClientRect();
+        if (rect.top < window.innerHeight * 1.15) {
+          node.classList.add("is-visible");
+        }
+      });
+    }
+
+    var revealTicking = false;
+    function queueRevealPassedTargets() {
+      if (revealTicking) return;
+      revealTicking = true;
+      window.requestAnimationFrame(function () {
+        revealPassedTargets();
+        revealTicking = false;
+      });
+    }
+
     var observer = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
+        if (entry.isIntersecting || entry.boundingClientRect.top < window.innerHeight * 1.15) {
           entry.target.classList.add("is-visible");
-        } else if (entry.boundingClientRect.top > window.innerHeight * 0.9) {
-          entry.target.classList.remove("is-visible");
         }
       });
     }, { threshold: 0.16, rootMargin: "0px 0px -8% 0px" });
 
     targets.forEach(function (node) { observer.observe(node); });
+    revealPassedTargets();
+    window.addEventListener("scroll", queueRevealPassedTargets, { passive: true });
+    window.addEventListener("resize", queueRevealPassedTargets);
     window.__deessesScrollReveal = { enabled: true, targetCount: targets.length };
   }
 
