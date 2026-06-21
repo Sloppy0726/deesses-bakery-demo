@@ -167,13 +167,13 @@ test('Pineapple-style scroll reveal animations are wired with reduced-motion sup
   assert.match(siteCss, /prefers-reduced-motion:\s*reduce[\s\S]*\.site \.reveal-on-scroll\s*\{[\s\S]*opacity:\s*1[\s\S]*transform:\s*none\s*!important[\s\S]*filter:\s*none/, 'current site reveal must be disabled for reduced motion');
 });
 
-test('cake craft placeholder appears only on the front page', () => {
-  assert.match(html, /id="craft"[\s\S]*Layer-by-layer cake craft[\s\S]*cake-layer-guide\.jpg/, 'front page should keep the layer-by-layer cake craft section');
+test('Higgsfield cake craft animation appears only on the front page', () => {
+  assert.match(html, /id="craft"[\s\S]*Layer-by-layer cake craft[\s\S]*higgsfield-cake-assembly\.mp4/, 'front page should keep the Higgsfield-generated cake craft animation');
   assert.match(html, /data-cake-action="explode"/, 'front-page craft section should keep accessible controls');
   assert.match(html, /aria-live="polite"[^>]*id="cakeStatus"|id="cakeStatus"[^>]*aria-live="polite"/, 'cake status should announce state changes');
-  assert.doesNotMatch(menuHtml + cakesHtml + pastriesHtml + breadsHtml, /id="craft"|Layer-by-layer cake craft|cake-layer-guide\.jpg/, 'layer-by-layer cake craft should not appear on menu or category pages');
-  assert.match(siteCss, /\.site-cake-placeholder[\s\S]*\.site-cake-placeholder img/, 'Cake placeholder styles should remain for the front-page craft section');
-  assert.match(js, /wireCakeAssembly[\s\S]*__cakeAssemblyStatus/, 'cake assembly JS wiring/status missing');
+  assert.doesNotMatch(menuHtml + cakesHtml + pastriesHtml + breadsHtml, /id="craft"|Layer-by-layer cake craft|higgsfield-cake-assembly\.mp4/, 'layer-by-layer cake craft should not appear on menu or category pages');
+  assert.match(siteCss, /\.site-higgsfield-cake[\s\S]*\.site-higgsfield-cake__video[\s\S]*object-fit:\s*cover/, 'Higgsfield video styles should remain for the front-page craft section');
+  assert.match(js, /wireCakeAssembly[\s\S]*__cakeAssemblyStatus[\s\S]*source:\s*"higgsfield"/, 'cake assembly JS wiring/status missing');
 });
 
 test('product modal details start at the top for every product', () => {
@@ -202,8 +202,8 @@ test('language toggle localizes current visible site sections', () => {
 });
 
 test('root loads the current scripts and motion layer progressively', () => {
-  assert.match(html, /script\.js\?v=legal-footer-1/, 'site script should be loaded on the root');
-  assert.match(html, /site\.css\?v=legal-footer-1/, 'root should load the current site stylesheet cache key');
+  assert.match(html, /script\.js\?v=cake-animation-2/, 'site script should be loaded on the root with the current cache key');
+  assert.match(html, /site\.css\?v=cake-animation-2/, 'root should load the current site stylesheet cache key');
   assert.match(js, /function initGsapTasteMotion\(\)/, 'motion initializer should remain available as progressive enhancement');
   assert.match(js, /prefersReducedMotion\(\) \|\| !gsap/, 'motion should disable itself for reduced-motion users or when GSAP is unavailable');
   assert.match(js, /__deessesGsapMotion\s*=\s*\{ enabled:\s*true/, 'motion status should be exposed for browser verification when active');
@@ -213,7 +213,7 @@ test('every public page has legal footer links and placeholder legal pages', () 
   const publicPages = [html, menuHtml, cakesHtml, pastriesHtml, breadsHtml, customCakeHtml, privacyHtml, termsHtml];
   publicPages.forEach((page, index) => {
     assert.match(page, /class="site-footer-legal"[\s\S]*All rights reserved[\s\S]*href="privacy-policy\.html"[\s\S]*href="terms-and-conditions\.html"/, `public page ${index + 1} should include legal footer links`);
-    assert.match(page, /site\.css\?v=legal-footer-1[\s\S]*script\.js\?v=legal-footer-1/, `public page ${index + 1} should use the legal footer cache keys`);
+    assert.match(page, /site\.css\?v=cake-animation-2[\s\S]*script\.js\?v=cake-animation-2/, `public page ${index + 1} should use the current animation cache keys`);
   });
   assert.match(privacyHtml, /id="privacyPolicyTitle"[\s\S]*data-i18n="privacyPolicyCopy"[\s\S]*Placeholder privacy policy text/, 'Privacy policy page should exist with placeholder copy');
   assert.match(termsHtml, /id="termsConditionsTitle"[\s\S]*data-i18n="termsConditionsCopy"[\s\S]*Placeholder terms and conditions text/, 'Terms and conditions page should exist with placeholder copy');

@@ -173,8 +173,8 @@
       viewPastries: "View pastries",
       viewBreads: "View breads",
       craftHeadline: "Layer-by-layer cake craft",
-      craftPlaceholderCopy: "This placeholder uses the supplied pistachio mochi cake layer guide while the custom animation is refined.",
-      cakeFigcaption: "Placeholder layer guide · Pistachio mochi cake",
+      craftPlaceholderCopy: "A Higgsfield-generated motion preview from the pistachio cake photo shows the sponge, mochi filling, whipped cream, pistachio cream, rose petals and pistachio crumble floating in a refined exploded view.",
+      cakeFigcaption: "Higgsfield-generated cake assembly animation",
       howChooseTitle: "Choose",
       howChooseCopy: "Select products from cakes, pastries or fresh breads.",
       howBrowseTitle: "Browse",
@@ -360,8 +360,8 @@
       viewPastries: "進入酥點系列",
       viewBreads: "進入麵包系列",
       craftHeadline: "一層一層，組成慶祝的甜。",
-      craftPlaceholderCopy: "此示意圖使用開心果麻糬蛋糕層次參考，待正式動畫再細化。",
-      cakeFigcaption: "蛋糕層次示意 · 開心果麻糬蛋糕",
+      craftPlaceholderCopy: "Higgsfield 會根據開心果蛋糕相片生成動畫，展示蛋糕胚、麻糬餡、忌廉、開心果忌廉、玫瑰花瓣和開心果脆粒的精緻拆解效果。",
+      cakeFigcaption: "Higgsfield 生成蛋糕組裝動畫",
       howChooseTitle: "選擇",
       howChooseCopy: "從蛋糕、酥點或新鮮麵包中選擇產品。",
       howBrowseTitle: "瀏覽",
@@ -1601,44 +1601,74 @@
     var craft = document.getElementById("craft");
     if (!craft) return;
     var status = document.getElementById("cakeStatus");
+    var video = craft.querySelector(".site-higgsfield-cake__video");
     var buttons = {
       explode: craft.querySelector('[data-cake-action="explode"]'),
       assemble: craft.querySelector('[data-cake-action="assemble"]'),
       replay: craft.querySelector('[data-cake-action="replay"]')
     };
     var replayTimer = null;
+    var mode = "assembled";
+
     function stopReplay() {
-      if (replayTimer) window.clearInterval(replayTimer);
+      if (replayTimer) window.clearTimeout(replayTimer);
       replayTimer = null;
       craft.removeAttribute("data-cake-replay");
       craft.classList.remove("craft--replaying");
+      if (video) video.loop = true;
     }
-    function setMode(mode, keepReplay) {
+
+    function playFrom(time) {
+      if (!video) return;
+      try { video.currentTime = time || 0; } catch (error) {}
+      var promise = video.play && video.play();
+      if (promise && promise.catch) promise.catch(function () {});
+    }
+
+    function syncStatus(nextMode, keepReplay) {
       if (!keepReplay) stopReplay();
+      mode = nextMode;
       craft.setAttribute("data-cake-mode", mode);
       if (buttons.explode) buttons.explode.disabled = mode === "exploded";
       if (buttons.assemble) buttons.assemble.disabled = mode === "assembled";
       if (status) status.textContent = mode === "exploded" ? tx("cakeExploded") : tx("cakeAssembled");
-      window.__cakeAssemblyStatus = { mode: mode, pieces: craft.querySelectorAll(".cake-piece").length };
+      window.__cakeAssemblyStatus = {
+        mode: mode,
+        source: "higgsfield",
+        video: !!video,
+        duration: video && Number.isFinite(video.duration) ? video.duration : null
+      };
     }
-    if (buttons.explode) buttons.explode.addEventListener("click", function () { setMode("exploded"); });
-    if (buttons.assemble) buttons.assemble.addEventListener("click", function () { setMode("assembled"); });
+
+    if (buttons.explode) buttons.explode.addEventListener("click", function () {
+      syncStatus("exploded");
+      playFrom(0);
+    });
+    if (buttons.assemble) buttons.assemble.addEventListener("click", function () {
+      syncStatus("assembled");
+      playFrom(video && Number.isFinite(video.duration) ? Math.max(video.duration * 0.48, 0) : 2.4);
+    });
     if (buttons.replay) buttons.replay.addEventListener("click", function () {
       stopReplay();
       craft.setAttribute("data-cake-replay", "true");
       craft.classList.add("craft--replaying");
-      setMode("exploded", true);
-      replayTimer = window.setInterval(function () {
-        setMode(craft.getAttribute("data-cake-mode") === "exploded" ? "assembled" : "exploded", true);
-      }, 2200);
+      if (video) video.loop = false;
+      syncStatus("exploded", true);
+      playFrom(0);
+      replayTimer = window.setTimeout(function () {
+        syncStatus("assembled", true);
+        if (video) video.loop = true;
+      }, video && Number.isFinite(video.duration) ? video.duration * 1000 : 5200);
     });
-    setMode("assembled");
-    window.setTimeout(function () {
-      if (!prefersReducedMotion()) {
-        setMode("exploded");
-        window.setTimeout(function () { setMode("assembled"); }, 1700);
-      }
-    }, 500);
+    if (video) {
+      video.addEventListener("loadedmetadata", function () { syncStatus(mode, true); });
+      video.addEventListener("timeupdate", function () {
+        if (!video.duration || replayTimer) return;
+        if (video.currentTime > video.duration * 0.46 && mode !== "assembled") syncStatus("assembled", true);
+      });
+    }
+    syncStatus("assembled");
+    if (!prefersReducedMotion()) playFrom(0);
   }
 
   function wireSignatureProducts() {

@@ -1069,3 +1069,42 @@
     transition: none;
   }
 }
+
+
+
+.site-higgsfield-cake {
+  position: relative;
+  width: min(100%, 650px);
+  margin: 0;
+  display: grid;
+  place-items: center;
+  gap: 12px;
+  isolation: isolate;
+}
+.site-higgsfield-cake::before {
+  content: "";
+  position: absolute;
+  inset: 8% 2% 16%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.76), rgba(255,211,228,0.25) 58%, transparent 72%);
+  filter: blur(10px);
+  z-index: -1;
+}
+.site-higgsfield-cake__video {
+  width: min(100%, 500px);
+  aspect-ratio: 3 / 4;
+  display: block;
+  border-radius: 34px;
+  object-fit: cover;
+  box-shadow: 0 24px 58px rgba(120, 64, 91, 0.18), inset 0 1px 0 rgba(255,255,255,0.8);
+  background: #fff7f2;
+}
+.site-higgsfield-cake figcaption {
+  color: var(--site-muted);
+  font-size: 0.86rem;
+  font-weight: 700;
+  text-align: center;
+}
+@media (max-width: 680px) {
+  .site-higgsfield-cake__video { border-radius: 26px; }
+}
