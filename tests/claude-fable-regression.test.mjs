@@ -202,8 +202,8 @@ test('language toggle localizes current visible site sections', () => {
 });
 
 test('root loads the current scripts and motion layer progressively', () => {
-  assert.match(html, /script\.js\?v=cake-animation-2/, 'site script should be loaded on the root with the current cache key');
-  assert.match(html, /site\.css\?v=cake-animation-2/, 'root should load the current site stylesheet cache key');
+  assert.match(html, /script\.js\?v=solara-credit-1/, 'site script should be loaded on the root with the current cache key');
+  assert.match(html, /site\.css\?v=solara-credit-1/, 'root should load the current site stylesheet cache key');
   assert.match(js, /function initGsapTasteMotion\(\)/, 'motion initializer should remain available as progressive enhancement');
   assert.match(js, /prefersReducedMotion\(\) \|\| !gsap/, 'motion should disable itself for reduced-motion users or when GSAP is unavailable');
   assert.match(js, /__deessesGsapMotion\s*=\s*\{ enabled:\s*true/, 'motion status should be exposed for browser verification when active');
@@ -213,12 +213,13 @@ test('every public page has legal footer links and placeholder legal pages', () 
   const publicPages = [html, menuHtml, cakesHtml, pastriesHtml, breadsHtml, customCakeHtml, privacyHtml, termsHtml];
   publicPages.forEach((page, index) => {
     assert.match(page, /class="site-footer-legal"[\s\S]*All rights reserved[\s\S]*href="privacy-policy\.html"[\s\S]*href="terms-and-conditions\.html"/, `public page ${index + 1} should include legal footer links`);
-    assert.match(page, /site\.css\?v=cake-animation-2[\s\S]*script\.js\?v=cake-animation-2/, `public page ${index + 1} should use the current animation cache keys`);
+    assert.match(page, /class="site-footer-credit"[\s\S]*Website created by[\s\S]*href="https:\/\/solara\.hk"[\s\S]*Solara\.hk/, `public page ${index + 1} should credit Solara.hk at the bottom`);
+    assert.match(page, /site\.css\?v=solara-credit-1[\s\S]*script\.js\?v=solara-credit-1/, `public page ${index + 1} should use the current Solara credit cache keys`);
   });
   assert.match(privacyHtml, /id="privacyPolicyTitle"[\s\S]*data-i18n="privacyPolicyCopy"[\s\S]*Placeholder privacy policy text/, 'Privacy policy page should exist with placeholder copy');
   assert.match(termsHtml, /id="termsConditionsTitle"[\s\S]*data-i18n="termsConditionsCopy"[\s\S]*Placeholder terms and conditions text/, 'Terms and conditions page should exist with placeholder copy');
-  assert.match(js, /legalRights:[\s\S]*All rights reserved[\s\S]*privacyPolicy:[\s\S]*Privacy Policy[\s\S]*termsConditions:[\s\S]*Terms & Conditions[\s\S]*legalRights:[\s\S]*版權所有[\s\S]*privacyPolicy:[\s\S]*私隱政策[\s\S]*termsConditions:[\s\S]*條款及細則/, 'Legal footer and legal page text should be bilingual-ready');
-  assert.match(siteCss, /\.site-footer-legal[\s\S]*\.site-legal-page[\s\S]*\.site-legal-placeholder/, 'Legal footer and legal placeholder pages should be styled');
+  assert.match(js, /legalRights:[\s\S]*All rights reserved[\s\S]*privacyPolicy:[\s\S]*Privacy Policy[\s\S]*termsConditions:[\s\S]*Terms & Conditions[\s\S]*solaraCredit:[\s\S]*Website created by[\s\S]*legalRights:[\s\S]*版權所有[\s\S]*privacyPolicy:[\s\S]*私隱政策[\s\S]*termsConditions:[\s\S]*條款及細則[\s\S]*solaraCredit:[\s\S]*網站由/, 'Legal footer, Solara credit, and legal page text should be bilingual-ready');
+  assert.match(siteCss, /\.site-footer-legal[\s\S]*\.site-footer-credit[\s\S]*\.site-legal-page[\s\S]*\.site-legal-placeholder|\.site-footer-credit[\s\S]*\.site-footer-legal[\s\S]*\.site-legal-page[\s\S]*\.site-legal-placeholder/, 'Legal footer, Solara credit, and legal placeholder pages should be styled');
 });
 
 test('design taste refinements keep the page polished without adding clutter', () => {

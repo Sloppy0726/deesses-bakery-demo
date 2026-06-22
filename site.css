@@ -911,6 +911,20 @@
 .site-subscribe label { display: grid; gap: 8px; font-weight: 800; font-size: 0.86rem; }
 .site-subscribe input { min-height: 42px; border: 1px solid var(--site-line); border-radius: 8px; background: #fff; padding: 0 12px; }
 .site-footer-note { max-width: 1210px; margin: 26px auto 0; font-size: 0.76rem; }
+.site-footer-credit {
+  max-width: 1210px;
+  margin: 14px auto 0;
+  color: var(--site-muted);
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-align: center;
+}
+.site-footer-credit a {
+  color: var(--site-rose-dark);
+  text-decoration: none;
+}
+.site-footer-credit a:hover,
+.site-footer-credit a:focus-visible { text-decoration: underline; }
 .site-footer-legal {
   max-width: 1210px;
   margin: 18px auto 0;
